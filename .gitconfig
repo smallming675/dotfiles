@@ -1,0 +1,30 @@
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true 
+
+[merge]
+    conflictstyle = diff3
+
+[user]
+    email = 181466198+smallming675@users.noreply.github.com
+    name = SmallMing675
+
+[gui]
+    editor = nvim
+
+[color]
+    ui = auto
+
+[credential "https://github.com"]
+    helper = !pass git/github 
+
+[pull]
+    rebase = false
+
+[merge]
+    tool = nvimdiff

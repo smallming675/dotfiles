@@ -1,0 +1,21 @@
+
+new_tab ks ~/p/w/glowgrid 
+layout fat 
+cd /home/user/projects/brainfuck/src 
+title ks ~/p/w/glowgrid 
+launch --env KITTY_WINDOW_ID=1 --env PWD=/home/user 
+focus
+
+new_tab ~/p/brainfuck 
+layout fat 
+cd /home/user/projects/brainfuck 
+title ~/p/brainfuck 
+launch --env KITTY_WINDOW_ID=2 --env PWD=/home/user 
+focus
+
+new_tab ks ~/p/brainfuck 
+layout fat 
+cd /home/user/projects/brainfuck 
+title ks ~/p/brainfuck 
+launch --env KITTY_WINDOW_ID=4 --env PWD=/home/user 
+focus

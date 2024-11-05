@@ -1,0 +1,184 @@
+@import "colors.css";
+* {
+    font-size: 16px;
+    min-width: 8px;
+    min-height: 0px;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    text-shadow: none;
+    padding: 0px;
+}
+
+window#waybar {
+    transition-property: background-color;
+    transition-duration: 0.5s;
+    background: @bg;
+    border-radius: 9px;
+    background: alpha(@bg, 0.95);
+    color: lighter(@fg);
+}
+
+menu,
+tooltip {
+    border-radius: 8px;
+    padding: 2px;
+    border: 1px solid lighter(@fg);
+    background: alpha(@bg, 0.6);
+
+    color: lighter(@fg);
+}
+
+menu label,
+tooltip label {
+    font-size: 14px;
+    color: lighter(@fg);
+}
+
+#submap,
+#tray > .needs-attention {
+    animation-name: blink-fg;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.modules-right {
+    margin: 6px;
+    border-radius: 6px;
+    background: alpha(darker(@fg), 0.2);
+}
+
+.modules-left {
+    transition-property: background-color;
+    transition-duration: 0.5s;
+    margin: 0;
+    border-radius: 4px;
+}
+
+#cpu,
+#custom-github,
+#memory,
+#disk,
+#together,
+#submap,
+#custom-weather,
+#custom-recorder,
+#connection,
+#cnoti,
+#brightness,
+#power,
+#custom-updates,
+#tray,
+#audio,
+#privacy,
+#sound {
+    border-radius: 6px;
+    margin-right: 6px;
+    min-width: 22px;
+}
+
+
+#custom-cputemp,
+#disk,
+#memory,
+#cpu, 
+#custom-cpu-icon
+{
+    font-size: 14px;
+    padding: 0px 9px 0px 9px;
+    margin: 6px 0px 6px 0px;
+    border-radius:0px;
+    background: alpha(darker(@fg), 0.2);
+}
+
+#custom-cpu-icon {
+    border-radius: 6px 0px 0px 6px;
+}
+
+#disk {
+    border-radius: 0px 6px 6px 0px;
+    margin-right: 6px;
+}
+
+#custom-dmark {
+color: @bg-h;
+}
+#workspaces {
+    margin: 6px;
+
+}
+
+#workspaces button {
+    padding-left: 5px;
+    padding-right: 8px;
+    transition-property: color;
+    transition-duration: 0.2s;
+    color: @bg-h;
+    border-radius: 16px;
+}
+#workspaces button.empty:hover,
+#workspaces button:hover {
+    background: none;
+    color: lighter(@active);
+}
+
+#workspaces button.empty {
+    color: @bg-s;
+}
+
+#workspaces button.active {
+    color: red;
+}
+
+#workspaces button.active {
+    color: lighter(@active);
+}
+
+#network.wifi {
+    padding: 0px 12px 0px 6px;
+}
+
+#battery {
+    margin-right: 6px;
+}
+
+#clock {
+    font-weight: bold;
+    padding: 2px 0px 2px 0px;
+}
+
+#pulseaudio {
+    padding-left: 6px;
+}
+#pulseaudio.mic {
+    border-radius: 4px;
+    padding: 0px 6px 0px 6px;
+    margin: 0px 6px 0px 6px;
+    color: @bg;
+    background-color: transparent;
+}
+
+#backlight-slider slider,
+#pulseaudio-slider slider {
+    background-color: transparent;
+    box-shadow: none;
+    
+}
+
+#backlight-slider trough,
+#pulseaudio-slider trough {
+    margin-top: 4px;
+    min-width: 100px;
+    min-height: 6px;
+    border-radius: 8px;
+    background-color: alpha(@bg, 0.6);
+}
+
+#backlight-slider highlight,
+#pulseaudio-slider highlight {
+    background-color: lighter(@fg);
+}
+
+

@@ -1,55 +1,6 @@
 layout {
-default_tab_template {
-        pane size=1 borderless=true {
-            plugin location="file:~/.config/zellij/bin/zjstatus.wasm" {
-            color_fg "#c0caf5"
-            color_bg "#292e42"
-            color_bg2 "#9aa5ce"
-            color_black "#1a1b26"
-
-            color_red "#f7768e"
-            color_green "#9ece6a"
-            color_yellow "#e0af68"
-            color_blue "#7aa2f7"
-            color_magenta "#bb9af7"
-            color_cyan "#7dcfff"
-            color_white "#a9b1d6"
-            color_orange "#ff9e64"
-
-                
-            format_left   "{tabs}"
-            format_center ""
-            format_right  ""
-
-            format_space  ""
-            format_hide_on_overlength "true"
-            format_precedence "crl"
-
-            border_enabled  "false"
-            border_char     "─"
-            border_format   "#[fg=#6C7086]{char}"
-            border_position "top"
-
-            // formatting for inactive tabs
-            tab_normal              "#[bg=#292e42,fg=#7aa2f7,bold] {index} "
-            tab_active              "#[bg=#292e42,fg=#ff9e64,bold] {index} "
-
-            tab_separator           " "
-
-            // indicators
-            tab_sync_indicator       " "
-            tab_fullscreen_indicator " 󰊓"
-            tab_floating_indicator   " 󰹙"
-
-            command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
-            command_git_branch_format      "#[fg=blue] {stdout} "
-            command_git_branch_interval    "10"
-            command_git_branch_rendermode  "static"
-
-            }
-        }
-
-        children
+    pane size=2 borderless=true {
+        plugin location="compact-bar"
     }
+    pane
 }
-

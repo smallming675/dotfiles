@@ -1,0 +1,10 @@
+#!/bin/env bash
+
+systemctl --failed
+paccache -ruk0
+sudo pacman -Qqd | sudo pacman -Rsu -
+sudo pacman -Qqe >~/dotfiles/.pkglist.txt
+cd ~/dotfiles/
+stow .
+git add .
+git commit -a -m "Dotfiles update"

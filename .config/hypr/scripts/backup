@@ -1,0 +1,3 @@
+b2 sync ~/projects b2://backblaze-master-bucket/projects/
+b2 sync ~/dotfiles b2://backblaze-master-bucket/dotfiles/
+b2 sync ~/notes b2://backblaze-master-bucket/notes/

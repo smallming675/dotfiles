@@ -33,7 +33,7 @@ configuration {
 
 /*****----- Main Window -----*****/
 window {
-  location:                    north west;
+    location:                    center;
     anchor:                      center;
     fullscreen:                  false;
     width:                       800px;

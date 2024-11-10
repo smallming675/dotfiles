@@ -10,8 +10,8 @@ alias lt="eza --tree --level=3 --icons=auto"
 alias ll="eza -l --icons=auto"
 alias llt="eza -l --tree --level=3 --icons=auto"
 alias logout="loginctl terminate-session self"
-alias rm="rip"
 alias cat="bat"
+alias rm="safe-rm"
 alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 alias restore="$HOME/.local/share/Trash/files" #Trashed files directory
 alias back="trash-restore"
@@ -67,9 +67,9 @@ function lk
 end
 
 if status is-interactive
-  if not set -q ZELLIJ
-    zellij -l ~/.config/zellij/layouts/default.kdl
-  end
+    if not set -q ZELLIJ
+        zellij -l ~/.config/zellij/layouts/default.kdl
+    end
 end
 
 function starship_transient_prompt_func

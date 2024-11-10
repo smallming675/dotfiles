@@ -2,7 +2,7 @@
 
 configuration {
 
-	modi:                       "drun,run,filebrowser,ssh,window";
+    modi:                       "drun,run,filebrowser,ssh,window";
     show-icons:                 false;
     display-drun:               " Apps";
     display-run:                " Run";

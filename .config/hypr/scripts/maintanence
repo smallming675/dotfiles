@@ -8,3 +8,4 @@ cd ~/dotfiles/
 stow .
 git add .
 git commit -a -m "Dotfiles update"
+git push

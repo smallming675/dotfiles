@@ -5,7 +5,7 @@
     diffFilter = delta --color-only
 
 [delta]
-    navigate = true 
+    navigate = true    
 
 [merge]
     conflictstyle = diff3
@@ -27,4 +27,7 @@
     rebase = false
 
 [merge]
-    tool = nvimdiff
+  tool = nvimdiff
+
+[push]
+    autoSetupRemote = true

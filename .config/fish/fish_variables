@@ -3,6 +3,8 @@
 SETUVAR --export EDITOR:nvim
 SETUVAR --export FZF_DEFAULT_OPTS:
 SETUVAR --export GRAVEYARD:/home/user/\x2elocal/share/Trash
+SETUVAR --export MANPAGER:bat
+SETUVAR --export RUSTC_WRAPPER:sccache
 SETUVAR --export RUST_BACKTRACE:0
 SETUVAR --export SHELL:/usr/bin/fish
 SETUVAR --export VISUAL:nvim

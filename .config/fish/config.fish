@@ -11,7 +11,7 @@ alias ll="eza -l --icons=auto"
 alias llt="eza -l --tree --level=3 --icons=auto"
 alias logout="loginctl terminate-session self"
 alias cat="bat"
-alias rm="safe-rm"
+alias rm="rip"
 alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 alias restore="$HOME/.local/share/Trash/files" #Trashed files directory
 alias back="trash-restore"
@@ -22,6 +22,7 @@ alias .....="cd ../../../../"
 alias ......="cd ../../../../../"
 alias suspend="systemctl suspend"
 alias ff="fzf"
+alias fzf="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 alias py="python"
 alias icat="kitten icat"
 alias nv="nvim"
@@ -32,7 +33,8 @@ alias l="ls"
 set -Ux EDITOR nvim
 set -Ux VISUAL nvim
 set -Ux GRAVEYARD ~/.local/share/Trash
-set -gx SHELL /usr/bin/fish
+set -Ux SHELL /usr/bin/fish
+set -Ux RUSTC_WRAPPER sccache
 
 fish_add_path /home/user/.cargo/bin
 fish_add_path /home/user/.local/bin
@@ -79,3 +81,4 @@ starship init fish | source
 enable_transience
 
 thefuck --alias | source
+mise activate fish | source

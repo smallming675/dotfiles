@@ -1,6 +1,5 @@
 keybinds clear-defaults=true{
     shared_except "locked" {
-        bind "Alt q" { CloseTab; }
         bind "Alt n" { NewPane; }
         bind "Alt w" { CloseFocus;}
         bind "Alt t" { NewTab; }

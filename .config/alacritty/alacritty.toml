@@ -15,7 +15,6 @@ y = 6
 
 [cursor.style]
 shape = "Underline"
-blinking = "On"
 
 [colors.bright]
 black = "#444b6a"

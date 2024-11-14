@@ -4,6 +4,8 @@ systemctl --failed
 paccache -ruk0
 sudo pacman -Qqd | sudo pacman -Rsu -
 sudo pacman -Qqe >~/dotfiles/install/pkglist.txt
+yay --noconfirm
+
 cd ~/dotfiles/
 stow .
 git add .

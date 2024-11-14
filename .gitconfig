@@ -13,6 +13,7 @@
 [user]
     email = 181466198+smallming675@users.noreply.github.com
     name = SmallMing675
+	signingkey = 7D1EB3B6B8087B847B3C2D6F613556048BAEF869
 
 [gui]
     editor = nvim
@@ -31,3 +32,5 @@
 
 [push]
     autoSetupRemote = true
+[commit]
+	gpgsign = true

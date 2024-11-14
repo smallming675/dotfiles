@@ -10,4 +10,4 @@ git add .
 git commit -a -m "Dotfiles update"
 git push
 
-sudo timeshift --check
+sudo timeshift --create --tags D --scripted

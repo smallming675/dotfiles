@@ -2,5 +2,5 @@
 
 cd ~/dotfiles/
 sudo pacman -Syu
-pacman -S - <.pkglist.txt
+pacman -S - < .pkglist.txt
 stow .

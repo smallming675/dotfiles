@@ -1,13 +1,11 @@
 keybinds clear-defaults=true{
     shared_except "locked" {
-        bind "Alt n" { NewPane; }
+        bind "Alt H" { NewPane "Left"; }
+        bind "Alt J" { NewPane "Down"; }
+        bind "Alt K" { NewPane "Up"; }
+        bind "Alt L" { NewPane "Right"; }
         bind "Alt w" { CloseFocus;}
         bind "Alt t" { NewTab; }
-
-        bind "Alt H" { MoveFocus "Left"; }
-        bind "Alt L" { MoveFocus "Right"; }
-        bind "Alt J" { MoveFocus "Down"; }
-        bind "Alt K" { MoveFocus "Up"; }
 
         bind "Alt i" { MovePane; }
         bind "Alt o" { MovePaneBackwards; }

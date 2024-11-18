@@ -70,7 +70,7 @@ end
 
 if status is-interactive
     if not set -q ZELLIJ
-        zellij -l ~/.config/zellij/layouts/default.kdl
+            zellij -l ~/.config/zellij/layouts/default.kdl attach --index 0
     end
 end
 

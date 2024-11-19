@@ -6,6 +6,8 @@ base-devel
 bat
 brightnessctl
 btop
+cbonsai
+chromium
 cpupower-gui
 dolphin
 efibootmgr
@@ -28,6 +30,7 @@ iwd
 jdk8-openjdk
 jq
 kitty
+lazygit
 less
 libsixel
 libva-intel-driver
@@ -50,10 +53,12 @@ npm
 obsidian
 okular
 openssh
+osu-lazer-bin
 pacman-contrib
 pamixer
 pass
 pavucontrol
+phoronix-test-suite
 pipewire-audio
 polkit-kde-agent
 prismlauncher
@@ -75,6 +80,7 @@ smartmontools
 starship
 stow
 syncthing
+sysbench
 thefuck
 thermald
 timeshift

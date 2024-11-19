@@ -408,9 +408,6 @@ require("lazy").setup({
 			require("mini.ai").setup({ n_lines = 500 })
 			require("mini.surround").setup()
 			require("mini.files").setup()
-			if not vim.g.neovide then
-				require("mini.animate").setup()
-			end
 		end,
 	},
 

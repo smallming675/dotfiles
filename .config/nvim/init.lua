@@ -24,9 +24,9 @@ map("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 map("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 map("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 map("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
-map("n", "J", "<C-d>")
-map("n", "K", "<C-u>")
-map("n", "-", ":lua MiniFiles.open()<CR>")
+map("n", "-", ":lua MiniFiles.open()<CR>", { desc = "Open Mini.Files" })
+map("n", "<leader>nn", ":Neotree toggle<CR>", { desc = "Toggle neotree" })
+map("n", "<leader>nb", ":Neotree buffers<CR>", { desc = "Toggle neotree (Buffers)" })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",
@@ -55,23 +55,6 @@ require("lazy").setup({
 		opts = {},
 	},
 	{
-		"smoka7/multicursors.nvim",
-		event = "VeryLazy",
-		dependencies = {
-			"nvimtools/hydra.nvim",
-		},
-		opts = {},
-		cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
-		keys = {
-			{
-				mode = { "v", "n" },
-				"q",
-				"<cmd>MCstart<cr>",
-				desc = "Create a selection for selected text or word under the cursor",
-			},
-		},
-	},
-	{
 		"folke/flash.nvim",
 		event = "VeryLazy",
 		opts = {},
@@ -85,15 +68,13 @@ require("lazy").setup({
 		},
 	},
 	{
-		"nvim-telescope/telescope.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		config = function()
-			local builtin = require("telescope.builtin")
-			map("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
-			map("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
-			map("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
-			map("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
-		end,
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons",
+			"MunifTanjim/nui.nvim",
+		},
 	},
 	{
 		"folke/noice.nvim",
@@ -166,16 +147,16 @@ require("lazy").setup({
 			pcall(require("telescope").load_extension, "ui-select")
 
 			local builtin = require("telescope.builtin")
-			map("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
-			map("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-			map("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-			map("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
-			map("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-			map("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
-			map("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
-			map("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
-			map("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-			map("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+			map("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
+			map("n", "<leader>fk", builtin.keymaps, { desc = "[F]ind [K]eymaps" })
+			map("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
+			map("n", "<leader>fs", builtin.builtin, { desc = "[F]ind [S]elect Telescope" })
+			map("n", "<leader>fw", builtin.grep_string, { desc = "[F]ind current [W]ord" })
+			map("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind by [G]rep" })
+			map("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
+			map("n", "<leader>fr", builtin.resume, { desc = "[F]ind [R]esume" })
+			map("n", "<leader>f.", builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
+			map("n", "<leader><leader>", builtin.buffers, { desc = "Find existing buffers" })
 
 			map("n", "<leader>/", function()
 				builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
@@ -184,16 +165,16 @@ require("lazy").setup({
 				}))
 			end, { desc = "[/] Fuzzily search in current buffer" })
 
-			map("n", "<leader>s/", function()
+			map("n", "<leader>f/", function()
 				builtin.live_grep({
 					grep_open_files = true,
 					prompt_title = "Live Grep in Open Files",
 				})
-			end, { desc = "[S]earch [/] in Open Files" })
+			end, { desc = "[F]ind [/] in Open Files" })
 
-			map("n", "<leader>sn", function()
+			map("n", "<leader>fn", function()
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
-			end, { desc = "[S]earch [N]eovim files" })
+			end, { desc = "[F]ind [N]eovim files" })
 		end,
 	},
 
@@ -296,16 +277,6 @@ require("lazy").setup({
 		"stevearc/conform.nvim",
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
-		keys = {
-			{
-				"<leader>f",
-				function()
-					require("conform").format({ async = true, lsp_format = "fallback" })
-				end,
-				mode = "",
-				desc = "[F]ormat buffer",
-			},
-		},
 		opts = {
 			notify_on_error = false,
 			format_on_save = function(bufnr)
@@ -351,6 +322,7 @@ require("lazy").setup({
 				formatting = {
 					format = lspkind.cmp_format({
 						mode = "symbol_text",
+						symbol_map = { Codeium = "" },
 					}),
 				},
 				snippet = {
@@ -360,8 +332,8 @@ require("lazy").setup({
 				},
 				completion = { completeopt = "menu,menuone,noinsert" },
 				mapping = cmp.mapping.preset.insert({
-					["<Tab>"] = cmp.mapping.select_next_item(),
-					["<S-Tab>"] = cmp.mapping.select_prev_item(),
+					["<C-n>"] = cmp.mapping.select_next_item(),
+					["<C-p>"] = cmp.mapping.select_prev_item(),
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<Enter>"] = cmp.mapping.confirm({ select = true }),
@@ -381,6 +353,7 @@ require("lazy").setup({
 					{ name = "lazydev", group_index = 0 },
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
+					{ name = "codeium" },
 					{ name = "path" },
 				},
 			})
@@ -407,6 +380,7 @@ require("lazy").setup({
 		config = function()
 			require("mini.ai").setup({ n_lines = 500 })
 			require("mini.surround").setup()
+			require("mini.pairs").setup()
 			require("mini.files").setup()
 		end,
 	},
@@ -430,6 +404,13 @@ require("lazy").setup({
 				additional_vim_regex_highlighting = { "ruby" },
 			},
 			indent = { enable = true, disable = { "ruby" } },
+		},
+	},
+	{
+		"Exafunction/codeium.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"hrsh7th/nvim-cmp",
 		},
 	},
 }, {})

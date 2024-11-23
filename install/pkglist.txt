@@ -8,6 +8,7 @@ brightnessctl
 btop
 cbonsai
 chromium
+cpupower
 cpupower-gui
 dolphin
 efibootmgr
@@ -16,6 +17,7 @@ fd
 fish
 fzf
 git
+github-cli
 grim
 grub
 htop
@@ -62,6 +64,8 @@ phoronix-test-suite
 pipewire-audio
 polkit-kde-agent
 prismlauncher
+proton-vpn-gtk-app
+ptpython
 pulseaudio
 python-b2sdk
 python-pip
@@ -82,7 +86,6 @@ stow
 syncthing
 sysbench
 thefuck
-thermald
 timeshift
 ts-node
 ttf-jetbrains-mono

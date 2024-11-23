@@ -1,11 +1,11 @@
 set fish_greeting
-eval "$(zoxide init fish --cmd cd)"
-
+eval "$(zoxide init fish)"
 
 alias lgit="lazygit"
 alias cls="clear"
 alias copy="wl-copy"
 alias ls="eza --icons=auto"
+alias la="eza --icons=auto"
 alias lt="eza --tree --level=3 --icons=auto"
 alias ll="eza -l --icons=auto"
 alias llt="eza -l --tree --level=3 --icons=auto"
@@ -24,17 +24,17 @@ alias suspend="systemctl suspend"
 alias ff="fzf"
 alias fzf="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 alias py="python"
-alias icat="kitten icat"
 alias nv="nvim"
 alias cp="rsync"
 alias sp="nv /tmp/scratchpad.txt"
 alias l="ls"
 
-set -Ux EDITOR nvim
-set -Ux VISUAL nvim
-set -Ux GRAVEYARD ~/.local/share/Trash
-set -Ux SHELL /usr/bin/fish
-set -Ux RUSTC_WRAPPER sccache
+set -x EDITOR nvim
+set -x VISUAL nvim
+set -x GRAVEYARD ~/.local/share/Trash
+set -x SHELL /usr/bin/fish
+set -x RUSTC_WRAPPER sccache
+set -x MANPAGER "nvim +Man!"
 
 fish_add_path /home/user/.cargo/bin
 fish_add_path /home/user/.local/bin
@@ -50,35 +50,20 @@ function bind_bang
     end
 end
 
-function bind_dollar
-    switch (commandline -t)[-1]
-        case "!"
-            commandline -f backward-delete-char history-token-search-backward
-        case "*"
-            commandline -i '$'
-    end
-end
-
 function fish_user_key_bindings
     bind ! bind_bang
-    bind '$' bind_dollar
-end
-
-function lk
-    set loc (walk $argv); and cd $loc
 end
 
 if status is-interactive
     if not set -q ZELLIJ
-            zellij -l ~/.config/zellij/layouts/default.kdl attach --index 0
+        zellij -l ~/.config/zellij/layouts/default.kdl attach --index 0 -c
     end
 end
 
 function starship_transient_prompt_func
     starship module character
 end
+
 starship init fish | source
 enable_transience
-
-thefuck --alias | source
 mise activate fish | source

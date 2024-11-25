@@ -4,6 +4,7 @@ autoupdate
 base
 base-devel
 bat
+bottom
 brightnessctl
 btop
 cbonsai
@@ -11,6 +12,7 @@ chromium
 cpupower
 cpupower-gui
 dolphin
+dtools
 efibootmgr
 eza
 fd
@@ -24,11 +26,14 @@ htop
 hyprland
 hyprpaper
 hyprpicker
+i7z
 intel-media-driver
 intel-ucode
+intel-undervolt
 intellij-idea-community-edition
 iptsd
 iwd
+jan-bin
 jdk8-openjdk
 jq
 kitty
@@ -44,6 +49,7 @@ localsend-bin
 localsend-go
 lollypop
 lsix
+lsof
 ly
 man-db
 mpv
@@ -74,7 +80,6 @@ qt5-wayland
 qt6-wayland
 ranger
 ripgrep
-rm-improved-bin
 rofi
 rsync
 rustup
@@ -83,6 +88,7 @@ slurp
 smartmontools
 starship
 stow
+stress
 syncthing
 sysbench
 thefuck
@@ -101,6 +107,7 @@ wireless_tools
 wl-clipboard
 wofi
 wpa_supplicant
+x86_energy_perf_policy
 xdg-desktop-portal-hyprland
 xdg-utils
 xf86-video-amdgpu

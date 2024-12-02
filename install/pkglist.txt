@@ -12,7 +12,7 @@ chromium
 cpupower
 cpupower-gui
 dolphin
-dtools
+dust
 efibootmgr
 eza
 fd
@@ -39,6 +39,7 @@ jq
 kitty
 lazygit
 less
+libreoffice-still
 libsixel
 libva-intel-driver
 linux-firmware
@@ -93,6 +94,7 @@ syncthing
 sysbench
 thefuck
 timeshift
+tk
 ts-node
 ttf-jetbrains-mono
 ttf-jetbrains-mono-nerd

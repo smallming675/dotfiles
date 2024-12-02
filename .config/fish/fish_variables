@@ -5,7 +5,7 @@ SETUVAR --export FZF_DEFAULT_OPTS:
 SETUVAR --export GRAVEYARD:/home/user/\x2elocal/share/Trash
 SETUVAR --export MANPAGER:nvim\x20\x2bMan\x21
 SETUVAR --export RUSTC_WRAPPER:sccache
-SETUVAR --export RUST_BACKTRACE:0
+SETUVAR --export RUST_BACKTRACE:1
 SETUVAR --export SHELL:/usr/bin/fish
 SETUVAR --export VISUAL:nvim
 SETUVAR __fish_initialized:3400

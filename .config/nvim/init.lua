@@ -147,16 +147,12 @@ require("lazy").setup({
 			pcall(require("telescope").load_extension, "ui-select")
 
 			local builtin = require("telescope.builtin")
-			map("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
 			map("n", "<leader>fk", builtin.keymaps, { desc = "[F]ind [K]eymaps" })
-			map("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
-			map("n", "<leader>fs", builtin.builtin, { desc = "[F]ind [S]elect Telescope" })
+			map("n", "<leader><leader>", builtin.find_files, { desc = "[F]ind [F]iles" })
 			map("n", "<leader>fw", builtin.grep_string, { desc = "[F]ind current [W]ord" })
 			map("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind by [G]rep" })
 			map("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
-			map("n", "<leader>fr", builtin.resume, { desc = "[F]ind [R]esume" })
-			map("n", "<leader>f.", builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
-			map("n", "<leader><leader>", builtin.buffers, { desc = "Find existing buffers" })
+			map("n", "<leader>fb", builtin.buffers, { desc = "Find existing buffers" })
 
 			map("n", "<leader>/", function()
 				builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
@@ -209,7 +205,7 @@ require("lazy").setup({
 						vim.keymap.set(mode, keys, func, { desc = "LSP: " .. desc })
 					end
 					map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-					map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+					map("gu", require("telescope.builtin").lsp_references, "[G]oto [U]ses")
 					map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 					map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
 					map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
@@ -253,6 +249,10 @@ require("lazy").setup({
 		event = "InsertEnter",
 		dependencies = {
 			{
+				"zbirenbaum/copilot-cmp",
+				opts = {},
+			},
+			{
 				"L3MON4D3/LuaSnip",
 				build = (function()
 					if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
@@ -284,7 +284,7 @@ require("lazy").setup({
 				formatting = {
 					format = lspkind.cmp_format({
 						mode = "symbol_text",
-						symbol_map = { Codeium = "" },
+						symbol_map = { Copilot = "" },
 					}),
 				},
 				snippet = {
@@ -298,7 +298,7 @@ require("lazy").setup({
 					["<C-p>"] = cmp.mapping.select_prev_item(),
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<Enter>"] = cmp.mapping.confirm({ select = true }),
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
 					["<C-Space>"] = cmp.mapping.complete({}),
 					["<C-l>"] = cmp.mapping(function()
 						if luasnip.expand_or_locally_jumpable() then
@@ -314,8 +314,8 @@ require("lazy").setup({
 				sources = {
 					{ name = "lazydev", group_index = 0 },
 					{ name = "nvim_lsp" },
+					{ name = "copilot" },
 					{ name = "luasnip" },
-					{ name = "codeium" },
 					{ name = "path" },
 				},
 			})
@@ -369,12 +369,23 @@ require("lazy").setup({
 		},
 	},
 	{
-		"Exafunction/codeium.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"hrsh7th/nvim-cmp",
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		config = function()
+			require("copilot").setup({
+				suggestion = { enabled = false },
+				panel = { enabled = false },
+			})
+		end,
+	},
+
+	{
+		"akinsho/toggleterm.nvim",
+		version = "*",
+		opts = {
+			open_mapping = [[<c-/>]],
 		},
-		opts = {},
 	},
 }, {})
 

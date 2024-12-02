@@ -6,8 +6,6 @@ size = 16
 family = "JetBrainsMono Nerd Font Mono"
 style = "Medium"
 
-[window]
-dynamic_padding = true
 
 [window.padding]
 x = 6

@@ -26,7 +26,7 @@ alias fzf="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {
 alias py="python"
 alias nv="nvim"
 alias cp="rsync"
-alias sp="nv /tmp/scratchpad.txt"
+alias ghc="gh copilot"
 alias l="ls"
 
 set -x EDITOR nvim

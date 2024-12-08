@@ -55,6 +55,7 @@ ly
 man-db
 mpv
 nano
+neofetch
 neovide
 neovim
 noto-fonts-cjk

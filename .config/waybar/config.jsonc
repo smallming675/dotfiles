@@ -78,7 +78,6 @@
         "group/sound",
         "group/connection",
         "group/together",
-        "tray",
         "group/power",
     ],
     "custom/recorder": {

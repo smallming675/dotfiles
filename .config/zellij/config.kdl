@@ -1,4 +1,4 @@
-keybinds clear-defaults=true{
+keybinds clear-defaults=true { 
     shared_except "locked" {
         bind "Alt H" { NewPane "Left"; }
         bind "Alt J" { NewPane "Down"; }

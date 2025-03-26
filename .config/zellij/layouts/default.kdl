@@ -1,6 +1,6 @@
 layout {
     default_tab_template {
-        pane size=1 borderless=true {
+        pane size=1 borderless=false {
             plugin location="file:~/dotfiles/.config/zellij/bin/zjstatus.wasm" {
             color_fg "#c0caf5"
             color_bg "#292e42"

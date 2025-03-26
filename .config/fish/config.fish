@@ -13,7 +13,6 @@ alias logout="loginctl terminate-session self"
 alias cat="bat"
 alias rm="rip"
 alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
-alias restore="$HOME/.local/share/Trash/files" #Trashed files directory
 alias back="trash-restore"
 alias ..="cd ../"
 alias ...="cd ../../"
@@ -33,7 +32,6 @@ set -x EDITOR nvim
 set -x VISUAL nvim
 set -x GRAVEYARD ~/.local/share/Trash
 set -x SHELL /usr/bin/fish
-set -x RUSTC_WRAPPER sccache
 set -x MANPAGER "nvim +Man!"
 
 fish_add_path /home/user/.cargo/bin

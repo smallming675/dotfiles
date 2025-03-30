@@ -1,0 +1,60 @@
+keybinds clear-defaults=true { 
+    shared_except "locked" {
+        bind "Alt H" { NewPane "Left"; }
+        bind "Alt J" { NewPane "Down"; }
+        bind "Alt K" { NewPane "Up"; }
+        bind "Alt L" { NewPane "Right"; }
+        bind "Alt w" { CloseFocus;}
+        bind "Alt t" { NewTab; }
+
+        bind "Alt i" { MovePane; }
+        bind "Alt o" { MovePaneBackwards; }
+
+        bind "Alt h" { MoveFocus "Left"; }
+        bind "Alt j" { MoveFocus "Down"; }
+        bind "Alt k" { MoveFocus "Up"; }
+        bind "Alt l" { MoveFocus "Right"; }
+
+        bind "Alt =" "Alt +" { Resize "Increase"; }
+        bind "Alt -" { Resize "Decrease"; }
+
+        bind "Alt 1" { GoToTab 1;}
+        bind "Alt 2" { GoToTab 2;}
+        bind "Alt 3" { GoToTab 3;}
+        bind "Alt 4" { GoToTab 4;}
+        bind "Alt 5" { GoToTab 5;}
+        bind "Alt 6" { GoToTab 6;}
+        bind "Alt 7" { GoToTab 7;}
+        bind "Alt 8" { GoToTab 8;}
+        bind "Alt 9" { GoToTab 9;}
+    }
+}
+
+themes {
+    tokyonight {
+          fg "#c0caf5"
+          bg "#292e42"
+          black "#1a1b26"
+          red "#f7768e"
+          green "#9ece6a"
+          yellow "#e0af68"
+          blue "#7aa2f7"
+          magenta "#bb9af7"
+          cyan "#7dcfff"
+          white "#a9b1d6"
+          orange "#ff9e64"
+    }
+}
+
+ui {
+    pane_frames {
+        hide_session_name true
+    }
+}
+
+default_shell "fish"
+simplified_ui true
+serialize_pane_viewport true
+pane_frames false
+default_layout "compact"
+theme "tokyonight"

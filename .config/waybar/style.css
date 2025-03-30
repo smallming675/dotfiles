@@ -1,5 +1,6 @@
 @import "colors.css";
-* {  
+
+* {
     font-family: "JetBrains Mono Nerd Font";
     font-size: 16px;
     min-width: 8px;
@@ -20,7 +21,6 @@ window#waybar {
 
 menu,
 tooltip {
-    border-radius: 8px;
     padding: 2px;
     border: 1px solid lighter(@fg);
     background: alpha(@bg, 0.6);
@@ -35,7 +35,7 @@ tooltip label {
 }
 
 #submap,
-#tray > .needs-attention {
+#tray>.needs-attention {
     animation-name: blink-fg;
     animation-duration: 1s;
     animation-timing-function: linear;
@@ -45,7 +45,6 @@ tooltip label {
 
 .modules-right {
     margin: 6px;
-    border-radius: 6px;
     background: alpha(darker(@fg), 0.2);
 }
 
@@ -53,7 +52,6 @@ tooltip label {
     transition-property: background-color;
     transition-duration: 0.5s;
     margin: 0;
-    border-radius: 4px;
 }
 
 #cpu,
@@ -73,7 +71,7 @@ tooltip label {
 #audio,
 #privacy,
 #sound {
-    border-radius: 6px;
+    /*border-radius: 6px;*/
     margin-right: 6px;
     min-width: 22px;
 }
@@ -82,13 +80,12 @@ tooltip label {
 #custom-cputemp,
 #disk,
 #memory,
-#cpu, 
-#custom-cpu-icon
-{
+#cpu,
+#custom-cpu-icon {
     font-size: 14px;
     padding: 0px 9px 0px 9px;
     margin: 6px 0px 6px 0px;
-    border-radius:0px;
+    /*border-radius: 0px;*/
     background: alpha(darker(@fg), 0.2);
 }
 
@@ -102,8 +99,9 @@ tooltip label {
 }
 
 #custom-dmark {
-color: @bg-h;
+    color: @bg-h;
 }
+
 #workspaces {
     margin: 6px;
 
@@ -117,6 +115,7 @@ color: @bg-h;
     color: @bg-h;
     border-radius: 16px;
 }
+
 #workspaces button.empty:hover,
 #workspaces button:hover {
     background: none;
@@ -151,6 +150,7 @@ color: @bg-h;
 #pulseaudio {
     padding-left: 6px;
 }
+
 #pulseaudio.mic {
     border-radius: 4px;
     padding: 0px 6px 0px 6px;
@@ -163,7 +163,7 @@ color: @bg-h;
 #pulseaudio-slider slider {
     background-color: transparent;
     box-shadow: none;
-    
+
 }
 
 #backlight-slider trough,
@@ -179,5 +179,3 @@ color: @bg-h;
 #pulseaudio-slider highlight {
     background-color: lighter(@fg);
 }
-
-

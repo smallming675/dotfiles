@@ -17,6 +17,8 @@ window#waybar {
     transition-duration: 0.5s;
     background: @bg;
     color: lighter(@fg);
+    border-radius: 6px;
+
 }
 
 menu,
@@ -46,6 +48,7 @@ tooltip label {
 .modules-right {
     margin: 6px;
     background: alpha(darker(@fg), 0.2);
+    border-radius: 6px;
 }
 
 .modules-left {
@@ -71,7 +74,7 @@ tooltip label {
 #audio,
 #privacy,
 #sound {
-    /*border-radius: 6px;*/
+    border-radius: 6px;
     margin-right: 6px;
     min-width: 22px;
 }
@@ -85,7 +88,7 @@ tooltip label {
     font-size: 14px;
     padding: 0px 9px 0px 9px;
     margin: 6px 0px 6px 0px;
-    /*border-radius: 0px;*/
+    border-radius: 6px;
     background: alpha(darker(@fg), 0.2);
 }
 

@@ -3,6 +3,7 @@ eval "$(zoxide init fish)"
 
 alias lgit="lazygit"
 alias cls="clear"
+alias cal="qalc"
 alias copy="wl-copy"
 alias ls="eza --icons=auto"
 alias la="eza --icons=auto"

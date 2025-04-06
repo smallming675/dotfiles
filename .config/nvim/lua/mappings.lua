@@ -10,6 +10,8 @@ map("i", "jk", "<ESC>")
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 map("n", "<C-j>", "<cmd>bn<CR>", { desc = "Move to next tab" })
 map("n", "<C-k>", "<cmd>bp<CR>", { desc = "Move to previous tab" })
+map("n", "K", "<C-u>", { desc = "Move Up" })
+map("n", "J", "<C-d>", { desc = "Move Down" })
 map("n", "<leader><leader>", "<cmd>Telescope find_files<CR>", { desc = "Find Files" })
 
 vim.api.nvim_create_autocmd("TextYankPost", {

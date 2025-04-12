@@ -1,15 +1,10 @@
 {
     "position": "top",
     "margin-bottom": 0,
-    "margin-top": 9,
-    "margin-left": 9,
-    "margin-right": 9,
     "reload_style_on_change": true,
     "modules-left": [
-        "custom/updates",
         "hyprland/workspaces",
-        "hyprland/submap",
-        "group/info",
+        "group/info"
     ],
     "hyprland/workspaces": {
         "format": "{icon}",
@@ -23,7 +18,7 @@
             "7": [],
             "8": [],
             "9": [],
-            "10": [],
+            "10": []
         },
         "tooltip": false,
         "format-icons": {
@@ -32,56 +27,50 @@
             "default": ""
             //"empty": "",
             //"default": "",
-        },
-    },
-    "hyprland/submap": {
-        "format": "<b>󰇘</b>",
-        "max-length": 8,
-        "tooltip": false,
+        }
     },
     "group/info": {
         "orientation": "inherit",
         "drawer": {
             "transition-duration": 500,
-            "transition-left-to-right": false,
+            "transition-left-to-right": false
         },
-        "modules": ["custom/dmark", "group/gcpu", "memory", "disk"],
+        "modules": ["custom/dmark", "group/gcpu", "memory", "disk"]
     },
     "custom/dmark": {
         "format": " ",
-        "tooltip": false,
+        "tooltip": false
     },
     "group/gcpu": {
         "orientation": "inherit",
-        "modules": ["custom/cpu-icon", "custom/cputemp", "cpu"],
+        "modules": ["custom/cpu-icon", "custom/cputemp", "cpu"]
     },
     "custom/cpu-icon": {
         "format": "󰻠",
-        "tooltip": false,
+        "tooltip": false
     },
     "custom/cputemp": {
         "format": "{}",
         "exec": "~/.config/waybar/bin/cputemp",
         "interval": 10,
-        "return-type": "json",
+        "return-type": "json"
     },
     "cpu": {
-        "format": "<b>{usage}󱉸</b>",
+        "format": "<b>{usage}󱉸</b>"
     },
     "memory": {
-        "format": "<b>  {:2}󱉸</b>",
+        "format": "<b>  {:2}󱉸</b>"
     },
     "disk": {
         "interval": 600,
         "format": "<b>󰋊 {percentage_used}󱉸</b>",
-        "path": "/",
+        "path": "/"
     },
     "modules-right": [
         "privacy",
-        "group/sound",
-        "group/connection",
-        "group/together",
-        "group/power",
+        "group/audio",
+        "group/network",
+        "clock"
     ],
     "custom/recorder": {
         "format": "{}",
@@ -145,10 +134,6 @@
         "orientation": "horizontical",
         "device": "intel_backlight",
     },
-    "group/sound": {
-        "orientation": "inherit",
-        "modules": ["group/audio", "custom/notifications"],
-    },
     "group/audio": {
         "orientation": "inherit",
         "drawer": {
@@ -156,14 +141,6 @@
             "transition-left-to-right": false,
         },
         "modules": ["pulseaudio", "pulseaudio#mic", "pulseaudio/slider"],
-    },
-    "group/connection": {
-        "orientation": "inherit",
-        "modules": ["group/network"],
-    },
-    "group/together": {
-        "orientation": "inherit",
-        "modules": ["clock"],
     },
     "group/utils": {
         "orientation": "inherit",

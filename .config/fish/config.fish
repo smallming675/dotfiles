@@ -38,6 +38,7 @@ set -x MANPAGER "nvim +Man!"
 fish_add_path /home/user/.cargo/bin
 fish_add_path /home/user/.local/bin
 fish_add_path /home/user/go/bin
+fish_add_path /var/lib/flatpak/exports/bin
 
 function bind_bang
     switch (commandline -t)[-1]

@@ -1,2 +1,2 @@
-#!/bin/sh
-QT_SCALE_FACTOR=1 QT_FONT_DPI=135 prismlauncher
+#!/bin/bash
+QT_SCALE_FACTOR=1 QT_FONT_DPI=100 /var/lib/flatpak/exports/bin/org.prismlauncher.PrismLauncher

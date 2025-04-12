@@ -17,7 +17,6 @@ window#waybar {
     transition-duration: 0.5s;
     background: @bg;
     color: lighter(@fg);
-    border-radius: 6px;
 
 }
 
@@ -61,7 +60,7 @@ tooltip label {
 #custom-github,
 #memory,
 #disk,
-#together,
+#network,
 #submap,
 #custom-weather,
 #custom-recorder,
@@ -73,10 +72,11 @@ tooltip label {
 #tray,
 #audio,
 #privacy,
+#clock,
 #sound {
     border-radius: 6px;
     margin-right: 6px;
-    min-width: 22px;
+    min-width: 24px;
 }
 
 
@@ -137,14 +137,6 @@ tooltip label {
     color: lighter(@active);
 }
 
-#network.wifi {
-    padding: 0px 12px 0px 6px;
-}
-
-#battery {
-    margin-right: 6px;
-}
-
 #clock {
     font-weight: bold;
     padding: 2px 0px 2px 0px;
@@ -152,6 +144,7 @@ tooltip label {
 
 #pulseaudio {
     padding-left: 6px;
+    padding-right: 4px;
 }
 
 #pulseaudio.mic {

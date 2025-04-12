@@ -1,6 +1,0 @@
-#!/bin/env bash
-
-jellyfin &
-sudo tailscale up
-mullvad connect
-

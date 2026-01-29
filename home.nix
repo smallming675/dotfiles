@@ -58,7 +58,6 @@ in {
     atuin
     fastfetch
     grc
-    delta
     usbmuxd
     zip
     unzip
@@ -869,6 +868,29 @@ in {
     enable = true;
     config = {
       theme = "Catppuccin Mocha";
+    };
+  };
+
+  programs.delta = {
+    enable = true;
+    options = with colors; {
+      features = "side-by-side line-numbers decorations";
+      side-by-side = true;
+      line-numbers = true;
+      navigate = true;
+      syntax-theme = "Dracula";
+      minus-style = "syntax #${red}";
+      minus-emph-style = "syntax #${bright1}";
+      plus-style = "syntax #${green}";
+      plus-emph-style = "syntax #${bright2}";
+      file-style = "#${blue} ul";
+      file-decoration-style = "#${blue} ul";
+      hunk-header-style = "line-number syntax";
+      hunk-header-decoration-style = "#${yellow} box";
+      merge-conflict-begin-symbol = "◀";
+      merge-conflict-end-symbol = "▶";
+      merge-conflict-ours-diff-header-style = "#${green}";
+      merge-conflict-theirs-diff-header-style = "#${red}";
     };
   };
 

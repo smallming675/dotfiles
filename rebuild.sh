@@ -15,6 +15,3 @@ git commit -am "$current"
 
 echo "Rebuild success!"
 rm nixos-switch.log
-popd
-
-

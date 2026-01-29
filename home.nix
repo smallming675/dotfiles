@@ -109,8 +109,8 @@ in {
       add_newline = false;
       line_break.disabled = true;
       character = {
-        success_symbol = "[❯](bold ${colors.green})";
-        error_symbol = "[❯](bold ${colors.red})";
+        success_symbol = "[❯](bold green)";
+        error_symbol = "[❯](bold red)";
       };
       python = {
         symbol = " ";
@@ -118,27 +118,27 @@ in {
       };
       sudo = {
         format = "[$symbol]($style)";
-        style = "bold ${colors.yellow}";
+        style = "bold yellow";
         symbol = " ";
         disabled = false;
       };
       cmd_duration.disabled = true;
       hostname = {
         ssh_only = false;
-        format = "[$hostname](bold ${colors.red}) ";
+        format = "[$hostname](bold red) ";
         disabled = true;
       };
       git_branch = {
         symbol = " ";
         format = "[$symbol$branch(:$remote_branch)]($style) ";
-        style = "${colors.blue}";
+        style = "blue";
       };
       directory = {
         format = "[$read_only]($read_only_style)[$path]($style) ";
         read_only = " ";
         truncation_length = 4;
         home_symbol = "~";
-        style = "${colors.green}";
+        style = "green";
       };
     };
   };

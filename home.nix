@@ -581,7 +581,6 @@ in {
         font: "JetBrainsMono Nerd Font 16";
         terminal: "foot";
         cycle: true;
-        location: "center";
     }
     * {
         background:     ${bg}FF;

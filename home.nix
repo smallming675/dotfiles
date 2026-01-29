@@ -5,26 +5,26 @@
   ...
 }: let
   colors = rec {
-    fg = "dadada";
-    bg = "141b1e";
-    black = "232a2d";
-    red = "e57474";
-    green = "8ccf7e";
-    yellow = "e5c76b";
-    blue = "67b0e8";
-    magenta = "c47fd5";
-    cyan = "6cbfbf";
-    white = "b3b9b8";
-    orange = "ff9e64";
+    fg = "F3F4F5";
+    bg = "1C2023";
+    black = "1C2023";
+    red = "C7AE95";
+    green = "95C7AE";
+    yellow = "C7C795";
+    blue = "95AEC7";
+    magenta = "AE95C7";
+    cyan = "95AEC7";
+    white = "C7CCD1";
+    orange = "C79595";
 
-    bright0 = "2d3437";
-    bright1 = "ef7e7e";
-    bright2 = "96d988";
-    bright3 = "f4d67a";
-    bright4 = "71baf2";
-    bright5 = "ce89df";
-    bright6 = "67cbe7";
-    bright7 = "bdc3c2";
+    bright0 = "393F45";
+    bright1 = "C7C795";
+    bright2 = "AEC795";
+    bright3 = "95C7AE";
+    bright4 = "95AEC7";
+    bright5 = "C795AE";
+    bright6 = "95AEC7";
+    bright7 = "DFE2E5";
 
     hex = {
       fg = "#${fg}";

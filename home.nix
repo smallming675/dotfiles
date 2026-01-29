@@ -97,6 +97,7 @@ in {
     opencode
     syncthing
     gemini-cli-bin
+    ghostty
   ];
 
   programs.starship = {
@@ -343,8 +344,8 @@ in {
               datetime        "#[fg=${colors.hex.white}] {format} "
               datetime_format "%d %b %Y %H:%M"
               datetime_timezone "Hongkong"
-              tab_normal  "#[bg=${colors.hex.bg},fg=${colors.hex.blue}] {index} "
-              tab_active  "#[bg=${colors.hex.black},fg=${colors.hex.yellow},bold] {index} "
+              tab_normal  "#[bg=${colors.hex.black},fg=${colors.hex.blue}] {index} "
+              tab_active  "#[bg=${colors.hex.bg},fg=${colors.hex.yellow},bold] {index} "
               tab_separator " "
             }
           }

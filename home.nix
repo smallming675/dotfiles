@@ -880,9 +880,9 @@ in {
       navigate = true;
       syntax-theme = "Dracula";
       minus-style = "syntax #${red}";
-      minus-emph-style = "syntax #${bright1}";
+      minus-emph-style = "syntax #${red}";
       plus-style = "syntax #${green}";
-      plus-emph-style = "syntax #${bright2}";
+      plus-emph-style = "syntax #${green}";
       file-style = "#${blue} ul";
       file-decoration-style = "#${blue} ul";
       hunk-header-style = "line-number syntax";

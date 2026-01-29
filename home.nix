@@ -48,6 +48,7 @@ in {
 
   home.packages = with pkgs; [
     (pass.withExtensions (exts: [exts.pass-otp]))
+    delta
     ripgrep
     fd
     bat
@@ -868,29 +869,6 @@ in {
     enable = true;
     config = {
       theme = "Catppuccin Mocha";
-    };
-  };
-
-  programs.delta = {
-    enable = true;
-    options = with colors; {
-      features = "side-by-side line-numbers decorations";
-      side-by-side = true;
-      line-numbers = true;
-      navigate = true;
-      syntax-theme = "Dracula";
-      minus-style = "syntax #${red}";
-      minus-emph-style = "syntax #${red}";
-      plus-style = "syntax #${green}";
-      plus-emph-style = "syntax #${green}";
-      file-style = "#${blue} ul";
-      file-decoration-style = "#${blue} ul";
-      hunk-header-style = "line-number syntax";
-      hunk-header-decoration-style = "#${yellow} box";
-      merge-conflict-begin-symbol = "◀";
-      merge-conflict-end-symbol = "▶";
-      merge-conflict-ours-diff-header-style = "#${green}";
-      merge-conflict-theirs-diff-header-style = "#${red}";
     };
   };
 

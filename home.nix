@@ -230,7 +230,12 @@ in {
               "pyright", "eslint-lsp", "lua-language-server", "nixfmt" }
             vim.lsp.enable(servers)
           end,
-        };
+        },
+        { "nvzone/volt", lazy = true },
+        {
+          "nvzone/minty",
+          cmd = { "Shades", "Huefy" },
+        }
       }
     '';
     extraConfig = ''

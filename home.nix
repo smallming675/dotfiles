@@ -231,6 +231,13 @@ in {
             vim.lsp.enable(servers)
           end,
         },
+        {
+          'Biscuit-Theme/nvim',
+          as = "biscuit",
+          config = function()
+              vim.cmd('colorscheme biscuit')
+          end
+        },
         { "nvzone/volt", lazy = true },
         {
           "nvzone/minty",

@@ -187,6 +187,8 @@ in {
         fzf_key_bindings
       end
       enable_transience
+      export GEMINI_API_KEY="$(pass show gemini/api-key)"
+      export GOOGLE_GEMINI_BASE_URL="$(pass show gemini/base-url)"
     '';
     interactiveShellInit = ''
       alias cd="z"

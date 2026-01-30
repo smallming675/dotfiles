@@ -231,13 +231,6 @@ in {
             vim.lsp.enable(servers)
           end,
         },
-        {
-          'Biscuit-Theme/nvim',
-          as = "biscuit",
-          config = function()
-              vim.cmd('colorscheme biscuit')
-          end
-        },
         { "nvzone/volt", lazy = true },
         {
           "nvzone/minty",
@@ -256,7 +249,64 @@ in {
     '';
     chadrcConfig = ''
       local M = {}
-      M.ui = { theme = "everblush" }
+
+      M.base_30 = {
+        white = "#FFE9C7", -- Papaya Whip (Main Text)
+        darker_black = "#141010", -- Slightly darker Licorice (Statusline)
+        black = "#1A1515", -- Licorice (Main BG)
+        black2 = "#2D2424", -- Raisin Black (Sidebar/Pmenu)
+        one_bg = "#2D2424", -- Raisin Black (Cursorline)
+        one_bg2 = "#453636", -- Van Dyke
+        one_bg3 = "#725A5A", -- Wenge
+        grey = "#725A5A", -- Wenge (Comments)
+        grey_fg = "#9C8181", -- Cinereous (Line Nr)
+        grey_fg2 = "#DCC9BC", -- Champagne Pink
+        light_grey = "#DCC9BC",
+
+        red = "#CF223E", -- Crimson
+        baby_pink = "#CF223E",
+        pink = "#AE3F82", -- Magenta Haze
+        line = "#2D2424", -- Line highlight
+
+        green = "#959A6B", -- Moss Green
+        vibrant_green = "#959A6B",
+
+        nord_blue = "#756D94", -- Chinese Violet
+        blue = "#756D94",
+
+        yellow = "#E39C45", -- Persian Orange
+        sun = "#E39C45",
+
+        purple = "#614F76", -- Ultra Violet
+        cyan = "#768F80", -- Battleship Gray
+        teal = "#768F80",
+        orange = "#F07342", -- Burnt Sienna
+
+        statusline_bg = "#1A1515",
+        lightbg = "#2D2424",
+        pmenu_bg = "#2D2424",
+        folder_bg = "#2D2424",
+      }
+
+      M.base_16 = {
+        base00 = "#1A1515", -- Licorice
+        base01 = "#2D2424", -- Raisin Black
+        base02 = "#453636", -- Van Dyke
+        base03 = "#725A5A", -- Wenge
+        base04 = "#9C8181", -- Cinereous
+        base05 = "#FFE9C7", -- Papaya Whip
+        base06 = "#DCC9BC", -- Champagne Pink
+        base07 = "#FFE9C7", -- Papaya Whip
+        base08 = "#CF223E", -- Crimson (Variables)
+        base09 = "#F07342", -- Burnt Sienna (Integers)
+        base0A = "#E39C45", -- Persian Orange (Classes)
+        base0B = "#959A6B", -- Moss Green (Strings)
+        base0C = "#768F80", -- Battleship Gray (Regex)
+        base0D = "#756D94", -- Chinese Violet (Functions)
+        base0E = "#614F76", -- Ultra Violet (Keywords)
+        base0F = "#7B3D79", -- Plum
+      }
+
       return M
     '';
   };

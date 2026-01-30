@@ -93,13 +93,13 @@ in {
     watchexec
     obsidian
     localsend
-    opencode
     syncthing
     gemini-cli-bin
     ghostty
     hyprpicker
     gimp
     zathura
+    delta
   ];
 
   programs.starship = {
@@ -233,6 +233,10 @@ in {
             vim.lsp.enable(servers)
           end,
         },
+        {
+          'kiddos/gemini.nvim',
+          opts = {}
+        }
       }
     '';
     extraConfig = ''
@@ -874,13 +878,6 @@ in {
     enable = true;
     config = {
       theme = "Catppuccin Mocha";
-    };
-  };
-
-  programs.delta = {
-    enable = true;
-    options = {
-      features = "catppuccin-mocha";
     };
   };
 

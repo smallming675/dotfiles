@@ -98,6 +98,7 @@ in {
     syncthing
     gemini-cli-bin
     ghostty
+    hyprpicker
   ];
 
   programs.starship = {

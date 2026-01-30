@@ -130,5 +130,14 @@
     KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{serial}=="*vial:f64c2b3c*", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
   '';
 
+  system.autoUpgrade = {
+    enable = true;
+    channel = "https://nixos.org/channels/nixos-unstable";
+    dates = "02:00";
+    randomizedDelaySec = "45min";
+    allowReboot = true;
+    flags = ["--print-build-logs"];
+  };
+
   system.stateVersion = "25.11";
 }

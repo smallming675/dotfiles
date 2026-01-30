@@ -48,7 +48,6 @@ in {
 
   home.packages = with pkgs; [
     (pass.withExtensions (exts: [exts.pass-otp]))
-    delta
     ripgrep
     fd
     bat
@@ -99,6 +98,8 @@ in {
     gemini-cli-bin
     ghostty
     hyprpicker
+    gimp
+    zathura
   ];
 
   programs.starship = {
@@ -873,6 +874,13 @@ in {
     enable = true;
     config = {
       theme = "Catppuccin Mocha";
+    };
+  };
+
+  programs.delta = {
+    enable = true;
+    options = {
+      features = "catppuccin-mocha";
     };
   };
 

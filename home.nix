@@ -248,6 +248,7 @@ in {
       map("n", "-", "<C-x>", { desc = "Decrement", noremap = true })
     '';
     chadrcConfig = ''
+      as;dflsdas
       local M = {}
 
       M.base_30 = {

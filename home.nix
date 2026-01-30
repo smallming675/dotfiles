@@ -146,6 +146,13 @@ in {
     };
   };
 
+  programs.bash = {
+    enable = true;
+    initExtra = ''
+      export GEMINI_API_KEY="$(pass show gemini/api-key)"
+      export GOOGLE_GEMINI_BASE_URL="$(pass show gemini/base-url)"
+    '';
+  };
   programs.fish = {
     enable = true;
     plugins = [
@@ -187,8 +194,6 @@ in {
         fzf_key_bindings
       end
       enable_transience
-      export GEMINI_API_KEY="$(pass show gemini/api-key)"
-      export GOOGLE_GEMINI_BASE_URL="$(pass show gemini/base-url)"
     '';
     interactiveShellInit = ''
       alias cd="z"
@@ -237,6 +242,7 @@ in {
         },
         {
           "jonroosevelt/gemini-cli.nvim",
+          lazy = false;
           config = function()
             require("gemini").setup({
               split_direction = "vertical",

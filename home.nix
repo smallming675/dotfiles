@@ -5,26 +5,26 @@
   ...
 }: let
   colors = rec {
-    fg = "F3F4F5";
-    bg = "1C2023";
-    black = "1C2023";
-    red = "C7AE95";
-    green = "95C7AE";
-    yellow = "C7C795";
-    blue = "95AEC7";
-    magenta = "AE95C7";
-    cyan = "95AEC7";
-    white = "C7CCD1";
-    orange = "C79595";
+    fg = "cdc0ad";
+    bg = "252221";
+    black = "2b2827";
+    red = "c65f5f";
+    green = "8ca589";
+    yellow = "d9b27c";
+    blue = "7d92a2";
+    magenta = "998396";
+    cyan = "829e9b";
+    white = "cdc0ad";
+    orange = "d08b65";
 
-    bright0 = "393F45";
-    bright1 = "C7C795";
-    bright2 = "AEC795";
-    bright3 = "95C7AE";
-    bright4 = "95AEC7";
-    bright5 = "C795AE";
-    bright6 = "95AEC7";
-    bright7 = "DFE2E5";
+    bright0 = "4d4a49";
+    bright1 = "dc7575";
+    bright2 = "95ae92";
+    bright3 = "e1ba84";
+    bright4 = "728797";
+    bright5 = "d16a6a";
+    bright6 = "749689";
+    bright7 = "c8baa4";
 
     hex = {
       fg = "#${fg}";
@@ -231,68 +231,9 @@ in {
             vim.lsp.enable(servers)
           end,
         },
-        { "nvzone/volt", lazy = true },
-        {
-          "nvzone/minty",
-          cmd = { "Shades", "Huefy" },
-        }
       }
     '';
     extraConfig = ''
-      package.preload["themes.biscuit"] = function()
-        local M = {}
-        M.base_30 = {
-          white = "#FFE9C7",
-          darker_black = "#141010",
-          black = "#1A1515",
-          black2 = "#2D2424",
-          one_bg = "#2D2424",
-          one_bg2 = "#453636",
-          one_bg3 = "#725A5A",
-          grey = "#725A5A",
-          grey_fg = "#9C8181",
-          grey_fg2 = "#DCC9BC",
-          light_grey = "#DCC9BC",
-          red = "#CF223E",
-          baby_pink = "#CF223E",
-          pink = "#AE3F82",
-          line = "#2D2424",
-          green = "#959A6B",
-          vibrant_green = "#959A6B",
-          nord_blue = "#756D94",
-          blue = "#756D94",
-          yellow = "#E39C45",
-          sun = "#E39C45",
-          purple = "#614F76",
-          cyan = "#768F80",
-          teal = "#768F80",
-          orange = "#F07342",
-          statusline_bg = "#1A1515",
-          lightbg = "#2D2424",
-          pmenu_bg = "#2D2424",
-          folder_bg = "#2D2424",
-        }
-        M.base_16 = {
-          base00 = "#1A1515",
-          base01 = "#2D2424",
-          base02 = "#453636",
-          base03 = "#725A5A",
-          base04 = "#9C8181",
-          base05 = "#FFE9C7",
-          base06 = "#DCC9BC",
-          base07 = "#FFE9C7",
-          base08 = "#CF223E",
-          base09 = "#F07342",
-          base0A = "#E39C45",
-          base0B = "#959A6B",
-          base0C = "#768F80",
-          base0D = "#756D94",
-          base0E = "#614F76",
-          base0F = "#7B3D79",
-        }
-        return M
-      end
-
       local map = vim.keymap.set
       vim.o.wrap = false
       map("n", ";", ":", { desc = "CMD enter command mode" })
@@ -304,9 +245,8 @@ in {
     chadrcConfig = ''
       local M = {}
       M.base46 = {
-        theme = "biscuit",
+        theme = "chocolate",
         transparency = false,
-        theme_toggle = { "biscuit", "one_light" },
       }
       return M
     '';

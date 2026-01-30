@@ -241,14 +241,14 @@ in {
           end,
         },
         {
-          "jonroosevelt/gemini-cli.nvim",
+          "mrf/gemini-code-assist.nvim",
+          dependencies = { "nvim-lua/plenary.nvim" },
           lazy = false;
           config = function()
-            require("gemini").setup({
-              split_direction = "vertical",
-            })
+            require("gemini").setup()
           end,
-        }}
+        }
+      };
     '';
     extraConfig = ''
       local map = vim.keymap.set

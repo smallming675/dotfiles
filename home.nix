@@ -230,26 +230,33 @@ in {
       (python3.withPackages (ps: with ps; [pyright flake8]))
     ];
     extraPlugins = ''
-      return {
-        {
-          "neovim/nvim-lspconfig",
-          config = function()
-            require("nvchad.configs.lspconfig").defaults()
-            local servers = {
-              "html", "cssls", "rust-analyzer", "clangd",
-              "pyright", "eslint-lsp", "lua-language-server", "nixfmt" }
-            vim.lsp.enable(servers)
-          end,
-        },
-        {
-          "mrf/gemini-code-assist.nvim",
-          dependencies = { "nvim-lua/plenary.nvim" },
-          lazy = false;
-          config = function()
-            require("gemini").setup()
-          end,
+            return {
+              {
+                "neovim/nvim-lspconfig",
+                config = function()
+                  require("nvchad.configs.lspconfig").defaults()
+                  local servers = {
+                    "html", "cssls", "rust-analyzer", "clangd",
+                    "pyright", "eslint-lsp", "lua-language-server", "nixfmt" }
+                  vim.lsp.enable(servers)
+                end,
+              },
+              {
+                'huggingface/llm.nvim',
+                opts = {
+      {
+        model = "gemini-2.5-pro",
+        url = "https://api.vectorengine.ai",
+        request_body = {
+          options = {
+            temperature = 0.2,
+            top_p = 0.95,
+          }
         }
-      };
+      }
+                }
+              },
+            };
     '';
     extraConfig = ''
       local map = vim.keymap.set

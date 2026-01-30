@@ -236,11 +236,13 @@ in {
           end,
         },
         {
-          'kiddos/gemini.nvim',
-          lazy = false,
-          opts = {}
-        }
-      }
+          "jonroosevelt/gemini-cli.nvim",
+          config = function()
+            require("gemini").setup({
+              split_direction = "vertical",
+            })
+          end,
+        }}
     '';
     extraConfig = ''
       local map = vim.keymap.set

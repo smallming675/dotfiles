@@ -100,6 +100,7 @@ in {
     gimp
     zathura
     delta
+    mullvad-vpn
   ];
 
   programs.starship = {

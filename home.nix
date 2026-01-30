@@ -235,6 +235,7 @@ in {
         },
         {
           'kiddos/gemini.nvim',
+          lazy = false,
           opts = {}
         }
       }

@@ -768,7 +768,8 @@ in {
       monitorrule = name:DP-1,width:2560,height:1440,refresh:180,x:0,y:0
       exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots
       exec-once = wl-clip-persist --clipboard regular --reconnect-tries 0 &
-      cursor_theme = Bibata-Modern-Black
+      cursor_theme = Bibata-Modern-Ice
+      drag_tile_to_tile = true
       borderpx = 0
       gappih = 0
       gappiv = 0
@@ -781,7 +782,7 @@ in {
       bind=SUPER,P,togglefloating
       bind=SUPER,Q,killclient
       bind=SUPER,U,spawn_shell,slurp | grim -g - - | wl-copy
-      bindr=,SUPER,spawn_shell,rofi -show drun || pkill rofi
+      bind=,SUPER,spawn_shell,rofi -show drun || pkill rofi
       bind=SUPER,O,spawn,obsidian
       bind=SUPER,6,view,1
       bind=SUPER,7,view,2
@@ -799,8 +800,8 @@ in {
       bind=SUPER + CTRL,s,tag,6
       bind=SUPER + CTRL,d,tag,7
       bind=SUPER + CTRL,f,tag,8
-      bind=SUPER + ALT,h,exchange_client,l
-      bind=SUPER + ALT,l,exchange_client,r
+      bind=SUPER + ALT,h,tagtoleft
+      bind=SUPER + ALT,l,tagtoright
       bind=SUPER,R,reload_config
       bind=,XF86AudioRaiseVolume,exec,pamixer -ui 5
       bind=,XF86AudioLowerVolume,exec,pamixer -ud 5

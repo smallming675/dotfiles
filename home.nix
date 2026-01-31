@@ -101,6 +101,7 @@ in {
     zathura
     delta
     mullvad-vpn
+    pamixer
   ];
 
   programs.starship = {
@@ -230,37 +231,39 @@ in {
       (python3.withPackages (ps: with ps; [pyright flake8]))
     ];
     extraPlugins = ''
-            return {
-              {
-                "neovim/nvim-lspconfig",
-                config = function()
-                  require("nvchad.configs.lspconfig").defaults()
-                  local servers = {
-                    "html", "cssls", "rust-analyzer", "clangd",
-                    "pyright", "eslint-lsp", "lua-language-server", "nixfmt" }
-                  vim.lsp.enable(servers)
-                end,
-              },
-              {
-                'huggingface/llm.nvim',
-                opts = {
-      {
-        model = "gemini-2.5-pro",
-        url = "https://api.vectorengine.ai",
-        request_body = {
-          options = {
-            temperature = 0.2,
-            top_p = 0.95,
-          }
-        }
-      }
+      return {
+        {
+          "neovim/nvim-lspconfig",
+          config = function()
+            require("nvchad.configs.lspconfig").defaults()
+            local servers = {
+              "html", "cssls", "rust-analyzer", "clangd",
+              "pyright", "eslint-lsp", "lua-language-server", "nixfmt" }
+            vim.lsp.enable(servers)
+          end,
+        },
+        {
+          'huggingface/llm.nvim',
+          lazy = false,
+          opts = {
+            {
+              model = "gemini-2.5-pro",
+              url = "https://api.vectorengine.ai",
+              request_body = {
+                options = {
+                  temperature = 0.2,
+                  top_p = 0.95,
                 }
-              },
-            };
+              }
+            }
+          }
+        },
+      };
     '';
     extraConfig = ''
       local map = vim.keymap.set
       vim.o.wrap = false
+      vim.o.relativenumber = true
       map("n", ";", ":", { desc = "CMD enter command mode" })
       map({ "n", "v" }, "J", "<C-d>", { desc = "Go Down" })
       map({ "n", "v" }, "K", "<C-u>", { desc = "Go Up" })
@@ -588,7 +591,6 @@ in {
     };
   };
 
-  # Use xdg.configFile for rofi to avoid theme issues
   xdg.configFile."rofi/config.rasi".text = with colors.hex; ''
     configuration {
         show-icons: false;
@@ -898,6 +900,19 @@ in {
     config = {
       theme = "Catppuccin Mocha";
     };
+  };
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Gruvbox-Dark-B";
+      package = pkgs.gruvbox-gtk-theme;
+    };
+  };
+
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
   };
 
   home.stateVersion = "25.11";

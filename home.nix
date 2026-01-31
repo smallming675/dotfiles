@@ -906,20 +906,6 @@ in {
   programs.yazi = {
     enable = true;
     enableFishIntegration = true;
-
-    settings = {
-      preview = {
-        image_filter = "lanczos3";
-        image_quality = 80;
-        sixel_fraction = 10;
-      };
-    };
-
-    theme = {
-      manager = {
-        preview_hovered = {underline = true;};
-      };
-    };
   };
 
   home.stateVersion = "25.11";

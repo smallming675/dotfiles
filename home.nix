@@ -747,25 +747,13 @@ in {
     };
   };
 
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Gruvbox-Dark-B";
-      package = pkgs.gruvbox-gtk-theme;
-    };
-  };
-
-  qt = {
-    enable = true;
-    platformTheme = "gtk";
-  };
-
   wayland.windowManager.mango = {
     enable = true;
     settings = ''
       env = XCURSOR_SIZE,24
       exec-once = swaybg -i ~/config/bin/wallpaper.png
       monitorrule = name:DP-1,width:2560,height:1440,refresh:180,x:0,y:0
+      tagrule=,,layout_name:tile
       exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots
       exec-once = wl-clip-persist --clipboard regular --reconnect-tries 0 &
       cursor_theme = Bibata-Modern-Black
@@ -775,13 +763,14 @@ in {
       gappoh = 0
       gappov = 0
       blur = 0
+      drag_tile_to_tile = true
       bind=SUPER,T,spawn,foot
       bind=SUPER,N,spawn,brave
       bind=SUPER,M,togglefullscreen
       bind=SUPER,P,togglefloating
       bind=SUPER,Q,killclient
       bind=SUPER,U,spawn_shell,slurp | grim -g - - | wl-copy
-      bindr=,SUPER,spawn_shell,rofi -show drun || pkill rofi
+      bindr=,SUPER_L,spawn,rofi -show drun || pkill rofi
       bind=SUPER,O,spawn,obsidian
       bind=SUPER,6,view,1
       bind=SUPER,7,view,2
@@ -818,8 +807,6 @@ in {
       mousebind=SUPER,btn_left,moveresize,curmove
       mousebind=SUPER,btn_right,moveresize,curresize
       mousebind=SUPER+CTRL,btn_right,killclient
-      mousebind=NONE,btn_left,toggleoverview,-1
-      mousebind=NONE,btn_right,killclient,0
       mousebind=NONE,btn_middle,togglemaximizescreen,0
 
       animations=1

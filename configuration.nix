@@ -86,7 +86,7 @@
 
   services.greetd.enable = true;
   services.greetd.settings.default_session = {
-    command = "start-hyprland";
+    command = "mango";
     user = "user";
   };
 

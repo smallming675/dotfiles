@@ -102,6 +102,7 @@ in {
     mullvad-vpn
     pamixer
     yazi
+    jq
   ];
 
   programs.starship = {
@@ -412,6 +413,9 @@ in {
     enable = true;
     package = pkgs.hyprland;
     settings = {
+      layerrule = [
+        "noanim, rofi"
+      ];
       env = [
         "XCURSOR_SIZE,24"
         "HYPRCURSOR_SIZE,24"
@@ -497,7 +501,7 @@ in {
         "SUPER,P,togglefloating"
         "SUPER,Q,killactive"
         "SUPER,U,exec, slurp | grim -g - - | wl-copy"
-        "SUPER,SUPER_L,exec,hyprctl keyword layerrule animation none, rofi -show drun || pkill rofi"
+        "SUPER,SUPER_L,exec,rofi -show drun || pkill rofi"
         "SUPER SHIFT,S,exec,hyprpicker -a"
         "SUPER,O,exec,obsidian"
         "SUPER,Tab,cyclenext"

@@ -242,22 +242,6 @@ in {
             vim.lsp.enable(servers)
           end,
         },
-        {
-          'huggingface/llm.nvim',
-          lazy = false,
-          opts = {
-            {
-              model = "gemini-2.5-pro",
-              url = "https://api.vectorengine.ai",
-              request_body = {
-                options = {
-                  temperature = 0.2,
-                  top_p = 0.95,
-                }
-              }
-            }
-          }
-        },
       };
     '';
     extraConfig = ''

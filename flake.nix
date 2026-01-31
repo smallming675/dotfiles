@@ -10,10 +10,6 @@
       url = "github:nix-community/nix4nvchad";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    mango = {
-      url = "github:DreamMaoMao/mango";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
@@ -22,7 +18,7 @@
     home-manager,
     nix4nvchad,
     ...
-  } @ inputs: let
+  }: let
     system = "x86_64-linux";
     lib = nixpkgs.lib;
     pkgs = import nixpkgs {inherit system;};
@@ -37,12 +33,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = {inherit nix4nvchad;};
-          home-manager.users.user = {
-            imports = [
-              ./home.nix
-              inputs.mango.hmModules.mango
-            ];
-          };
+          home-manager.users.user = import ./home.nix;
         }
       ];
     };

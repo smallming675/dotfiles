@@ -804,7 +804,6 @@ in {
       bind=SUPER + CTRL,f,tag,8
       bind=SUPER + ALT,h,tagtoleft
       bind=SUPER + ALT,l,tagtoright
-      bind=SUPER,R,reload_config
       bind=,XF86AudioRaiseVolume,exec,pamixer -ui 5
       bind=,XF86AudioLowerVolume,exec,pamixer -ud 5
       bind=,XF86AudioMute,exec,pamixer --toggle-mute

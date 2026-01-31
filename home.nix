@@ -770,7 +770,7 @@ in {
       bind=SUPER,P,togglefloating
       bind=SUPER,Q,killclient
       bind=SUPER,U,spawn_shell,slurp | grim -g - - | wl-copy
-      bindr=,SUPER_L,spawn_shell,rofi -show drun || pkill rofi
+      bindr=NONE,SUPER_L,spawn_shell,pkill rofi || rofi -show drun
       bind=SUPER,O,spawn,obsidian
       bind=SUPER,6,view,1
       bind=SUPER,7,view,2

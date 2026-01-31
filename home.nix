@@ -602,12 +602,12 @@ in {
 
     theme = builtins.toFile "theme.rasi" ''
       * {
-          background:                  ${colors.bg}FF;
-          background-alt:              ${colors.black}FF;
-          foreground:                  ${colors.fg}FF;
-          selected:                    ${colors.fg}FF;
-          active:                      ${colors.cyan}FF;
-          urgent:                      ${colors.red}FF;
+          background:                  #${colors.bg}FF;
+          background-alt:              #${colors.black}FF;
+          foreground:                  #${colors.fg}FF;
+          selected:                    #${colors.fg}FF;
+          active:                      #${colors.cyan}FF;
+          urgent:                      #${colors.red}FF;
           border-colour:               transparent;
           handle-colour:               var(selected);
           background-colour:           var(background);

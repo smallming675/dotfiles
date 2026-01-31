@@ -101,8 +101,9 @@ in {
     delta
     mullvad-vpn
     pamixer
-    yazi
     jq
+    libsixel
+    chafa
   ];
 
   programs.starship = {
@@ -899,6 +900,25 @@ in {
     enable = true;
     config = {
       theme = "Catppuccin Mocha";
+    };
+  };
+
+  programs.yazi = {
+    enable = true;
+    enableFishIntegration = true;
+
+    settings = {
+      preview = {
+        image_filter = "lanczos3";
+        image_quality = 80;
+        sixel_fraction = 10;
+      };
+    };
+
+    theme = {
+      manager = {
+        preview_hovered = {underline = true;};
+      };
     };
   };
 

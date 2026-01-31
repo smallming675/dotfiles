@@ -413,7 +413,7 @@ in {
     package = pkgs.hyprland;
     settings = {
       windowrule = [
-        "noanim, class:^(Rofi)$"
+        "class:^(Rofi)$, no_anim"
       ];
       env = [
         "XCURSOR_SIZE,24"

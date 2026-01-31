@@ -770,6 +770,7 @@ in {
       exec-once = wl-clip-persist --clipboard regular --reconnect-tries 0 &
       cursor_theme = Bibata-Modern-Ice
       drag_tile_to_tile = true
+      enable_floating_snap = true
       borderpx = 0
       gappih = 0
       gappiv = 0
@@ -780,10 +781,11 @@ in {
       bind=SUPER,N,spawn,brave
       bind=SUPER,M,togglefullscreen
       bind=SUPER,P,togglefloating
-      bind=SUPER,Q,killclient
+      bind=SUPER,Q,killactive
       bind=SUPER,U,spawn_shell,slurp | grim -g - - | wl-copy
-      bind=,SUPER,spawn_shell,rofi -show drun || pkill rofi
+      bind=SUPER,,spawn_shell,rofi -show drun || pkill rofi
       bind=SUPER,O,spawn,obsidian
+      bind=SUPER,Tab,cyclenext
       bind=SUPER,6,view,1
       bind=SUPER,7,view,2
       bind=SUPER,8,view,3

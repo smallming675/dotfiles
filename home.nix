@@ -886,18 +886,5 @@ in {
     };
   };
 
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Gruvbox-Dark-B";
-      package = pkgs.gruvbox-gtk-theme;
-    };
-  };
-
-  qt = {
-    enable = true;
-    platformTheme = "gtk";
-  };
-
   home.stateVersion = "25.11";
 }

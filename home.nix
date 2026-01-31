@@ -379,6 +379,10 @@ in {
         font = "JetBrainsMono Nerd Font:size=18:style=Semibold";
         pad = "6x6 center";
         shell = "fish";
+        dpi-aware = "no";
+      };
+      tweak = {
+        sixel = "yes";
       };
       cursor = {
         style = "underline";

@@ -66,7 +66,7 @@ in {
     grim
     slurp
     swaybg
-    hyprpaper
+    wl-clip-persist
     pavucontrol
     brightnessctl
     nautilus
@@ -96,7 +96,6 @@ in {
     syncthing
     gemini-cli-bin
     ghostty
-    hyprpicker
     gimp
     zathura
     delta
@@ -405,144 +404,6 @@ in {
       mouse = {
         hide-when-typing = "yes";
       };
-    };
-  };
-
-  wayland.windowManager.hyprland = {
-    enable = true;
-    package = pkgs.hyprland;
-    settings = {
-      env = [
-        "XCURSOR_SIZE,24"
-        "HYPRCURSOR_SIZE,24"
-        "HYPRCURSOR_THEME,Bibata-Modern-Black"
-        "XCOMPOSEFILE,~/.XCompose"
-        "LIBVA_DRIVER_NAME,nvidia"
-        "GBM_BACKEND,nvidia-drm"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        "NVD_BACKEND,direct"
-        "GDK_BACKEND,wayland,x11,*"
-        "QT_QPA_PLATFORM,wayland;xcb"
-        "QT_STYLE_OVERRIDE,kvantum"
-        "SDL_VIDEODRIVER,wayland"
-        "MOZ_ENABLE_WAYLAND,1"
-        "ELECTRON_OZONE_PLATFORM_HINT,wayland"
-        "OZONE_PLATFORM,wayland"
-        "XDG_SESSION_TYPE,wayland"
-        "XDG_CURRENT_DESKTOP,Hyprland"
-        "XDG_SESSION_DESKTOP,Hyprland"
-      ];
-      xwayland.force_zero_scaling = true;
-      monitor = ["DP-1, 2560x1440@180, auto, 1"];
-      exec-once = [
-        "swaybg -i ~/config/bin/wallpaper.png"
-        "[workspace 1 silent] brave"
-        "[workspace 2 silent] foot"
-        "[workspace 3 silent] obsidian"
-        "[workspace 4 silent] vesktop"
-      ];
-      input.follow_mouse = 0;
-      misc = {
-        disable_hyprland_logo = true;
-        animate_manual_resizes = true;
-        vfr = true;
-        disable_splash_rendering = true;
-        focus_on_activate = true;
-        anr_missed_pings = 3;
-      };
-      cursor = {
-        no_hardware_cursors = true;
-        hide_on_key_press = true;
-      };
-      general = {
-        border_size = 0;
-        resize_on_border = false;
-        allow_tearing = false;
-        gaps_in = 0;
-        gaps_out = 0;
-      };
-      animations = {
-        enabled = true;
-        bezier = [
-          "easeOutQuint,0.23,1,0.32,1"
-          "easeInOutCubic,0.65,0.05,0.36,1"
-          "linear,0,0,1,1"
-          "almostLinear,0.5,0.5,0.75,1.0"
-          "quick,0.15,0,0.1,1"
-        ];
-        animation = [
-          "global, 1, 10, default"
-          "border, 1, 5.39, easeOutQuint"
-          "windows, 1, 4.79, easeOutQuint"
-          "windowsIn, 1, 4.1, easeOutQuint, popin 87%"
-          "windowsOut, 1, 1.49, linear, popin 87%"
-          "fadeIn, 1, 1.73, almostLinear"
-          "fadeOut, 1, 1.46, almostLinear"
-          "fade, 1, 3.03, quick"
-          "layers, 1, 3.81, easeOutQuint"
-          "layersIn, 1, 4, easeOutQuint, fade"
-          "layersOut, 1, 1.5, linear, fade"
-          "fadeLayersIn, 1, 1.79, almostLinear"
-          "fadeLayersOut, 1, 1.39, almostLinear"
-          "workspaces, 1, 2, easeOutQuint"
-        ];
-      };
-      master.new_status = "master";
-      ecosystem.no_update_news = true;
-      debug.disable_logs = false;
-      bind = [
-        "SUPER,T,exec,foot"
-        "SUPER,N,exec,brave"
-        "SUPER,M,fullscreen"
-        "SUPER,P,togglefloating"
-        "SUPER,Q,killactive"
-        "SUPER,U,exec, slurp | grim -g - - | wl-copy"
-        "SUPER,SUPER_L,exec,rofi -show drun || pkill rofi"
-        "SUPER SHIFT,S,exec,hyprpicker -a"
-        "SUPER,O,exec,obsidian"
-        "SUPER,Tab,cyclenext"
-        "SUPER,6,workspace,1"
-        "SUPER,7,workspace,2"
-        "SUPER,8,workspace,3"
-        "SUPER,9,workspace,4"
-        "SUPER,1,workspace,5"
-        "SUPER,2,workspace,6"
-        "SUPER,3,workspace,7"
-        "SUPER,4,workspace,8"
-        "SUPER CTRL,h,movetoworkspace,1"
-        "SUPER CTRL,j,movetoworkspace,2"
-        "SUPER CTRL,k,movetoworkspace,3"
-        "SUPER CTRL,l,movetoworkspace,4"
-        "SUPER CTRL,a,movetoworkspace,5"
-        "SUPER CTRL,s,movetoworkspace,6"
-        "SUPER CTRL,d,movetoworkspace,7"
-        "SUPER CTRL,f,movetoworkspace,8"
-        "SUPER ALT,h,movewindow,l"
-        "SUPER ALT,j,movewindow,d"
-        "SUPER ALT,k,movewindow,u"
-        "SUPER ALT,l,movewindow,r"
-        "SUPER SHIFT,l,resizeactive,100 0"
-        "SUPER SHIFT,h,resizeactive,-100 0"
-        "SUPER SHIFT,k,resizeactive,0 -100"
-        "SUPER SHIFT,j,resizeactive,0 100"
-        ",XF86AudioRaiseVolume,exec,pamixer -ui 5"
-        ",XF86AudioLowerVolume,exec,pamixer -ud 5"
-        ",XF86AudioMute,exec,pamixer --toggle-mute"
-        ",XF86MonBrightnessUp,exec,brightnessctl set 10%+"
-        ",XF86MonBrightnessDown,exec,brightnessctl set 10%-"
-        ",XF86AudioPlay,exec,playerctl play-pause"
-        ",XF86AudioNext,exec,playerctl next"
-        ",XF86AudioPrev,exec,playerctl previous"
-        "SUPER,mouse:272,movewindow"
-        "SUPER,grave,togglespecialworkspace"
-        "SUPER ALT,grave,movetoworkspace,special"
-      ];
-      bindr = [
-        "SUPER,h,movefocus,l"
-        "SUPER,l,movefocus,r"
-        "SUPER,k,movefocus,u"
-        "SUPER,j,movefocus,d"
-      ];
     };
   };
 
@@ -897,6 +758,74 @@ in {
   qt = {
     enable = true;
     platformTheme = "gtk";
+  };
+
+  wayland.windowManager.mango = {
+    enable = true;
+    settings = ''
+      env = XCURSOR_SIZE,24
+      exec-once = swaybg -i ~/config/bin/wallpaper.png
+      monitorrule = name:DP-1,width:2560,height:1440,refresh:180,x:0,y:0
+      exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots
+      exec-once = wl-clip-persist --clipboard regular --reconnect-tries 0 &
+      cursor_theme = Bibata-Modern-Ice
+      drag_tile_to_tile = true
+      enable_floating_snap = true
+      borderpx = 0
+      gappih = 0
+      gappiv = 0
+      gappoh = 0
+      gappov = 0
+      blur = 0
+      bind=SUPER,T,spawn,foot
+      bind=SUPER,N,spawn,brave
+      bind=SUPER,M,togglefullscreen
+      bind=SUPER,P,togglefloating
+      bind=SUPER,Q,killactive
+      bind=SUPER,U,spawn_shell,slurp | grim -g - - | wl-copy
+      bind=SUPER,,spawn_shell,rofi -show drun || pkill rofi
+      bind=SUPER,O,spawn,obsidian
+      bind=SUPER,Tab,cyclenext
+      bind=SUPER,6,view,1
+      bind=SUPER,7,view,2
+      bind=SUPER,8,view,3
+      bind=SUPER,9,view,4
+      bind=SUPER,1,view,5
+      bind=SUPER,2,view,6
+      bind=SUPER,3,view,7
+      bind=SUPER,4,view,8
+      bind=SUPER + CTRL,h,tag,1
+      bind=SUPER + CTRL,j,tag,2
+      bind=SUPER + CTRL,k,tag,3
+      bind=SUPER + CTRL,l,tag,4
+      bind=SUPER + CTRL,a,tag,5
+      bind=SUPER + CTRL,s,tag,6
+      bind=SUPER + CTRL,d,tag,7
+      bind=SUPER + CTRL,f,tag,8
+      bind=SUPER + ALT,h,tagtoleft
+      bind=SUPER + ALT,l,tagtoright
+      bind=,XF86AudioRaiseVolume,exec,pamixer -ui 5
+      bind=,XF86AudioLowerVolume,exec,pamixer -ud 5
+      bind=,XF86AudioMute,exec,pamixer --toggle-mute
+      bind=,XF86MonBrightnessUp,exec,brightnessctl set 10%+
+      bind=,XF86MonBrightnessDown,exec,brightnessctl set 10%-
+      bind=,XF86AudioPlay,exec_shell,playerctl play-pause
+      bind=,XF86AudioNext,exec_shell,playerctl next
+      bind=,XF86AudioPrev,exec_shell,playerctl previous
+      bind=SUPER,mouse:272,movewindow
+      bind=SUPER,h,focusdir,l
+      bind=SUPER,l,focusdir,r
+      bind=SUPER,k,focusdir,u
+      bind=SUPER,j,focusdir,d
+      mousebind=SUPER,btn_left,moveresize,curmove
+      mousebind=SUPER,btn_right,moveresize,curresize
+      mousebind=SUPER+CTRL,btn_right,killclient
+      mousebind=NONE,btn_left,toggleoverview,-1
+      mousebind=NONE,btn_right,killclient,0
+      mousebind=NONE,btn_middle,togglemaximizescreen,0
+    '';
+    autostart_sh = ''
+    '';
   };
 
   home.stateVersion = "25.11";

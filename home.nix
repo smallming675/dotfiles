@@ -414,7 +414,7 @@ in {
     package = pkgs.hyprland;
     settings = {
       layerrule = [
-        "noanim, rofi"
+        "no_anim, rofi"
       ];
       env = [
         "XCURSOR_SIZE,24"

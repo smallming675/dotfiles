@@ -1117,7 +1117,7 @@ in {
   xdg.desktopEntries.kew = {
     name = "Kew";
     genericName = "Music Player";
-    exec = "alacritty --class kew-music -e kew";
+    exec = "alacritty --class kew-music -e kew all";
     terminal = false;
     categories = ["Audio" "AudioVideo" "Player"];
     icon = "utilities-terminal";

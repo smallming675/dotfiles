@@ -224,7 +224,9 @@ in {
       alias nv="nvim"
       alias cp="rsync"
       set -g fish_key_bindings fish_vi_key_bindings
-      ${pkgs.tmux}/bin/tmux new-session -A -s main
+      if not set -q TMUX
+        exec tmux new-session -A -s main
+      end
     '';
   };
 
@@ -462,8 +464,11 @@ in {
       sync_to_monitor = "yes";
       macos_option_as_alt = "yes";
       window_padding_width = 4;
+      background_tint = "0.0";
+      dim_opacity = "1.0";
       confirm_os_window_close = 0;
       background_blur = 0;
+      linux_display_server = "x11";
       background = "#${colors.bg}";
       foreground = "#${colors.fg}";
 

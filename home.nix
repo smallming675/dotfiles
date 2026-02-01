@@ -318,41 +318,41 @@ in {
     ];
 
     extraConfig = ''
-      set-option -g status-position top
-      set -g status-interval 1
-      set -g status-style "bg=${colors.hex.bg},fg=${colors.hex.fg}"
-      set -g status-left-leng
-      set -g status-left ""  # Clean start
-      set -g window-status-format "#[fg=${colors.hex.blue},bg=${colors.hex.bg}] #I "
-      set -g window-status-current-format "#[fg=${colors.hex.yellow},bg=${colors.hex.black},bold] #I "
-      set -g window-status-separator " "
-      set -g status-right-length 100
-      set -g status-right "#[fg=${colors.hex.bright0}] %d %b %Y %H:%M "
-      set -g pane-border-style "fg=${colors.hex.black}"
-      set -g pane-active-border-style "fg=${colors.hex.blue}"
-      set -s extended-keys on
-      set -as terminal-features 'xterm*:extkeys'
+        set-option -g status-position top
+        set -g status-interval 1
+        set -g status-style "bg=${colors.hex.bg},fg=${colors.hex.fg}"
+        set -g status-left-length 50
+        set -g status-left ""
+        set -g window-status-format "#[fg=${colors.hex.blue},bg=${colors.hex.bg}] #I "
+        set -g window-status-current-format "#[fg=${colors.hex.yellow},bg=${colors.hex.black},bold] #I "
+        set -g window-status-separator " "
+        set -g status-right-length 100
+        set -g status-right "#[fg=${colors.hex.bright0}] %d %b %Y %H:%M "
+        set -g pane-border-style "fg=${colors.hex.black}"
+        set -g pane-active-border-style "fg=${colors.hex.blue}"
+        set -s extended-keys on
+        set -as terminal-features 'xterm*:extkeys'
 
-      bind -n C-h select-pane -L
-      bind -n C-j select-pane -D
-      bind -n C-k select-pane -U
-      bind -n C-l select-pane -R
+        bind -n C-h select-pane -L
+        bind -n C-j select-pane -D
+        bind -n C-k select-pane -U
+        bind -n C-l select-pane -R
 
-      bind -n C-+ resize-pane -U 5
-      bind -n C-_ resize-pane -D 5
+        bind -n C-+ resize-pane -U 5
+        bind -n C-_ resize-pane -D 5
 
-      bind -n C-S-h split-window -hb -c "#{pane_current_path}"
-      bind -n C-S-l split-window -h -c "#{pane_current_path}"
-      bind -n C-S-k split-window -vb -c "#{pane_current_path}"
+        bind -n C-S-h split-window -hb -c "#{pane_current_path}"
+        bind -n C-S-l split-window -h -c "#{pane_current_path}"
+        bind -n C-S-k split-window -vb -c "#{pane_current_path}"
       bind -n C-S-j split-window -v -c "#{pane_current_path}"
 
-      bind -n C-t new-window -c "#{pane_current_path}"
-      bind -n C-w kill-pane
+        bind -n C-t new-window -c "#{pane_current_path}"
+        bind -n C-w kill-pane
 
-      bind -n C-a select-window -t 1
-      bind -n C-s select-window -t 2
-      bind -n C-d select-window -t 3
-      bind -n C-f select-window -t 4
+        bind -n C-a select-window -t 1
+        bind -n C-s select-window -t 2
+        bind -n C-d select-window -t 3
+        bind -n C-f select-window -t 4
 
 
     '';

@@ -459,6 +459,7 @@ in {
       dynamic_background_opacity = "no";
       sync_to_monitor = "yes";
       macos_option_as_alt = "yes";
+      window_padding_width = 6;
 
       background = "#${colors.bg}";
       foreground = "#${colors.fg}";
@@ -498,46 +499,46 @@ in {
     };
   };
 
-  # programs.foot = {
-  #   enable = true;
-  #   settings = with colors; {
-  #     main = {
-  #       font = "JetBrainsMono Nerd Font:size=18:style=Semibold";
-  #       pad = "6x6 center";
-  #       shell = "fish";
-  #     };
-  #     tweak = {
-  #       sixel = "yes";
-  #     };
-  #     cursor = {
-  #       style = "underline";
-  #     };
-  #     colors = {
-  #       cursor = "${fg} ${fg}";
-  #       background = bg;
-  #       foreground = fg;
-  #       regular0 = black;
-  #       regular1 = red;
-  #       regular2 = green;
-  #       regular3 = yellow;
-  #       regular4 = blue;
-  #       regular5 = magenta;
-  #       regular6 = cyan;
-  #       regular7 = white;
-  #       bright0 = bright0;
-  #       bright1 = bright1;
-  #       bright2 = bright2;
-  #       bright3 = bright3;
-  #       bright4 = bright4;
-  #       bright5 = bright5;
-  #       bright6 = bright6;
-  #       bright7 = bright7;
-  #     };
-  #     mouse = {
-  #       hide-when-typing = "yes";
-  #     };
-  #   };
-  # };
+  programs.foot = {
+    enable = true;
+    settings = with colors; {
+      main = {
+        font = "JetBrainsMono Nerd Font:size=18:style=Semibold";
+        pad = "6x6 center";
+        shell = "fish";
+      };
+      tweak = {
+        sixel = "yes";
+      };
+      cursor = {
+        style = "underline";
+      };
+      colors = {
+        cursor = "${fg} ${fg}";
+        background = bg;
+        foreground = fg;
+        regular0 = black;
+        regular1 = red;
+        regular2 = green;
+        regular3 = yellow;
+        regular4 = blue;
+        regular5 = magenta;
+        regular6 = cyan;
+        regular7 = white;
+        bright0 = bright0;
+        bright1 = bright1;
+        bright2 = bright2;
+        bright3 = bright3;
+        bright4 = bright4;
+        bright5 = bright5;
+        bright6 = bright6;
+        bright7 = bright7;
+      };
+      mouse = {
+        hide-when-typing = "yes";
+      };
+    };
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;

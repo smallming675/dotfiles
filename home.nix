@@ -107,7 +107,7 @@ in {
     yt-dlp
     mpv
     ffmpeg
-    termusic
+    kew
     jdk
   ];
 

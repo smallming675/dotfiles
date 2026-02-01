@@ -163,13 +163,6 @@ in {
     };
   };
 
-  programs.bash = {
-    enable = true;
-    initExtra = ''
-      export GEMINI_API_KEY="$(pass show gemini/api-key)"
-      export GOOGLE_GEMINI_BASE_URL="$(pass show gemini/base-url)"
-    '';
-  };
   programs.fish = {
     enable = true;
     plugins = [
@@ -230,10 +223,11 @@ in {
       alias py="python"
       alias nv="nvim"
       alias cp="rsync"
-      set -g fish_key_bindings fish_vi_key_bindings
       if not set -q TMUX
         exec tmux new-session -A -s main
       end
+
+      set -g fish_key_bindings fish_vi_key_bindings
       set -g fish_cursor_default block
       set -g fish_cursor_insert line
       set -g fish_cursor_replace_one underscore

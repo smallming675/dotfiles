@@ -309,7 +309,7 @@ in {
       {
         plugin = tmuxPlugins.tmux-sessionx;
         extraConfig = ''
-          set -g @sessionx-bind 'o'  # Bind to 'o' (inside prefix) or change as needed
+          set -g @sessionx-bind 'o'
           set -g @sessionx-window-height '85%'
           set -g @sessionx-window-width '75%'
           set -g @sessionx-zoxide-mode 'on'
@@ -454,8 +454,9 @@ in {
     settings = {
       font_family = "JetBrainsMono Nerd Font SemiBold";
       font_size = 18;
-      shell = "fish";
+      shell = "${pkgs.tmux}/bin/tmux new-session -A -s main";
       background_opacity = "1";
+      dynamic_background_opacity = "no";
       sync_to_monitor = "yes";
       macos_option_as_alt = "yes";
 
@@ -570,7 +571,7 @@ in {
       exec-once = [
         "swaybg -c 201e1d"
         "[workspace 1 silent] brave"
-        "[workspace 2 silent] foot"
+        "[workspace 2 silent] kitty"
         "[workspace 3 silent] obsidian"
         "[workspace 4 silent] vesktop"
       ];
@@ -624,7 +625,7 @@ in {
       ecosystem.no_update_news = true;
       debug.disable_logs = false;
       bind = [
-        "SUPER,T,exec,foot"
+        "SUPER,T,exec,kitty"
         "SUPER,N,exec,brave"
         "SUPER,M,fullscreen"
         "SUPER,P,togglefloating"
@@ -712,7 +713,7 @@ in {
     enable = true;
     package = pkgs.rofi;
     font = "JetBrainsMono Nerd Font 16";
-    terminal = "foot";
+    terminal = "kitty";
     extraConfig = {
       show-icons = false;
       display-drun = " Apps";

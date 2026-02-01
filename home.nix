@@ -234,6 +234,10 @@ in {
       if not set -q TMUX
         exec tmux new-session -A -s main
       end
+      set -g fish_cursor_default block
+      set -g fish_cursor_insert line
+      set -g fish_cursor_replace_one underscore
+      set -g fish_cursor_visual block
     '';
   };
 
@@ -315,6 +319,7 @@ in {
     mouse = true;
     baseIndex = 1;
     prefix = "C-u";
+    escapeTime = 0;
 
     plugins = with pkgs; [
     ];
@@ -454,10 +459,13 @@ in {
   programs.alacritty = {
     enable = true;
     settings = {
+      terminal = {
+        shell = "fish";
+      };
       window = {
         padding = {
-          x = 4;
-          y = 4;
+          x = 6;
+          y = 6;
         };
         opacity = 1.0;
       };

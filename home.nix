@@ -116,6 +116,7 @@ in {
     kew
     jdk
     playerctl
+    opencode
   ];
 
   programs.starship = {

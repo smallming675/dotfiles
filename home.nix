@@ -117,6 +117,7 @@ in {
     jdk
     playerctl
     opencode
+    gemini-cli-bin
   ];
 
   programs.starship = {

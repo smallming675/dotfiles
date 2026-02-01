@@ -460,7 +460,8 @@ in {
       sync_to_monitor = "yes";
       macos_option_as_alt = "yes";
       window_padding_width = 6;
-
+      confirm_os_window_close = 0;
+      term = "xterm-kitty";
       background = "#${colors.bg}";
       foreground = "#${colors.fg}";
 

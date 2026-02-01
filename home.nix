@@ -296,92 +296,150 @@ in {
     };
   };
 
-  programs.zellij = {
+  programs.tmux = {
     enable = true;
-    enableFishIntegration = true;
-    attachExistingSession = true;
-    settings = {
-      default_shell = "fish";
-      default_layout = "default";
-      pane_frames = false;
-      simplified_ui = false;
-      theme = "everblush";
-      show_startup_tips = false;
-      hide_frame_for_single_pane = true;
-      serialize_pane_viewport = true;
-      themes = {
-        everblush = with colors; {
-          fg = hex.fg;
-          bg = hex.bg;
-          black = hex.black;
-          red = hex.red;
-          green = hex.green;
-          yellow = hex.yellow;
-          blue = hex.blue;
-          magenta = hex.magenta;
-          cyan = hex.cyan;
-          white = hex.white;
-          orange = hex.orange;
-        };
-      };
-    };
+    shell = "${pkgs.fish}/bin/fish";
+    terminal = "tmux-256color";
+    mouse = true;
+    baseIndex = 1;
+    prefix = "C-a";
+
+    plugins = with pkgs; [
+      {
+        plugin = tmuxPlugins.tmux-sessionx;
+        extraConfig = ''
+          set -g @sessionx-bind 'o'  # Bind to 'o' (inside prefix) or change as needed
+          set -g @sessionx-window-height '85%'
+          set -g @sessionx-window-width '75%'
+          set -g @sessionx-zoxide-mode 'on'
+        '';
+      }
+    ];
+
     extraConfig = ''
-      keybinds clear-defaults=true {
-        shared_except "locked" {
-          bind "Ctrl +" { Resize "Increase"; }
-          bind "Ctrl -" { Resize "Decrease"; }
-          bind "Ctrl a" { GoToTab 1; }
-          bind "Ctrl s" { GoToTab 2; }
-          bind "Ctrl d" { GoToTab 3; }
-          bind "Ctrl f" { GoToTab 4; }
-          bind "Ctrl g" { GoToTab 5; }
-          bind "Ctrl H" { NewPane "left"; }
-          bind "Ctrl J" { NewPane "down"; }
-          bind "Ctrl K" { NewPane "up"; }
-          bind "Ctrl L" { NewPane "right"; }
-          bind "Ctrl h" { MoveFocus "left"; }
-          bind "Ctrl j" { MoveFocus "down"; }
-          bind "Ctrl k" { MoveFocus "up"; }
-          bind "Ctrl l" { MoveFocus "right"; }
-          bind "Ctrl t" { NewTab; }
-          bind "Ctrl w" { CloseFocus; }
-          bind "Alt s" { EditScrollback; }
-          bind "Ctrl Alt s" {
-            LaunchOrFocusPlugin "session-manager" {
-                floating true
-                move_to_focused_tab true
-            };
-          };
-        }
-      }
-    '';
-    layouts.default = ''
-      layout {
-        default_tab_template {
-          pane size=1 borderless=true {
-            plugin location="file:~/config/bin/zjstatus.wasm" {
-              format_left   "{tabs}"
-              format_right  "{datetime}"
-              format_space  ""
-              format_hide_on_overlength "true"
-              format_precedence "crl"
-              border_enabled  "false"
-              border_char     "─"
-              border_format   "#[fg=${colors.hex.white}]{char}"
-              border_position "top"
-              datetime        "#[fg=${colors.hex.white}] {format} "
-              datetime_format "%d %b %Y %H:%M"
-              datetime_timezone "Hongkong"
-              tab_normal  "#[bg=${colors.hex.bg},fg=${colors.hex.blue}] {index} "
-              tab_active  "#[bg=${colors.hex.black},fg=${colors.hex.yellow},bold] {index} "
-              tab_separator " "
-            }
-          }
-          children
-        }
-      }
+      set-option -g status-position top
+      set -g status-interval 1
+      set -g status-style "bg=${colors.bg},fg=${colors.fg}"
+      set -g status-left-length 50
+      set -g status-left ""  # Clean start
+      set -g window-status-format "#[fg=${colors.blue},bg=${colors.bg}] #I "
+      set -g window-status-current-format "#[fg=${colors.yellow},bg=${colors.black},bold] #I "
+      set -g window-status-separator " "
+      set -g status-right-length 100
+      set -g status-right "#[fg=${colors.white}] %d %b %Y %H:%M "
+      set -g pane-border-style "fg=${colors.black}"
+      set -g pane-active-border-style "fg=${colors.blue}"
+      bind -n C-h select-pane -L
+      bind -n C-j select-pane -D
+      bind -n C-k select-pane -U
+      bind -n C-l select-pane -R
+
+      bind -n C-+ resize-pane -U 5
+      bind -n C-_ resize-pane -D 5  # Ctrl - is usually interpreted as underscore or hyphen
+
+      bind -n C-S-h split-window -hb  # Split Left
+      bind -n C-S-l split-window -h   # Split Right
+      bind -n C-S-k split-window -vb  # Split Up
+      bind -n C-S-j split-window -v   # Split Down
+
+      bind -n C-t new-window -c "#{pane_current_path}"
+      bind -n C-w kill-pane
+
+      bind -n M-1 select-window -t 1
+      bind -n M-2 select-window -t 2
+      bind -n M-3 select-window -t 3
+      bind -n M-4 select-window -t 4
+
+      bind -n C-M-s run-shell "${pkgs.tmuxPlugins.tmux-sessionx}/share/tmux-plugins/sessionx/sessionx.tmux"
     '';
   };
+
+  # programs.zellij = {
+  #   enable = true;
+  #   enableFishIntegration = true;
+  #   attachExistingSession = true;
+  #   settings = {
+  #     default_shell = "fish";
+  #     default_layout = "default";
+  #     pane_frames = false;
+  #     simplified_ui = false;
+  #     theme = "everblush";
+  #     show_startup_tips = false;
+  #     hide_frame_for_single_pane = true;
+  #     serialize_pane_viewport = true;
+  #     themes = {
+  #       everblush = with colors; {
+  #         fg = hex.fg;
+  #         bg = hex.bg;
+  #         black = hex.black;
+  #         red = hex.red;
+  #         green = hex.green;
+  #         yellow = hex.yellow;
+  #         blue = hex.blue;
+  #         magenta = hex.magenta;
+  #         cyan = hex.cyan;
+  #         white = hex.white;
+  #         orange = hex.orange;
+  #       };
+  #     };
+  #   };
+  #   extraConfig = ''
+  #     keybinds clear-defaults=true {
+  #       shared_except "locked" {
+  #         bind "Ctrl +" { Resize "Increase"; }
+  #         bind "Ctrl -" { Resize "Decrease"; }
+  #         bind "Ctrl a" { GoToTab 1; }
+  #         bind "Ctrl s" { GoToTab 2; }
+  #         bind "Ctrl d" { GoToTab 3; }
+  #         bind "Ctrl f" { GoToTab 4; }
+  #         bind "Ctrl g" { GoToTab 5; }
+  #         bind "Ctrl H" { NewPane "left"; }
+  #         bind "Ctrl J" { NewPane "down"; }
+  #         bind "Ctrl K" { NewPane "up"; }
+  #         bind "Ctrl L" { NewPane "right"; }
+  #         bind "Ctrl h" { MoveFocus "left"; }
+  #         bind "Ctrl j" { MoveFocus "down"; }
+  #         bind "Ctrl k" { MoveFocus "up"; }
+  #         bind "Ctrl l" { MoveFocus "right"; }
+  #         bind "Ctrl t" { NewTab; }
+  #         bind "Ctrl w" { CloseFocus; }
+  #         bind "Alt s" { EditScrollback; }
+  #         bind "Ctrl Alt s" {
+  #           LaunchOrFocusPlugin "session-manager" {
+  #               floating true
+  #               move_to_focused_tab true
+  #           };
+  #         };
+  #       }
+  #     }
+  #   '';
+  #   layouts.default = ''
+  #     layout {
+  #       default_tab_template {
+  #         pane size=1 borderless=true {
+  #           plugin location="file:~/config/bin/zjstatus.wasm" {
+  #             format_left   "{tabs}"
+  #             format_right  "{datetime}"
+  #             format_space  ""
+  #             format_hide_on_overlength "true"
+  #             format_precedence "crl"
+  #             border_enabled  "false"
+  #             border_char     "─"
+  #             border_format   "#[fg=${colors.hex.white}]{char}"
+  #             border_position "top"
+  #             datetime        "#[fg=${colors.hex.white}] {format} "
+  #             datetime_format "%d %b %Y %H:%M"
+  #             datetime_timezone "Hongkong"
+  #             tab_normal  "#[bg=${colors.hex.bg},fg=${colors.hex.blue}] {index} "
+  #             tab_active  "#[bg=${colors.hex.black},fg=${colors.hex.yellow},bold] {index} "
+  #             tab_separator " "
+  #           }
+  #         }
+  #         children
+  #       }
+  #     }
+  #   '';
+  # };
 
   programs.foot = {
     enable = true;

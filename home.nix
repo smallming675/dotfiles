@@ -346,6 +346,7 @@ in {
           bind "Ctrl t" { NewTab; }
           bind "Ctrl w" { CloseFocus; }
           bind "Alt s" { EditScrollback; }
+          bind "Ctrl Alt s" { session-manager; }
         }
       }
     '';

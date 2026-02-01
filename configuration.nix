@@ -115,16 +115,6 @@
     binfmt = true;
   };
   services.usbmuxd.enable = true;
-  services.syncthing = {
-    enable = true;
-    user = "user";
-    dataDir = "/home/user/obsidian/";
-    configDir = "/home/user/.config/syncthing";
-    overrideDevices = true;
-    overrideFolders = true;
-    guiAddress = "127.0.0.1:8384";
-  };
-
   services.udev.extraRules = ''
     # Vial keyboards
     KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{serial}=="*vial:f64c2b3c*", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"

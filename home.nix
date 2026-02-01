@@ -379,7 +379,6 @@ in {
         font = "JetBrainsMono Nerd Font:size=18:style=Semibold";
         pad = "6x6 center";
         shell = "fish";
-        dpi-aware = "yes";
       };
       tweak = {
         sixel = "yes";
@@ -444,7 +443,7 @@ in {
       xwayland.force_zero_scaling = true;
       monitor = ["DP-1, 2560x1440@180, auto, 1"];
       exec-once = [
-        "swaybg -i ~/config/bin/wallpaper.png"
+        "swaybg -c 151313"
         "[workspace 1 silent] brave"
         "[workspace 2 silent] foot"
         "[workspace 3 silent] obsidian"

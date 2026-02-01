@@ -345,10 +345,10 @@ in {
       bind -n C-+ resize-pane -U 5
       bind -n C-_ resize-pane -D 5
 
-      bind -n C-H split-window -hb -c "#{pane_current_path}"
-      bind -n C-L split-window -h -c "#{pane_current_path}"
-      bind -n C-K split-window -vb -c "#{pane_current_path}"
-      bind -n C-J split-window -v -c "#{pane_current_path}"
+      bind -n C-S-H split-window -hb -c "#{pane_current_path}"
+      bind -n C-S-L split-window -h -c "#{pane_current_path}"
+      bind -n C-S-K split-window -vb -c "#{pane_current_path}"
+      bind -n C-S-J split-window -v -c "#{pane_current_path}"
 
       bind -n C-t new-window -c "#{pane_current_path}"
       bind -n C-w kill-pane
@@ -468,7 +468,6 @@ in {
       dim_opacity = "1.0";
       confirm_os_window_close = 0;
       background_blur = 0;
-      linux_display_server = "x11";
       background = "#${colors.bg}";
       foreground = "#${colors.fg}";
 

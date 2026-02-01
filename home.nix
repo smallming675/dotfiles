@@ -118,6 +118,7 @@ in {
     playerctl
     opencode
     gemini-cli-bin
+    github-cli
   ];
 
   programs.starship = {

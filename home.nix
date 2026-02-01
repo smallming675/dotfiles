@@ -194,6 +194,7 @@ in {
       function starship_transient_prompt_func
         starship module character
       end
+
       starship init fish | source
       atuin init fish | source
       function fish_user_key_bindings
@@ -223,6 +224,7 @@ in {
       alias nv="nvim"
       alias cp="rsync"
       set -g fish_key_bindings fish_vi_key_bindings
+      ${pkgs.tmux}/bin/tmux new-session -A -s main
     '';
   };
 
@@ -454,14 +456,14 @@ in {
     settings = {
       font_family = "JetBrainsMono Nerd Font SemiBold";
       font_size = 18;
-      shell = "${pkgs.tmux}/bin/tmux new-session -A -s main";
+      shell = "fish";
       background_opacity = "1";
       dynamic_background_opacity = "no";
       sync_to_monitor = "yes";
       macos_option_as_alt = "yes";
-      window_padding_width = 6;
+      window_padding_width = 4;
       confirm_os_window_close = 0;
-      term = "xterm-kitty";
+      background_blur = 0;
       background = "#${colors.bg}";
       foreground = "#${colors.fg}";
 

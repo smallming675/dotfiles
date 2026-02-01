@@ -342,10 +342,10 @@ in {
       bind -n C-+ resize-pane -U 5
       bind -n C-_ resize-pane -D 5
 
-      bind -n C-S-h split-window -hb -c "#{pane_current_path}"
-      bind -n C-S-l split-window -h -c "#{pane_current_path}"
-      bind -n C-S-k split-window -vb -c "#{pane_current_path}"
-      bind -n C-S-j split-window -v -c "#{pane_current_path}"
+      bind -n M-H split-window -hb -c "#{pane_current_path}"
+      bind -n M-L split-window -h -c "#{pane_current_path}"
+      bind -n M-K split-window -vb -c "#{pane_current_path}"
+      bind -n M-J split-window -v -c "#{pane_current_path}"
 
       bind -n C-t new-window -c "#{pane_current_path}"
       bind -n C-w kill-pane

@@ -101,7 +101,6 @@ in {
     obsidian
     localsend
     syncthing
-    gemini-cli-bin
     hyprpicker
     gimp
     zathura

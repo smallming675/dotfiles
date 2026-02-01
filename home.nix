@@ -302,7 +302,7 @@ in {
     terminal = "tmux-256color";
     mouse = true;
     baseIndex = 1;
-    prefix = "C-a";
+    prefix = "C-u";
 
     plugins = with pkgs; [
       {
@@ -319,23 +319,23 @@ in {
     extraConfig = ''
       set-option -g status-position top
       set -g status-interval 1
-      set -g status-style "bg=${colors.bg},fg=${colors.fg}"
-      set -g status-left-length 50
+      set -g status-style "bg=${colors.hex.bg},fg=${colors.hex.fg}"
+      set -g status-left-leng
       set -g status-left ""  # Clean start
-      set -g window-status-format "#[fg=${colors.blue},bg=${colors.bg}] #I "
-      set -g window-status-current-format "#[fg=${colors.yellow},bg=${colors.black},bold] #I "
+      set -g window-status-format "#[fg=${colors.hex.blue},bg=${colors.hex.bg}] #I "
+      set -g window-status-current-format "#[fg=${colors.hex.yellow},bg=${colors.hex.black},bold] #I "
       set -g window-status-separator " "
       set -g status-right-length 100
-      set -g status-right "#[fg=${colors.white}] %d %b %Y %H:%M "
-      set -g pane-border-style "fg=${colors.black}"
-      set -g pane-active-border-style "fg=${colors.blue}"
+      set -g status-right "#[fg=${colors.hex.white}] %d %b %Y %H:%M "
+      set -g pane-border-style "fg=${colors.hex.black}"
+      set -g pane-active-border-style "fg=${colors.hex.blue}"
       bind -n C-h select-pane -L
       bind -n C-j select-pane -D
       bind -n C-k select-pane -U
       bind -n C-l select-pane -R
 
       bind -n C-+ resize-pane -U 5
-      bind -n C-_ resize-pane -D 5  # Ctrl - is usually interpreted as underscore or hyphen
+      bind -n C-_ resize-pane -D 5
 
       bind -n C-S-h split-window -hb  # Split Left
       bind -n C-S-l split-window -h   # Split Right
@@ -345,10 +345,10 @@ in {
       bind -n C-t new-window -c "#{pane_current_path}"
       bind -n C-w kill-pane
 
-      bind -n M-1 select-window -t 1
-      bind -n M-2 select-window -t 2
-      bind -n M-3 select-window -t 3
-      bind -n M-4 select-window -t 4
+      bind -n C-a select-window -t 1
+      bind -n C-s select-window -t 2
+      bind -n C-d select-window -t 3
+      bind -n C-f select-window -t 4
 
       bind -n C-M-s run-shell "${pkgs.tmuxPlugins.tmux-sessionx}/share/tmux-plugins/sessionx/sessionx.tmux"
     '';
@@ -454,9 +454,9 @@ in {
       };
       cursor = {
         style = "underline";
-        color = "${fg} ${fg}";
       };
       colors = {
+        cursor = "${fg} ${fg}";
         background = bg;
         foreground = fg;
         regular0 = black;

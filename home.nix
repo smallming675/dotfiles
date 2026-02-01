@@ -39,6 +39,13 @@
       white = "#${white}";
       orange = "#${orange}";
       bright0 = "#${bright0}";
+      bright1 = "#${bright1}";
+      bright2 = "#${bright2}";
+      bright3 = "#${bright3}";
+      bright4 = "#${bright4}";
+      bright5 = "#${bright5}";
+      bright6 = "#${bright6}";
+      bright7 = "#${bright7}";
     };
   };
 in {
@@ -444,99 +451,162 @@ in {
   #   '';
   # };
 
-  programs.kitty = {
+  programs.alacritty = {
     enable = true;
     settings = {
-      font_family = "JetBrainsMono Nerd Font SemiBold";
-      font_size = 18;
-      shell = "fish";
-      background_opacity = "1";
-      dynamic_background_opacity = "no";
-      sync_to_monitor = "yes";
-      macos_option_as_alt = "yes";
-      window_padding_width = 4;
-      background_tint = "0.0";
-      dim_opacity = "1.0";
-      confirm_os_window_close = 0;
-      background_blur = 0;
-      background = "#${colors.bg}";
-      foreground = "#${colors.fg}";
-
-      cursor = "#${colors.fg}";
-      cursor_text_color = "#${colors.bg}";
-
-      selection_background = "#${colors.bright0}";
-      selection_foreground = "#${colors.fg}";
-
-      active_border_color = "#${colors.blue}";
-      inactive_border_color = "#${colors.black}";
-      active_tab_background = "#${colors.bg}";
-      active_tab_foreground = "#${colors.blue}";
-
-      color0 = "#${colors.black}";
-      color1 = "#${colors.red}";
-      color2 = "#${colors.green}";
-      color3 = "#${colors.yellow}";
-      color4 = "#${colors.blue}";
-      color5 = "#${colors.magenta}";
-      color6 = "#${colors.cyan}";
-      color7 = "#${colors.white}";
-      color8 = "#${colors.bright0}";
-      color9 = "#${colors.bright1}";
-      color10 = "#${colors.bright2}";
-      color11 = "#${colors.bright3}";
-      color12 = "#${colors.bright4}";
-      color13 = "#${colors.bright5}";
-      color14 = "#${colors.bright6}";
-      color15 = "#${colors.bright7}";
-    };
-
-    keybindings = {
-      "ctrl+equal" = "change_font_size all +2.0";
-      "ctrl+minus" = "change_font_size all -2.0";
-    };
-  };
-
-  programs.foot = {
-    enable = true;
-    settings = with colors; {
-      main = {
-        font = "JetBrainsMono Nerd Font:size=18:style=Semibold";
-        pad = "6x6 center";
-        shell = "fish";
+      window = {
+        padding = {
+          x = 4;
+          y = 4;
+        };
+        opacity = 1.0;
       };
-      tweak = {
-        sixel = "yes";
+
+      font = {
+        size = 18;
+        normal = {
+          family = "JetBrainsMono Nerd Font";
+          style = "SemiBold";
+        };
+        bold = {
+          family = "JetBrainsMono Nerd Font";
+          style = "Bold";
+        };
+        italic = {
+          family = "JetBrainsMono Nerd Font";
+          style = "Italic";
+        };
       };
-      cursor = {
-        style = "underline";
-      };
+
       colors = {
-        cursor = "${fg} ${fg}";
-        background = bg;
-        foreground = fg;
-        regular0 = black;
-        regular1 = red;
-        regular2 = green;
-        regular3 = yellow;
-        regular4 = blue;
-        regular5 = magenta;
-        regular6 = cyan;
-        regular7 = white;
-        bright0 = bright0;
-        bright1 = bright1;
-        bright2 = bright2;
-        bright3 = bright3;
-        bright4 = bright4;
-        bright5 = bright5;
-        bright6 = bright6;
-        bright7 = bright7;
-      };
-      mouse = {
-        hide-when-typing = "yes";
+        primary = {
+          background = colors.hex.bg;
+          foreground = colors.hex.fg;
+        };
+
+        cursor = {
+          text = colors.hex.bg;
+          cursor = colors.hex.fg;
+        };
+
+        normal = {
+          black = colors.hex.black;
+          red = colors.hex.red;
+          green = colors.hex.green;
+          yellow = colors.hex.yellow;
+          blue = colors.hex.blue;
+          magenta = colors.hex.magenta;
+          cyan = colors.hex.cyan;
+          white = colors.hex.white;
+        };
+
+        bright = {
+          black = colors.hex.bright0;
+          red = colors.hex.bright1;
+          green = colors.hex.bright2;
+          yellow = colors.hex.bright3;
+          blue = colors.hex.bright4;
+          magenta = colors.hex.bright5;
+          cyan = colors.hex.bright6;
+          white = colors.hex.bright7;
+        };
       };
     };
   };
+
+  # programs.kitty = {
+  #   enable = true;
+  #   settings = {
+  #     font_family = "JetBrainsMono Nerd Font SemiBold";
+  #     font_size = 18;
+  #     shell = "fish";
+  #     background_opacity = "1";
+  #     dynamic_background_opacity = "no";
+  #     sync_to_monitor = "yes";
+  #     macos_option_as_alt = "yes";
+  #     window_padding_width = 4;
+  #     background_tint = "0.0";
+  #     dim_opacity = "1.0";
+  #     confirm_os_window_close = 0;
+  #     background_blur = 0;
+  #     background = "#${colors.bg}";
+  #     foreground = "#${colors.fg}";
+  #
+  #     cursor = "#${colors.fg}";
+  #     cursor_text_color = "#${colors.bg}";
+  #
+  #     selection_background = "#${colors.bright0}";
+  #     selection_foreground = "#${colors.fg}";
+  #
+  #     active_border_color = "#${colors.blue}";
+  #     inactive_border_color = "#${colors.black}";
+  #     active_tab_background = "#${colors.bg}";
+  #     active_tab_foreground = "#${colors.blue}";
+  #
+  #     color0 = "#${colors.black}";
+  #     color1 = "#${colors.red}";
+  #     color2 = "#${colors.green}";
+  #     color3 = "#${colors.yellow}";
+  #     color4 = "#${colors.blue}";
+  #     color5 = "#${colors.magenta}";
+  #     color6 = "#${colors.cyan}";
+  #     color7 = "#${colors.white}";
+  #     color8 = "#${colors.bright0}";
+  #     color9 = "#${colors.bright1}";
+  #     color10 = "#${colors.bright2}";
+  #     color11 = "#${colors.bright3}";
+  #     color12 = "#${colors.bright4}";
+  #     color13 = "#${colors.bright5}";
+  #     color14 = "#${colors.bright6}";
+  #     color15 = "#${colors.bright7}";
+  #   };
+  #
+  #   keybindings = {
+  #     "ctrl+equal" = "change_font_size all +2.0";
+  #     "ctrl+minus" = "change_font_size all -2.0";
+  #   };
+  # };
+  #
+  # programs.foot = {
+  #   enable = true;
+  #   settings = with colors; {
+  #     main = {
+  #       font = "JetBrainsMono Nerd Font:size=18:style=Semibold";
+  #       pad = "6x6 center";
+  #       shell = "fish";
+  #     };
+  #     tweak = {
+  #       sixel = "yes";
+  #     };
+  #     cursor = {
+  #       style = "underline";
+  #     };
+  #     colors = {
+  #       cursor = "${fg} ${fg}";
+  #       background = bg;
+  #       foreground = fg;
+  #       regular0 = black;
+  #       regular1 = red;
+  #       regular2 = green;
+  #       regular3 = yellow;
+  #       regular4 = blue;
+  #       regular5 = magenta;
+  #       regular6 = cyan;
+  #       regular7 = white;
+  #       bright0 = bright0;
+  #       bright1 = bright1;
+  #       bright2 = bright2;
+  #       bright3 = bright3;
+  #       bright4 = bright4;
+  #       bright5 = bright5;
+  #       bright6 = bright6;
+  #       bright7 = bright7;
+  #     };
+  #     mouse = {
+  #       hide-when-typing = "yes";
+  #     };
+  #   };
+  # };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -570,7 +640,7 @@ in {
       exec-once = [
         "swaybg -c 201e1d"
         "[workspace 1 silent] brave"
-        "[workspace 2 silent] kitty"
+        "[workspace 2 silent] alacritty"
         "[workspace 3 silent] obsidian"
         "[workspace 4 silent] vesktop"
       ];
@@ -624,7 +694,7 @@ in {
       ecosystem.no_update_news = true;
       debug.disable_logs = false;
       bind = [
-        "SUPER,T,exec,kitty"
+        "SUPER,T,exec,alacritty"
         "SUPER,N,exec,brave"
         "SUPER,M,fullscreen"
         "SUPER,P,togglefloating"
@@ -712,7 +782,7 @@ in {
     enable = true;
     package = pkgs.rofi;
     font = "JetBrainsMono Nerd Font 16";
-    terminal = "kitty";
+    terminal = "alacritty";
     extraConfig = {
       show-icons = false;
       display-drun = " Apps";
@@ -1034,6 +1104,15 @@ in {
   programs.yazi = {
     enable = true;
     enableFishIntegration = true;
+  };
+
+  xdg.desktopEntries.kew = {
+    name = "Kew";
+    genericName = "Music Player";
+    exec = "alacritty --class kew-music -e kew";
+    terminal = false;
+    categories = ["Audio" "AudioVideo" "Player"];
+    icon = "utilities-terminal";
   };
 
   home.stateVersion = "25.11";

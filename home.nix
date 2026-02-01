@@ -95,7 +95,6 @@ in {
     localsend
     syncthing
     gemini-cli-bin
-    ghostty
     hyprpicker
     gimp
     zathura
@@ -342,10 +341,10 @@ in {
       bind -n C-+ resize-pane -U 5
       bind -n C-_ resize-pane -D 5
 
-      bind -n M-H split-window -hb -c "#{pane_current_path}"
-      bind -n M-L split-window -h -c "#{pane_current_path}"
-      bind -n M-K split-window -vb -c "#{pane_current_path}"
-      bind -n M-J split-window -v -c "#{pane_current_path}"
+      bind -n C-H split-window -hb -c "#{pane_current_path}"
+      bind -n C-L split-window -h -c "#{pane_current_path}"
+      bind -n C-K split-window -vb -c "#{pane_current_path}"
+      bind -n C-J split-window -v -c "#{pane_current_path}"
 
       bind -n C-t new-window -c "#{pane_current_path}"
       bind -n C-w kill-pane
@@ -355,10 +354,10 @@ in {
       bind -n C-d select-window -t 3
       bind -n C-f select-window -t 4
 
-      bind -n C-1 select-window -t 5
-      bind -n C-2 select-window -t 6
-      bind -n C-3 select-window -t 7
-      bind -n C-4 select-window -t 8
+      bind -n C-6 select-window -t 5
+      bind -n C-7 select-window -t 6
+      bind -n C-8 select-window -t 7
+      bind -n C-9 select-window -t 8
 
     '';
   };
@@ -450,46 +449,93 @@ in {
   #   '';
   # };
 
-  programs.foot = {
+  programs.kitty = {
     enable = true;
-    settings = with colors; {
-      main = {
-        font = "JetBrainsMono Nerd Font:size=18:style=Semibold";
-        pad = "6x6 center";
-        shell = "fish";
-      };
-      tweak = {
-        sixel = "yes";
-      };
-      cursor = {
-        style = "underline";
-      };
-      colors = {
-        cursor = "${fg} ${fg}";
-        background = bg;
-        foreground = fg;
-        regular0 = black;
-        regular1 = red;
-        regular2 = green;
-        regular3 = yellow;
-        regular4 = blue;
-        regular5 = magenta;
-        regular6 = cyan;
-        regular7 = white;
-        bright0 = bright0;
-        bright1 = bright1;
-        bright2 = bright2;
-        bright3 = bright3;
-        bright4 = bright4;
-        bright5 = bright5;
-        bright6 = bright6;
-        bright7 = bright7;
-      };
-      mouse = {
-        hide-when-typing = "yes";
-      };
+    settings = {
+      font_family = "JetBrainsMono Nerd Font";
+      font_size = 12;
+      background_opacity = "1";
+      sync_to_monitor = "yes";
+      macos_option_as_alt = "yes";
+
+      background = "#${colors.bg}";
+      foreground = "#${colors.fg}";
+
+      cursor = "#${colors.fg}";
+      cursor_text_color = "#${colors.bg}";
+
+      selection_background = "#${colors.bright0}";
+      selection_foreground = "#${colors.fg}";
+
+      active_border_color = "#${colors.blue}";
+      inactive_border_color = "#${colors.black}";
+      active_tab_background = "#${colors.bg}";
+      active_tab_foreground = "#${colors.blue}";
+
+      color0 = "#${colors.black}";
+      color1 = "#${colors.red}";
+      color2 = "#${colors.green}";
+      color3 = "#${colors.yellow}";
+      color4 = "#${colors.blue}";
+      color5 = "#${colors.magenta}";
+      color6 = "#${colors.cyan}";
+      color7 = "#${colors.white}";
+      color8 = "#${colors.bright0}";
+      color9 = "#${colors.bright1}";
+      color10 = "#${colors.bright2}";
+      color11 = "#${colors.bright3}";
+      color12 = "#${colors.bright4}";
+      color13 = "#${colors.bright5}";
+      color14 = "#${colors.bright6}";
+      color15 = "#${colors.bright7}";
+    };
+
+    keybindings = {
+      "ctrl+equal" = "change_font_size all +2.0";
+      "ctrl+minus" = "change_font_size all -2.0";
     };
   };
+
+  # programs.foot = {
+  #   enable = true;
+  #   settings = with colors; {
+  #     main = {
+  #       font = "JetBrainsMono Nerd Font:size=18:style=Semibold";
+  #       pad = "6x6 center";
+  #       shell = "fish";
+  #     };
+  #     tweak = {
+  #       sixel = "yes";
+  #     };
+  #     cursor = {
+  #       style = "underline";
+  #     };
+  #     colors = {
+  #       cursor = "${fg} ${fg}";
+  #       background = bg;
+  #       foreground = fg;
+  #       regular0 = black;
+  #       regular1 = red;
+  #       regular2 = green;
+  #       regular3 = yellow;
+  #       regular4 = blue;
+  #       regular5 = magenta;
+  #       regular6 = cyan;
+  #       regular7 = white;
+  #       bright0 = bright0;
+  #       bright1 = bright1;
+  #       bright2 = bright2;
+  #       bright3 = bright3;
+  #       bright4 = bright4;
+  #       bright5 = bright5;
+  #       bright6 = bright6;
+  #       bright7 = bright7;
+  #     };
+  #     mouse = {
+  #       hide-when-typing = "yes";
+  #     };
+  #   };
+  # };
 
   wayland.windowManager.hyprland = {
     enable = true;

@@ -452,8 +452,9 @@ in {
   programs.kitty = {
     enable = true;
     settings = {
-      font_family = "JetBrainsMono Nerd Font";
-      font_size = 12;
+      font_family = "JetBrainsMono Nerd Font SemiBold";
+      font_size = 18;
+      shell = "fish";
       background_opacity = "1";
       sync_to_monitor = "yes";
       macos_option_as_alt = "yes";

@@ -310,15 +310,6 @@ in {
     prefix = "C-u";
 
     plugins = with pkgs; [
-      {
-        plugin = tmuxPlugins.tmux-sessionx;
-        extraConfig = ''
-          set -g @sessionx-bind 'o'
-          set -g @sessionx-window-height '85%'
-          set -g @sessionx-window-width '75%'
-          set -g @sessionx-zoxide-mode 'on'
-        '';
-      }
     ];
 
     extraConfig = ''
@@ -345,10 +336,10 @@ in {
       bind -n C-+ resize-pane -U 5
       bind -n C-_ resize-pane -D 5
 
-      bind -n C-S-H split-window -hb -c "#{pane_current_path}"
-      bind -n C-S-L split-window -h -c "#{pane_current_path}"
-      bind -n C-S-K split-window -vb -c "#{pane_current_path}"
-      bind -n C-S-J split-window -v -c "#{pane_current_path}"
+      bind -n C-S-H split-window -hb
+      bind -n C-S-L split-window -h
+      bind -n C-S-K split-window -vb
+      bind -n C-S-J split-window -v
 
       bind -n C-t new-window -c "#{pane_current_path}"
       bind -n C-w kill-pane

@@ -130,7 +130,7 @@ in {
   };
   system.autoUpgrade.enable = false;
   systemd.services.nixos-auto-update = {
-    description = "NixOS Auto Update (Flake-based)";
+    description = "NixOS Auto Update";
     wants = ["network-online.target"];
     after = ["network-online.target"];
 
@@ -175,6 +175,21 @@ in {
         fallbackDns = ["1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one"];
       };
     };
+  };
+
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
+  services.printing = {
+    listenAddresses = ["*:631"];
+    allowFrom = ["all"];
+    drivers = [pkgs.gutenprint pkgs.gutenprintBin];
+    browsing = true;
+    defaultShared = true;
+    openFirewall = true;
   };
 
   system.stateVersion = "25.11";

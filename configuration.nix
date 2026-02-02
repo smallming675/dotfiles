@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: let
   user = "user";
@@ -121,15 +122,24 @@ in {
     KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{serial}=="*vial:f64c2b3c*", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
   '';
 
+  programs.git = {
+    enable = true;
+    config.safe.directory = [path];
+  };
+
   system.autoUpgrade = {
     enable = true;
-    flake = "github:smallming675/dotfiles";
+    flake = "git+file://${path}";
+
     flags = [
-      "--recreate-lock-file"
+      "--update-input"
+      "nixpkgs"
       "--no-write-lock-file"
       "-L"
     ];
-    dates = "daily";
+
+    dates = "02:00";
+    randomizedDelaySec = "45min";
     allowReboot = true;
   };
 

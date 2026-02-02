@@ -18,7 +18,7 @@
     home-manager,
     nix4nvchad,
     ...
-  }: let
+  } @ inputs: let
     system = "x86_64-linux";
     lib = nixpkgs.lib;
     pkgs = import nixpkgs {inherit system;};
@@ -32,7 +32,7 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = {inherit nix4nvchad;};
+          home-manager.extraSpecialArgs = {inherit nix4nvchad inputs;};
           home-manager.users.user = import ./home.nix;
         }
       ];

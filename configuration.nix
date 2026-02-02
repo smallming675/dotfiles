@@ -122,25 +122,33 @@ in {
     KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{serial}=="*vial:f64c2b3c*", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
   '';
 
-  programs.git = {
-    enable = true;
-    config.safe.directory = [path];
+  system.autoUpgrade.enable = false;
+  systemd.services.nixos-auto-update = {
+    description = "NixOS Auto Update (Flake-based)";
+    wants = ["network-online.target"];
+    after = ["network-online.target"];
+
+    script = ''
+      ${pkgs.nix}/bin/nix flake update --flake ${path}
+      echo "Rebuilding system..."
+      ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake ${path} -L
+    '';
+
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+    };
   };
 
-  system.autoUpgrade = {
-    enable = true;
-    flake = "git+file://${path}";
-
-    flags = [
-      "--update-input"
-      "nixpkgs"
-      "--no-write-lock-file"
-      "-L"
-    ];
-
-    dates = "02:00";
-    randomizedDelaySec = "45min";
-    allowReboot = true;
+  systemd.timers.nixos-auto-update = {
+    description = "Nixos Auto Update";
+    wantedBy = ["timers.target"];
+    timerConfig = {
+      OnCalendar = "02:00";
+      RandomizedDelaySec = "45min";
+      Persistent = true;
+      Unit = "nixos-auto-update.service";
+    };
   };
 
   nix.gc = {

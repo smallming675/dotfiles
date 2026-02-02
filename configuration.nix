@@ -197,5 +197,8 @@ in {
     openFirewall = true;
   };
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [];
+
   system.stateVersion = "25.11";
 }

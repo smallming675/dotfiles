@@ -55,10 +55,7 @@
     python3
     nodejs
     go
-    libreoffice
-    brave
     clang-tools
-    bear
   ];
 
   environment.pathsToLink = ["/share/applications" "/share/xdg-desktop-portal"];
@@ -114,6 +111,7 @@
     enable = true;
     binfmt = true;
   };
+
   services.usbmuxd.enable = true;
   services.udev.extraRules = ''
     # Vial keyboards
@@ -122,16 +120,24 @@
 
   system.autoUpgrade = {
     enable = true;
-    channel = "https://nixos.org/channels/nixos-unstable";
-    dates = "02:00";
-    randomizedDelaySec = "45min";
+    flake = "git+file:///home/user/config";
+    flags = [
+      "--update-input"
+      "nixpkgs"
+      "-L"
+    ];
+    dates = "daily";
     allowReboot = true;
-    flags = ["--print-build-logs"];
+  };
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
   };
 
   services.mullvad-vpn.enable = true;
   networking.nameservers = ["1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one"];
-
   services.resolved = {
     enable = true;
     dnssec = "true";

@@ -119,6 +119,8 @@ in {
     opencode
     gemini-cli-bin
     github-cli
+    libreoffice
+    bear
   ];
 
   programs.starship = {
@@ -375,93 +377,6 @@ in {
     '';
   };
 
-  # programs.zellij = {
-  #   enable = true;
-  #   enableFishIntegration = true;
-  #   attachExistingSession = true;
-  #   settings = {
-  #     default_shell = "fish";
-  #     default_layout = "default";
-  #     pane_frames = false;
-  #     simplified_ui = false;
-  #     theme = "everblush";
-  #     show_startup_tips = false;
-  #     hide_frame_for_single_pane = true;
-  #     serialize_pane_viewport = true;
-  #     themes = {
-  #       everblush = with colors; {
-  #         fg = hex.fg;
-  #         bg = hex.bg;
-  #         black = hex.black;
-  #         red = hex.red;
-  #         green = hex.green;
-  #         yellow = hex.yellow;
-  #         blue = hex.blue;
-  #         magenta = hex.magenta;
-  #         cyan = hex.cyan;
-  #         white = hex.white;
-  #         orange = hex.orange;
-  #       };
-  #     };
-  #   };
-  #   extraConfig = ''
-  #     keybinds clear-defaults=true {
-  #       shared_except "locked" {
-  #         bind "Ctrl +" { Resize "Increase"; }
-  #         bind "Ctrl -" { Resize "Decrease"; }
-  #         bind "Ctrl a" { GoToTab 1; }
-  #         bind "Ctrl s" { GoToTab 2; }
-  #         bind "Ctrl d" { GoToTab 3; }
-  #         bind "Ctrl f" { GoToTab 4; }
-  #         bind "Ctrl g" { GoToTab 5; }
-  #         bind "Ctrl H" { NewPane "left"; }
-  #         bind "Ctrl J" { NewPane "down"; }
-  #         bind "Ctrl K" { NewPane "up"; }
-  #         bind "Ctrl L" { NewPane "right"; }
-  #         bind "Ctrl h" { MoveFocus "left"; }
-  #         bind "Ctrl j" { MoveFocus "down"; }
-  #         bind "Ctrl k" { MoveFocus "up"; }
-  #         bind "Ctrl l" { MoveFocus "right"; }
-  #         bind "Ctrl t" { NewTab; }
-  #         bind "Ctrl w" { CloseFocus; }
-  #         bind "Alt s" { EditScrollback; }
-  #         bind "Ctrl Alt s" {
-  #           LaunchOrFocusPlugin "session-manager" {
-  #               floating true
-  #               move_to_focused_tab true
-  #           };
-  #         };
-  #       }
-  #     }
-  #   '';
-  #   layouts.default = ''
-  #     layout {
-  #       default_tab_template {
-  #         pane size=1 borderless=true {
-  #           plugin location="file:~/config/bin/zjstatus.wasm" {
-  #             format_left   "{tabs}"
-  #             format_right  "{datetime}"
-  #             format_space  ""
-  #             format_hide_on_overlength "true"
-  #             format_precedence "crl"
-  #             border_enabled  "false"
-  #             border_char     "─"
-  #             border_format   "#[fg=${colors.hex.white}]{char}"
-  #             border_position "top"
-  #             datetime        "#[fg=${colors.hex.white}] {format} "
-  #             datetime_format "%d %b %Y %H:%M"
-  #             datetime_timezone "Hongkong"
-  #             tab_normal  "#[bg=${colors.hex.bg},fg=${colors.hex.blue}] {index} "
-  #             tab_active  "#[bg=${colors.hex.black},fg=${colors.hex.yellow},bold] {index} "
-  #             tab_separator " "
-  #           }
-  #         }
-  #         children
-  #       }
-  #     }
-  #   '';
-  # };
-
   programs.alacritty = {
     enable = true;
     settings = {
@@ -527,100 +442,6 @@ in {
       };
     };
   };
-
-  # programs.kitty = {
-  #   enable = true;
-  #   settings = {
-  #     font_family = "JetBrainsMono Nerd Font SemiBold";
-  #     font_size = 18;
-  #     shell = "fish";
-  #     background_opacity = "1";
-  #     dynamic_background_opacity = "no";
-  #     sync_to_monitor = "yes";
-  #     macos_option_as_alt = "yes";
-  #     window_padding_width = 4;
-  #     background_tint = "0.0";
-  #     dim_opacity = "1.0";
-  #     confirm_os_window_close = 0;
-  #     background_blur = 0;
-  #     background = "#${colors.bg}";
-  #     foreground = "#${colors.fg}";
-  #
-  #     cursor = "#${colors.fg}";
-  #     cursor_text_color = "#${colors.bg}";
-  #
-  #     selection_background = "#${colors.bright0}";
-  #     selection_foreground = "#${colors.fg}";
-  #
-  #     active_border_color = "#${colors.blue}";
-  #     inactive_border_color = "#${colors.black}";
-  #     active_tab_background = "#${colors.bg}";
-  #     active_tab_foreground = "#${colors.blue}";
-  #
-  #     color0 = "#${colors.black}";
-  #     color1 = "#${colors.red}";
-  #     color2 = "#${colors.green}";
-  #     color3 = "#${colors.yellow}";
-  #     color4 = "#${colors.blue}";
-  #     color5 = "#${colors.magenta}";
-  #     color6 = "#${colors.cyan}";
-  #     color7 = "#${colors.white}";
-  #     color8 = "#${colors.bright0}";
-  #     color9 = "#${colors.bright1}";
-  #     color10 = "#${colors.bright2}";
-  #     color11 = "#${colors.bright3}";
-  #     color12 = "#${colors.bright4}";
-  #     color13 = "#${colors.bright5}";
-  #     color14 = "#${colors.bright6}";
-  #     color15 = "#${colors.bright7}";
-  #   };
-  #
-  #   keybindings = {
-  #     "ctrl+equal" = "change_font_size all +2.0";
-  #     "ctrl+minus" = "change_font_size all -2.0";
-  #   };
-  # };
-  #
-  # programs.foot = {
-  #   enable = true;
-  #   settings = with colors; {
-  #     main = {
-  #       font = "JetBrainsMono Nerd Font:size=18:style=Semibold";
-  #       pad = "6x6 center";
-  #       shell = "fish";
-  #     };
-  #     tweak = {
-  #       sixel = "yes";
-  #     };
-  #     cursor = {
-  #       style = "underline";
-  #     };
-  #     colors = {
-  #       cursor = "${fg} ${fg}";
-  #       background = bg;
-  #       foreground = fg;
-  #       regular0 = black;
-  #       regular1 = red;
-  #       regular2 = green;
-  #       regular3 = yellow;
-  #       regular4 = blue;
-  #       regular5 = magenta;
-  #       regular6 = cyan;
-  #       regular7 = white;
-  #       bright0 = bright0;
-  #       bright1 = bright1;
-  #       bright2 = bright2;
-  #       bright3 = bright3;
-  #       bright4 = bright4;
-  #       bright5 = bright5;
-  #       bright6 = bright6;
-  #       bright7 = bright7;
-  #     };
-  #     mouse = {
-  #       hide-when-typing = "yes";
-  #     };
-  #   };
-  # };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -1120,7 +941,7 @@ in {
     enableFishIntegration = true;
   };
 
-  xdg.desktopEntries.kew = {
+  xdg.desktopEntries.kew-player = {
     name = "Kew";
     genericName = "Music Player";
     exec = "alacritty --class kew-music -e kew all";

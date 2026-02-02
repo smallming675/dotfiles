@@ -2,7 +2,10 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  user = "user";
+  path = "/home/${user}/config";
+in {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -120,10 +123,10 @@
 
   system.autoUpgrade = {
     enable = true;
-    flake = "git+file:///home/user/config";
+    flake = "github:smallming675/dotfiles";
     flags = [
-      "--update-input"
-      "nixpkgs"
+      "--recreate-lock-file"
+      "--no-write-lock-file"
       "-L"
     ];
     dates = "daily";

@@ -188,6 +188,7 @@ in {
   };
 
   services.printing = {
+    enable = true;
     listenAddresses = ["*:631"];
     allowFrom = ["all"];
     drivers = [pkgs.gutenprint pkgs.gutenprintBin];

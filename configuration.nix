@@ -189,13 +189,16 @@ in {
 
   services.printing = {
     enable = true;
-    listenAddresses = ["*:631"];
-    allowFrom = ["all"];
     drivers = [pkgs.gutenprint pkgs.gutenprintBin];
+    listenAddresses = ["localhost:631"];
+    allowFrom = ["all"];
+
     browsing = true;
     defaultShared = true;
     openFirewall = true;
   };
+
+  services.printing.browsed.enable = true;
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [];

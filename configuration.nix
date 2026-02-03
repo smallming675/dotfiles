@@ -199,9 +199,11 @@ in {
   };
 
   services.printing.browsed.enable = true;
+  services.ipp-usb.enable = true;
+
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [];
-
   virtualisation.docker.enable = true;
+
   system.stateVersion = "25.11";
 }

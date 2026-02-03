@@ -199,16 +199,9 @@ in {
   };
 
   services.printing.browsed.enable = true;
-
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [];
-  virtualisation.docker = {
-    enable = true;
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
-  };
 
+  virtualisation.docker.enable = true;
   system.stateVersion = "25.11";
 }

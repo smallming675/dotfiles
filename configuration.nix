@@ -199,7 +199,13 @@ in {
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [];
-  virtualisation.docker = {enable = true;};
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
 
   system.stateVersion = "25.11";
 }

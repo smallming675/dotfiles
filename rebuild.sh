@@ -14,4 +14,3 @@ current=$(nixos-rebuild list-generations | awk '$NF=="True" {print $1, $2, $3}')
 git commit -am "$current"
 
 echo "Rebuild success!"
-rm nixos-switch.log

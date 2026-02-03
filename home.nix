@@ -121,6 +121,7 @@ in {
     github-cli
     libreoffice
     bear
+    docker
   ];
 
   programs.starship = {

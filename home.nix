@@ -64,7 +64,7 @@ in {
     rip2
     btop
     atuin
-    fastfetch
+    hyfetch
     grc
     usbmuxd
     zip

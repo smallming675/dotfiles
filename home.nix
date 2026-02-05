@@ -122,6 +122,7 @@ in {
     libreoffice
     bear
     docker
+    nautilus
   ];
 
   programs.starship = {

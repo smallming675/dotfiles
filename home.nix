@@ -388,10 +388,10 @@ in {
       bind -n C-d select-window -t 3
       bind -n C-f select-window -t 4
 
-      bind a select-window -t 5
-      bind s select-window -t 6
-      bind d select-window -t 7
-      bind f select-window -t 8
+      bind -n C-M-a select-window -t 5
+      bind -n C-M-s select-window -t 6
+      bind -n C-M-d select-window -t 7
+      bind -n C-M-f select-window -t 8
     '';
   };
 
@@ -458,48 +458,6 @@ in {
           white = colors.bright7;
         };
       };
-      key_bindings = [
-        {
-          key = "H";
-          mods = "Control|Shift";
-          chars = "\\u0002h";
-        } # C-S-h → C-b h
-        {
-          key = "J";
-          mods = "Control|Shift";
-          chars = "\\u0002j";
-        } # C-S-j → C-b j
-        {
-          key = "K";
-          mods = "Control|Shift";
-          chars = "\\u0002k";
-        } # C-S-k → C-b k
-        {
-          key = "L";
-          mods = "Control|Shift";
-          chars = "\\u0002l";
-        } # C-S-l → C-b l
-        {
-          key = "A";
-          mods = "Control|Shift";
-          chars = "\\u0002a";
-        } # C-S-A → C-b a
-        {
-          key = "S";
-          mods = "Control|Shift";
-          chars = "\\u0002s";
-        } # C-S-S → C-b s
-        {
-          key = "D";
-          mods = "Control|Shift";
-          chars = "\\u0002D";
-        } # C-S-D → C-b D
-        {
-          key = "F";
-          mods = "Control|Shift";
-          chars = "\\u0002F";
-        } # C-S-F → C-b F
-      ];
     };
   };
 

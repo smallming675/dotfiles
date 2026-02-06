@@ -7,7 +7,7 @@
   colors = {
     fg = "#c0caf5";
     bg = "#1a1b26";
-    black = "#15161e";
+    black = "#16161e";
     red = "#f7768e";
     green = "#9ece6a";
     yellow = "#e0af68";

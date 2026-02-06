@@ -459,6 +459,48 @@ in {
           white = colors.bright7;
         };
       };
+      key_bindings = [
+        {
+          key = "H";
+          mods = "Control|Shift";
+          chars = "\\x02\\x0f";
+        } # C-S-h
+        {
+          key = "J";
+          mods = "Control|Shift";
+          chars = "\\x02\\x0e";
+        } # C-S-j
+        {
+          key = "K";
+          mods = "Control|Shift";
+          chars = "\\x02\\x0d";
+        } # C-S-k
+        {
+          key = "L";
+          mods = "Control|Shift";
+          chars = "\\x02\\x0c";
+        } # C-S-l
+        {
+          key = "A";
+          mods = "Control|Shift";
+          chars = "\\x02a";
+        } # C-S-A
+        {
+          key = "S";
+          mods = "Control|Shift";
+          chars = "\\x02s";
+        } # C-S-S
+        {
+          key = "D";
+          mods = "Control|Shift";
+          chars = "\\x02d";
+        } # C-S-D
+        {
+          key = "F";
+          mods = "Control|Shift";
+          chars = "\\x02f";
+        } # C-S-F
+      ];
     };
   };
 

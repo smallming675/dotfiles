@@ -10,6 +10,8 @@
       url = "github:nix-community/nix4nvchad";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    pix2tex-nix.url = "github:SimonYde/pix2tex.nix";
   };
 
   outputs = {

@@ -59,7 +59,7 @@ in {
     git
     zoxide
     neovim
-    (python3.withPackages (ps: [ps.pip]))
+    (python3.withPackages (ps: []))
     cargo
     rustc
     rust-analyzer
@@ -191,7 +191,7 @@ in {
       end
       enable_transience
 
-      export UV_PYTHON=$VIRTUAL_ENV/bin/python
+      set -gx UV_PYTHON $VIRTUAL_ENV/bin/python
     '';
     interactiveShellInit = ''
       alias cd="z"

@@ -34,30 +34,31 @@ in {
 
   home.packages = with pkgs; [
     (pass.withExtensions (exts: [exts.pass-otp]))
+    mullvad-vpn
+
+    # CLI
     ripgrep
     fd
     bat
     eza
     fzf
-    rip2
     btop
+    grc
+    jq
+    delta
+    zoxide
     atuin
     hyfetch
-    grc
-    usbmuxd
     zip
     unzip
     unrar
     wl-clipboard
-    grim
-    slurp
-    swaybg
-    hyprpaper
-    pavucontrol
-    brightnessctl
-    bibata-cursors
+    rip2
+    watchexec
+
+    # Dev tools
     git
-    zoxide
+    github-cli
     neovim
     (python3.withPackages (ps: []))
     cargo
@@ -72,36 +73,50 @@ in {
     valgrind
     cppcheck
     ctags
+    bear
+    uv
+    jdk
+    mathpix-snipping-tool
     ghostscript
     imagemagick
     graphviz
-    watchexec
-    obsidian
-    localsend
-    syncthing
+    opencode
+    gemini-cli-bin
+
+    # GUI
+    grim
+    slurp
     hyprpicker
-    gimp
-    zathura
-    delta
-    mullvad-vpn
-    pamixer
-    jq
     libsixel
     chafa
+    pamixer
+    brightnessctl
+    playerctl
+
+    # Wayland
+    swaybg
+    hyprpaper
+    pavucontrol
+    bibata-cursors
+
+    # Media
     yt-dlp
     mpv
     ffmpeg
     kew
-    jdk
-    playerctl
-    opencode
-    gemini-cli-bin
-    github-cli
+    gimp
+    zathura
     libreoffice
-    bear
+
+    # Others
+    usbmuxd
+    localsend
+    syncthing
+    obsidian
     docker
     nautilus
-    uv
+    kitty
+    foot
   ];
 
   programs.starship = {
@@ -347,15 +362,16 @@ in {
       bind -n C-t new-window -c "#{pane_current_path}"
       bind -n C-w kill-pane
 
+      bind -n C-S-A select-window -t 5
+      bind -n C-S-S select-window -t 6
+      bind -n C-S-D select-window -t 7
+      bind -n C-S-F select-window -t 8
+
       bind -n C-a select-window -t 1
       bind -n C-s select-window -t 2
       bind -n C-d select-window -t 3
       bind -n C-f select-window -t 4
 
-      bind -n C-6 select-window -t 5
-      bind -n C-7 select-window -t 6
-      bind -n C-8 select-window -t 7
-      bind -n C-9 select-window -t 8
 
     '';
   };

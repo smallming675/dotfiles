@@ -374,25 +374,24 @@ in {
       bind -n C-+ resize-pane -U 5
       bind -n C-_ resize-pane -D 5
 
-      bind -n C-S-h split-window -hb
-      bind -n C-S-l split-window -h
-      bind -n C-S-k split-window -vb
-      bind -n C-S-j split-window -v
 
       bind -n C-t new-window -c "#{pane_current_path}"
       bind -n C-w kill-pane
 
-      bind -n C-S-A select-window -t 5
-      bind -n C-S-S select-window -t 6
-      bind -n C-S-D select-window -t 7
-      bind -n C-S-F select-window -t 8
+      bind h split-window -hb
+      bind l split-window -h
+      bind k split-window -vb
+      bind j split-window -v
 
       bind -n C-a select-window -t 1
       bind -n C-s select-window -t 2
       bind -n C-d select-window -t 3
       bind -n C-f select-window -t 4
 
-
+      bind a select-window -t 5
+      bind s select-window -t 6
+      bind d select-window -t 7
+      bind f select-window -t 8
     '';
   };
 

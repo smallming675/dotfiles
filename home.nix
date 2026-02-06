@@ -31,7 +31,27 @@ in {
 
   home.username = "user";
   home.homeDirectory = "/home/user";
-
+  home.sessionVariables = {
+    XDG_CURRENT_DESKTOP = "Hyprland";
+    XDG_SESSION_DESKTOP = "Hyprland";
+    XDG_SESSION_TYPE = "wayland";
+    QT_QPA_PLATFORM = "wayland;xcb";
+    QT_STYLE_OVERRIDE = "";
+    SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+    LIBVA_DRIVER_NAME = "nvidia";
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    NVD_BACKEND = "direct";
+    GDK_BACKEND = "wayland,x11,*";
+    SDL_VIDEODRIVER = "wayland";
+    MOZ_ENABLE_WAYLAND = "1";
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+    OZONE_PLATFORM = "wayland";
+    XCURSOR_SIZE = "24";
+    HYPRCURSOR_SIZE = "24";
+    HYPRCURSOR_THEME = "Bibata-Modern-Black";
+    XCOMPOSEFILE = "~/.XCompose";
+  };
   home.packages = with pkgs; [
     (pass.withExtensions (exts: [exts.pass-otp]))
     mullvad-vpn
@@ -448,26 +468,6 @@ in {
     settings = {
       layerrule = [
         "no_anim on, match:namespace rofi"
-      ];
-      env = [
-        "XCURSOR_SIZE,24"
-        "HYPRCURSOR_SIZE,24"
-        "HYPRCURSOR_THEME,Bibata-Modern-Black"
-        "XCOMPOSEFILE,~/.XCompose"
-        "LIBVA_DRIVER_NAME,nvidia"
-        "GBM_BACKEND,nvidia-drm"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        "NVD_BACKEND,direct"
-        "GDK_BACKEND,wayland,x11,*"
-        "QT_QPA_PLATFORM,wayland;xcb"
-        "QT_STYLE_OVERRIDE,kvantum"
-        "SDL_VIDEODRIVER,wayland"
-        "MOZ_ENABLE_WAYLAND,1"
-        "ELECTRON_OZONE_PLATFORM_HINT,wayland"
-        "OZONE_PLATFORM,wayland"
-        "XDG_SESSION_TYPE,wayland"
-        "XDG_CURRENT_DESKTOP,Hyprland"
-        "XDG_SESSION_DESKTOP,Hyprland"
       ];
       xwayland.force_zero_scaling = true;
       monitor = ["DP-1, 2560x1440@180, auto, 1"];

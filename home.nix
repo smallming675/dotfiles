@@ -4,49 +4,27 @@
   nix4nvchad,
   ...
 }: let
-  colors = rec {
-    fg = "cdc0ad";
-    bg = "252221";
-    black = "2b2827";
-    red = "c65f5f";
-    green = "8ca589";
-    yellow = "d9b27c";
-    blue = "7d92a2";
-    magenta = "998396";
-    cyan = "829e9b";
-    white = "cdc0ad";
-    orange = "d08b65";
+  colors = {
+    fg = "#c0caf5";
+    bg = "#1a1b26";
+    black = "#15161e";
+    red = "#f7768e";
+    green = "#9ece6a";
+    yellow = "#e0af68";
+    blue = "#7aa2f7";
+    magenta = "#bb9af7";
+    cyan = "#7dcfff";
+    white = "#c0caf5";
+    orange = "#ff9e64";
 
-    bright0 = "4d4a49";
-    bright1 = "dc7575";
-    bright2 = "95ae92";
-    bright3 = "e1ba84";
-    bright4 = "728797";
-    bright5 = "d16a6a";
-    bright6 = "749689";
-    bright7 = "c8baa4";
-
-    hex = {
-      fg = "#${fg}";
-      bg = "#${bg}";
-      black = "#${black}";
-      red = "#${red}";
-      green = "#${green}";
-      yellow = "#${yellow}";
-      blue = "#${blue}";
-      magenta = "#${magenta}";
-      cyan = "#${cyan}";
-      white = "#${white}";
-      orange = "#${orange}";
-      bright0 = "#${bright0}";
-      bright1 = "#${bright1}";
-      bright2 = "#${bright2}";
-      bright3 = "#${bright3}";
-      bright4 = "#${bright4}";
-      bright5 = "#${bright5}";
-      bright6 = "#${bright6}";
-      bright7 = "#${bright7}";
-    };
+    bright0 = "#414868";
+    bright1 = "#ff899d";
+    bright2 = "#9fe044";
+    bright3 = "#faba4a";
+    bright4 = "#8db0ff";
+    bright5 = "#c7a9ff";
+    bright6 = "#a4daff";
+    bright7 = "#c0caf5";
   };
 in {
   imports = [nix4nvchad.homeManagerModule];
@@ -337,16 +315,16 @@ in {
     extraConfig = ''
       set-option -g status-position top
       set -g status-interval 1
-      set -g status-style "bg=${colors.hex.bg},fg=${colors.hex.fg}"
+      set -g status-style "bg=${colors.bg},fg=${colors.fg}"
       set -g status-left-length 50
       set -g status-left ""
-      set -g window-status-format "#[fg=${colors.hex.blue},bg=${colors.hex.bg}] #I "
-      set -g window-status-current-format "#[fg=${colors.hex.yellow},bg=${colors.hex.black},bold] #I "
+      set -g window-status-format "#[fg=${colors.blue},bg=${colors.bg}] #I "
+      set -g window-status-current-format "#[fg=${colors.yellow},bg=${colors.black},bold] #I "
       set -g window-status-separator " "
       set -g status-right-length 100
-      set -g status-right "#[fg=${colors.hex.bright0}] %d %b %Y %H:%M "
-      set -g pane-border-style "fg=${colors.hex.black}"
-      set -g pane-active-border-style "fg=${colors.hex.blue}"
+      set -g status-right "#[fg=${colors.bright0}] %d %b %Y %H:%M "
+      set -g pane-border-style "fg=${colors.black}"
+      set -g pane-active-border-style "fg=${colors.blue}"
       set -s extended-keys on
       set -as terminal-features 'xterm*:extkeys'
 
@@ -411,35 +389,35 @@ in {
 
       colors = {
         primary = {
-          background = colors.hex.bg;
-          foreground = colors.hex.fg;
+          background = colors.bg;
+          foreground = colors.fg;
         };
 
         cursor = {
-          text = colors.hex.bg;
-          cursor = colors.hex.fg;
+          text = colors.bg;
+          cursor = colors.fg;
         };
 
         normal = {
-          black = colors.hex.black;
-          red = colors.hex.red;
-          green = colors.hex.green;
-          yellow = colors.hex.yellow;
-          blue = colors.hex.blue;
-          magenta = colors.hex.magenta;
-          cyan = colors.hex.cyan;
-          white = colors.hex.white;
+          black = colors.black;
+          red = colors.red;
+          green = colors.green;
+          yellow = colors.yellow;
+          blue = colors.blue;
+          magenta = colors.magenta;
+          cyan = colors.cyan;
+          white = colors.white;
         };
 
         bright = {
-          black = colors.hex.bright0;
-          red = colors.hex.bright1;
-          green = colors.hex.bright2;
-          yellow = colors.hex.bright3;
-          blue = colors.hex.bright4;
-          magenta = colors.hex.bright5;
-          cyan = colors.hex.bright6;
-          white = colors.hex.bright7;
+          black = colors.bright0;
+          red = colors.bright1;
+          green = colors.bright2;
+          yellow = colors.bright3;
+          blue = colors.bright4;
+          magenta = colors.bright5;
+          cyan = colors.bright6;
+          white = colors.bright7;
         };
       };
     };

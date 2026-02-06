@@ -7,7 +7,7 @@
   colors = {
     fg = "#c0caf5";
     bg = "#1a1b26";
-    black = "#16161e";
+    black = "#15161e";
     red = "#f7768e";
     green = "#9ece6a";
     yellow = "#e0af68";
@@ -101,6 +101,7 @@ in {
     bear
     docker
     nautilus
+    uv
   ];
 
   programs.starship = {
@@ -189,6 +190,8 @@ in {
         fzf_key_bindings
       end
       enable_transience
+
+      export UV_PYTHON=$VIRTUAL_ENV/bin/python
     '';
     interactiveShellInit = ''
       alias cd="z"
@@ -613,8 +616,8 @@ in {
 
     theme = builtins.toFile "theme.rasi" ''
       * {
-          background:                  ${colors.bg}FF;
-          background-alt:              ${colors.black}FF;
+          background:                  ${colors.black}FF;
+          background-alt:              ${colors.bg}FF;
           foreground:                  ${colors.fg}FF;
           selected:                    ${colors.fg}FF;
           active:                      ${colors.cyan}FF;

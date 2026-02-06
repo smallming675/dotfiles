@@ -460,32 +460,32 @@ in {
       };
       key_bindings = [
         {
-          key = "h";
+          key = "H";
           mods = "Control|Shift";
           chars = "\\u0002h";
         } # C-S-h → C-b h
         {
-          key = "j";
+          key = "J";
           mods = "Control|Shift";
           chars = "\\u0002j";
         } # C-S-j → C-b j
         {
-          key = "k";
+          key = "K";
           mods = "Control|Shift";
           chars = "\\u0002k";
         } # C-S-k → C-b k
         {
-          key = "l";
+          key = "L";
           mods = "Control|Shift";
           chars = "\\u0002l";
         } # C-S-l → C-b l
         {
-          key = "a";
+          key = "A";
           mods = "Control|Shift";
           chars = "\\u0002a";
         } # C-S-A → C-b a
         {
-          key = "s";
+          key = "S";
           mods = "Control|Shift";
           chars = "\\u0002s";
         } # C-S-S → C-b s

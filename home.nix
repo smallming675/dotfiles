@@ -354,10 +354,10 @@ in {
       bind -n C-+ resize-pane -U 5
       bind -n C-_ resize-pane -D 5
 
-      bind -n M-h split-window -hb
-      bind -n M-l split-window -h
-      bind -n M-k split-window -vb
-      bind -n M-j split-window -v
+      bind -n C-S-h split-window -hb
+      bind -n C-S-l split-window -h
+      bind -n C-S-k split-window -vb
+      bind -n C-S-j split-window -v
 
       bind -n C-t new-window -c "#{pane_current_path}"
       bind -n C-w kill-pane

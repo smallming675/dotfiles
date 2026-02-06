@@ -344,7 +344,7 @@ in {
     terminal = "tmux-256color";
     mouse = true;
     baseIndex = 1;
-    prefix = "C-u";
+    prefix = "C-b";
     escapeTime = 0;
 
     plugins = with pkgs; [
@@ -463,23 +463,43 @@ in {
         {
           key = "H";
           mods = "Control|Shift";
-          chars = "\\x1b[27;6;72~";
-        } # C-S-h
+          chars = "\\u0002H";
+        } # C-S-h → C-b H
         {
           key = "J";
           mods = "Control|Shift";
-          chars = "\\x1b[27;6;74~";
-        } # C-S-j
+          chars = "\\u0002J";
+        } # C-S-j → C-b J
         {
           key = "K";
           mods = "Control|Shift";
-          chars = "\\x1b[27;6;75~";
-        } # C-S-k
+          chars = "\\u0002K";
+        } # C-S-k → C-b K
         {
           key = "L";
           mods = "Control|Shift";
-          chars = "\\x1b[27;6;76~";
-        } # C-S-l
+          chars = "\\u0002L";
+        } # C-S-l → C-b L
+        {
+          key = "A";
+          mods = "Control|Shift";
+          chars = "\\u0002A";
+        } # C-S-A → C-b A
+        {
+          key = "S";
+          mods = "Control|Shift";
+          chars = "\\u0002S";
+        } # C-S-S → C-b S
+        {
+          key = "D";
+          mods = "Control|Shift";
+          chars = "\\u0002D";
+        } # C-S-D → C-b D
+        {
+          key = "F";
+          mods = "Control|Shift";
+          chars = "\\u0002F";
+        } # C-S-F → C-b F
       ];
     };
   };

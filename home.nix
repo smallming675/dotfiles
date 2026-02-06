@@ -463,43 +463,23 @@ in {
         {
           key = "H";
           mods = "Control|Shift";
-          chars = "\\x02\\x0f";
+          chars = "\\x1b[27;6;72~";
         } # C-S-h
         {
           key = "J";
           mods = "Control|Shift";
-          chars = "\\x02\\x0e";
+          chars = "\\x1b[27;6;74~";
         } # C-S-j
         {
           key = "K";
           mods = "Control|Shift";
-          chars = "\\x02\\x0d";
+          chars = "\\x1b[27;6;75~";
         } # C-S-k
         {
           key = "L";
           mods = "Control|Shift";
-          chars = "\\x02\\x0c";
+          chars = "\\x1b[27;6;76~";
         } # C-S-l
-        {
-          key = "A";
-          mods = "Control|Shift";
-          chars = "\\x02a";
-        } # C-S-A
-        {
-          key = "S";
-          mods = "Control|Shift";
-          chars = "\\x02s";
-        } # C-S-S
-        {
-          key = "D";
-          mods = "Control|Shift";
-          chars = "\\x02d";
-        } # C-S-D
-        {
-          key = "F";
-          mods = "Control|Shift";
-          chars = "\\x02f";
-        } # C-S-F
       ];
     };
   };

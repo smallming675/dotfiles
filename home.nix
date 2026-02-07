@@ -96,7 +96,6 @@ in {
     bear
     uv
     jdk
-    mathpix-snipping-tool
     ghostscript
     imagemagick
     graphviz
@@ -154,10 +153,10 @@ in {
       };
       python = {
         symbol = " ";
-        format = ''[$symbol$pyenv_prefix$virtualenv]($style)'';
+        format = ''[$symbol$pyenv_prefix$virtualenv]($style) '';
       };
       sudo = {
-        format = "[$symbol]($style)";
+        format = "[$symbol]($style) ";
         style = "bold yellow";
         symbol = " ";
         disabled = false;
@@ -388,10 +387,10 @@ in {
       bind -n C-d select-window -t 3
       bind -n C-f select-window -t 4
 
-      bind -n C-M-a select-window -t 5
-      bind -n C-M-s select-window -t 6
-      bind -n C-M-d select-window -t 7
-      bind -n C-M-f select-window -t 8
+      bind -n M-a select-window -t 5
+      bind -n M-s select-window -t 6
+      bind -n M-d select-window -t 7
+      bind -n M-f select-window -t 8
     '';
   };
 

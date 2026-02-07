@@ -2,6 +2,8 @@
   pkgs,
   config,
   nix4nvchad,
+  lib,
+  agenix,
   ...
 }: let
   colors = {
@@ -27,10 +29,10 @@
     bright7 = "#c0caf5";
   };
 in {
-  imports = [nix4nvchad.homeManagerModule];
+  imports = [
+    nix4nvchad.homeManagerModule
+  ];
 
-  home.username = "user";
-  home.homeDirectory = "/home/user";
   home.sessionVariables = {
     XDG_CURRENT_DESKTOP = "Hyprland";
     XDG_SESSION_DESKTOP = "Hyprland";
@@ -38,9 +40,6 @@ in {
     QT_QPA_PLATFORM = "wayland;xcb";
     QT_STYLE_OVERRIDE = "";
     SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-    LIBVA_DRIVER_NAME = "nvidia";
-    GBM_BACKEND = "nvidia-drm";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     NVD_BACKEND = "direct";
     GDK_BACKEND = "wayland,x11,*";
     SDL_VIDEODRIVER = "wayland";
@@ -99,7 +98,6 @@ in {
     ghostscript
     imagemagick
     graphviz
-    opencode
     gemini-cli-bin
     lazygit
 
@@ -201,6 +199,10 @@ in {
       {
         name = "autopair";
         src = pkgs.fishPlugins.autopair.src;
+      }
+      {
+        name = "sponge";
+        src = pkgs.fishPlugins.sponge.src;
       }
     ];
     shellInit = ''
@@ -320,7 +322,7 @@ in {
   programs.git = {
     enable = true;
     signing = {
-      key = "/home/user/.ssh/id_ed25519.pub";
+      key = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
       signByDefault = true;
     };
     settings = {
@@ -473,7 +475,7 @@ in {
         "no_anim on, match:namespace rofi"
       ];
       xwayland.force_zero_scaling = true;
-      monitor = ["DP-1, 2560x1440@180, auto, 1"];
+      monitor = ", preferred, auto, 1";
       exec-once = [
         "swaybg -c ${colors.bg}"
         "[workspace 1 silent] brave"
@@ -936,13 +938,27 @@ in {
     enableFishIntegration = true;
   };
 
+  # programs.opencode = {
+  #   enable = true;
+  #   settings = {
+  #     theme = "tokyonight";
+  #     providers = [
+  #       {
+  #         name = "deepseek-v3.2";
+  #         type = "openai";
+  #         api_base = builtins.extraBuiltins.passKey "opencode" "base_url";
+  #         api_key = builtins.extraBuiltins.passKey "opencode" "api_key";
+  #       }
+  #     ];
+  #   };
+  # };
+
   xdg.desktopEntries.kew-player = {
     name = "Kew";
     genericName = "Music Player";
     exec = "alacritty --class kew-music -e kew all";
     terminal = false;
     categories = ["Audio" "AudioVideo" "Player"];
-    icon = "utilities-terminal";
   };
 
   home.stateVersion = "25.11";

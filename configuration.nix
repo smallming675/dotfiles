@@ -121,11 +121,6 @@ in {
       nodejs
       go
       clang-tools
-
-      # Libraries (fix for libstdc++.so.6)
-      glibc
-      stdenv.cc.cc.lib
-      pkgsi686Linux.glibc
     ];
 
     pathsToLink = ["/share/applications" "/share/xdg-desktop-portal"];
@@ -217,6 +212,5 @@ in {
   };
 
   services.usbmuxd.enable = true;
-
   system.stateVersion = "25.11";
 }

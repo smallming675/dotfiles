@@ -470,7 +470,7 @@ in {
       xwayland.force_zero_scaling = true;
       monitor = ["DP-1, 2560x1440@180, auto, 1"];
       exec-once = [
-        "swaybg -c 201e1d"
+        "swaybg -c ${colors.bg}"
         "[workspace 1 silent] brave"
         "[workspace 2 silent] alacritty"
         "[workspace 3 silent] obsidian"

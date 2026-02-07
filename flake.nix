@@ -25,7 +25,7 @@
   in {
     nixosConfigurations.nixos = lib.nixosSystem {
       system = system;
-      specialArgs = {inherit nix4nvchad;};
+      specialArgs = {inherit nix4nvchad inputs;};
       modules = [
         ./configuration.nix
         home-manager.nixosModules.home-manager

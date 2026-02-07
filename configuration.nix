@@ -192,41 +192,11 @@ in {
     libraries = with pkgs; [];
   };
 
-  system.autoUpgrade.enable = false;
-
-  systemd = {
-    services.nixos-auto-update = {
-      description = "NixOS Auto Update";
-      wants = ["network-online.target"];
-      after = ["network-online.target"];
-      script = ''
-        ${pkgs.nix}/bin/nix flake update --flake ${path}
-        echo "Rebuilding system..."
-        ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake ${path} -L
-      '';
-      serviceConfig = {
-        Type = "oneshot";
-        User = "root";
-      };
-    };
-
-    timers.nixos-auto-update = {
-      description = "Nixos Auto Update";
-      wantedBy = ["timers.target"];
-      timerConfig = {
-        OnCalendar = "02:00";
-        RandomizedDelaySec = "45min";
-        Persistent = true;
-        Unit = "nixos-auto-update.service";
-      };
-    };
-  };
-
-  programs.git = {
+  system.autoUpgrade = {
     enable = true;
-    config = {
-      safe.directory = [path];
-    };
+    flake = inputs.self.outPath;
+    dates = "02:00";
+    randomizedDelaySec = "45min";
   };
 
   services.printing = {
@@ -241,9 +211,6 @@ in {
   };
 
   services.ipp-usb.enable = true;
-
-  virtualisation.docker.enable = true;
-
   programs.appimage = {
     enable = true;
     binfmt = true;

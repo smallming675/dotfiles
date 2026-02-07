@@ -101,6 +101,7 @@ in {
     graphviz
     opencode
     gemini-cli-bin
+    lazygit
 
     # GUI
     grim

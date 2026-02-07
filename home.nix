@@ -198,6 +198,14 @@ in {
         name = "forgit";
         src = pkgs.fishPlugins.forgit.src;
       }
+      {
+        name = "autopair";
+        src = pkgs.fishPlugins.autopair.src;
+      }
+      {
+        name = "async-prompt";
+        src = pkgs.fishPlugins.async-prompt.src;
+      }
     ];
     shellInit = ''
       set fish_greeting

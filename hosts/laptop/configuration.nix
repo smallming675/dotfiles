@@ -12,8 +12,6 @@
   config = {
     networking.hostName = "laptop";
     networking.networkmanager.wifi.backend = "iwd";
-
-    # Use linux-surface kernel from nixos-hardware.
     hardware.microsoft-surface.kernelVersion = "stable";
 
     environment.systemPackages = with pkgs; [
@@ -21,7 +19,6 @@
     ];
 
     users.users.user.extraGroups = ["surface-control"];
-
     services.xserver.videoDrivers = ["modesetting"];
   };
 }

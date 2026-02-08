@@ -505,8 +505,6 @@ in {
         follow_mouse = 0;
         touchpad = {
           natural_scroll = true;
-          tap_to_click = true;
-          tap_and_drag = true;
         };
       };
       misc = {

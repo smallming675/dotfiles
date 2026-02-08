@@ -969,7 +969,7 @@ in {
         };
       };
       autoupdate = true;
-      model = "claude-sonnet-4-5-20250929";
+      model = "gpt-5-codex";
     };
   };
 

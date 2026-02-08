@@ -22,31 +22,45 @@
   } @ inputs: let
     system = "x86_64-linux";
     lib = nixpkgs.lib;
-    mkHost = hostName:
+    mkHost = {
+      hostName,
+      extraModules ? [],
+    }:
       lib.nixosSystem {
         inherit system;
         specialArgs = {
           inherit nix4nvchad inputs self;
         };
-        modules = [
-          ./hosts/${hostName}/configuration.nix
-          home-manager.nixosModules.home-manager
-          sops-nix.nixosModules.sops
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = {inherit nix4nvchad inputs self;};
-            home-manager.sharedModules = [
-              sops-nix.homeManagerModules.sops
-            ];
-            home-manager.users.user = import ./home.nix;
-          }
-        ];
+        modules =
+          [
+            ./hosts/${hostName}/configuration.nix
+            home-manager.nixosModules.home-manager
+            sops-nix.nixosModules.sops
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {inherit nix4nvchad inputs self;};
+              home-manager.sharedModules = [
+                sops-nix.homeManagerModules.sops
+              ];
+              home-manager.users.user = import ./home.nix;
+            }
+          ]
+          ++ extraModules;
       };
   in {
     nixosConfigurations = {
-      desktop = mkHost "desktop";
-      laptop = mkHost "laptop";
+      desktop = mkHost {hostName = "desktop";};
+      laptop = mkHost {hostName = "laptop";};
+      iso = mkHost {
+        hostName = "desktop";
+        extraModules = [
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+          {
+            isoImage.isoName = "nixos-config.iso";
+          }
+        ];
+      };
     };
   };
 }

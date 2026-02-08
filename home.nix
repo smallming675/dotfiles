@@ -28,7 +28,6 @@
     bright6 = "#a4daff";
     bright7 = "#c0caf5";
   };
-  # uid = "1000";
 in {
   imports = [
     nix4nvchad.homeManagerModule
@@ -150,6 +149,7 @@ in {
     obsidian
     docker
     nautilus
+    uair
     kitty
     foot
   ];

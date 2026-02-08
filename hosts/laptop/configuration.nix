@@ -13,8 +13,8 @@
     networking.hostName = "laptop";
     networking.networkmanager.wifi.backend = "iwd";
 
-    # Keep the patched linux-surface kernel.
-    hardware.microsoft-surface.kernelVersion = "longterm";
+    # Use linux-surface kernel from nixos-hardware.
+    hardware.microsoft-surface.kernelVersion = "stable";
 
     environment.systemPackages = with pkgs; [
       surface-control

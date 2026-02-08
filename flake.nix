@@ -10,7 +10,7 @@
     nix4nvchad.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-hardware.url = "github:8bitbuddhist/nixos-hardware/ac6458d3bcef09b40317be72e2b4f3795936732c";
   };
 
   outputs = {

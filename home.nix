@@ -61,6 +61,10 @@ in {
     PASSWORD_STORE_DIR = passwordStoreDir;
   };
 
+  home.file.".config/environment.d/10-password-store.conf".text = ''
+    PASSWORD_STORE_DIR=${passwordStoreDir}
+  '';
+
   home.pointerCursor = {
     gtk.enable = true;
     x11.enable = true;
@@ -224,7 +228,6 @@ in {
     ];
     shellInit = ''
       set fish_greeting
-      set -gx PASSWORD_STORE_DIR "${passwordStoreDir}"
       eval "$(zoxide init fish)"
       function bind_bang
         switch (commandline -t)[-1]

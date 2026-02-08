@@ -6,6 +6,7 @@
   lib,
   ...
 }: let
+  passwordStoreDir = "${config.home.homeDirectory}/config/secrets/password-store";
   colors = {
     fg = "#c0caf5";
     bg = "#1a1b26";
@@ -57,6 +58,7 @@ in {
     HYPRCURSOR_SIZE = "24";
     HYPRCURSOR_THEME = "Bibata-Modern-Black";
     XCOMPOSEFILE = "~/.XCompose";
+    PASSWORD_STORE_DIR = passwordStoreDir;
   };
 
   home.pointerCursor = {
@@ -68,7 +70,6 @@ in {
   };
 
   home.packages = with pkgs; [
-    (pass.withExtensions (exts: [exts.pass-otp]))
     mullvad-vpn
 
     # CLI
@@ -149,7 +150,6 @@ in {
     obsidian
     docker
     nautilus
-    uair
     kitty
     foot
   ];
@@ -360,6 +360,11 @@ in {
       gpg.format = "ssh";
       commit.gpgsign = true;
     };
+  };
+
+  programs.password-store = {
+    enable = true;
+    package = pkgs.pass.withExtensions (exts: [exts.pass-otp]);
   };
 
   programs.tmux = {

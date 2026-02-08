@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  config,
   ...
 }: {
   imports = [
@@ -13,6 +14,7 @@
 
     sops = {
       defaultSopsFile = ../../secrets/secrets.yaml;
+      age.keyFile = "${config.users.users.user.home}/.config/sops/age/keys.txt";
       age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
       secrets = {
         "ssh/id_ed25519" = {

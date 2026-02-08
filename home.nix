@@ -961,7 +961,7 @@ in {
     settings = {
       theme = "tokyonight";
       provider = {
-        deepseek = {
+        custom = {
           options = {
             baseURL = "{file:${config.sops.secrets."opencode/base_url".path}}";
             apiKey = "{file:${config.sops.secrets."opencode/api_key".path}}";
@@ -969,7 +969,7 @@ in {
         };
       };
       autoupdate = true;
-      model = "deepseek-v3.2";
+      model = "claude-sonnet-4-5-20250929";
     };
   };
 

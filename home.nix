@@ -960,15 +960,14 @@ in {
     enable = true;
     settings = {
       theme = "tokyonight";
-      providers = [
-        {
-          name = "deepseek-v3.2";
-          type = "openai";
-          api_base = config.sops.secrets."opencode/base_url".path;
-          api_key = config.sops.secrets."opencode/api_key".path;
-        }
-      ];
-
+      provider = {
+        deepseek = {
+          options = {
+            api_base = "{file:${config.sops.secrets."opencode/base_url".path}}";
+            apiKey = "{file:${config.sops.secrets."opencode/api_key".path}}";
+          };
+        };
+      };
       autoupdate = true;
       model = "deepseek-v3.2";
     };

@@ -15,19 +15,19 @@
       defaultSopsFile = ../../secrets/secrets.yaml;
       age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
       secrets = {
-        "laptop/ssh/id_ed25519" = {
+        "ssh/id_ed25519" = {
           path = "/home/user/.ssh/id_ed25519";
           owner = "user";
           group = "users";
           mode = "0600";
         };
-        "laptop/ssh/id_ed25519_pub" = {
+        "ssh/id_ed25519_pub" = {
           path = "/home/user/.ssh/id_ed25519.pub";
           owner = "user";
           group = "users";
           mode = "0644";
         };
-        "laptop/sops/age_keys_txt" = {
+        "sops/age_keys_txt" = {
           path = "/home/user/.config/sops/age/keys.txt";
           owner = "user";
           group = "users";

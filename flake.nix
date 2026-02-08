@@ -10,6 +10,7 @@
     nix4nvchad.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
   };
 
   outputs = {
@@ -18,6 +19,7 @@
     home-manager,
     nix4nvchad,
     sops-nix,
+    nixos-hardware,
     ...
   } @ inputs: let
     system = "x86_64-linux";

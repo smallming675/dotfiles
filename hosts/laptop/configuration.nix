@@ -27,7 +27,7 @@
           group = "users";
           mode = "0644";
         };
-        "sops/age_keys" = {
+        "age_keys" = {
           path = "/home/user/.config/sops/age/keys.txt";
           owner = "user";
           group = "users";

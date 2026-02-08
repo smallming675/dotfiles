@@ -22,25 +22,31 @@
   } @ inputs: let
     system = "x86_64-linux";
     lib = nixpkgs.lib;
-    pkgs = import nixpkgs {inherit system;};
+    mkHost = hostName:
+      lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit nix4nvchad inputs self;
+        };
+        modules = [
+          ./hosts/${hostName}/configuration.nix
+          home-manager.nixosModules.home-manager
+          sops-nix.nixosModules.sops
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = {inherit nix4nvchad inputs self;};
+            home-manager.sharedModules = [
+              sops-nix.homeManagerModules.sops
+            ];
+            home-manager.users.user = import ./home.nix;
+          }
+        ];
+      };
   in {
-    nixosConfigurations.nixos = lib.nixosSystem {
-      system = system;
-      specialArgs = {inherit nix4nvchad inputs;};
-      modules = [
-        ./configuration.nix
-        home-manager.nixosModules.home-manager
-        sops-nix.nixosModules.sops
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = {inherit nix4nvchad inputs self;};
-          home-manager.sharedModules = [
-            sops-nix.homeManagerModules.sops
-          ];
-          home-manager.users.user = import ./home.nix;
-        }
-      ];
+    nixosConfigurations = {
+      desktop = mkHost "desktop";
+      laptop = mkHost "laptop";
     };
   };
 }

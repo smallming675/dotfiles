@@ -977,7 +977,7 @@ in {
         };
       };
       autoupdate = true;
-      model = "gpt-5-codex";
+      model = "gpt-5.2-codex";
     };
   };
 

@@ -1,9 +1,9 @@
 {
+  inputs,
   pkgs,
   config,
   nix4nvchad,
   lib,
-  agenix,
   ...
 }: let
   colors = {
@@ -28,9 +28,24 @@
     bright6 = "#a4daff";
     bright7 = "#c0caf5";
   };
+
+  uid = builtins.toString config.home.uid;
 in {
   imports = [
     nix4nvchad.homeManagerModule
+    inputs.sops-nix.homeManagerModules.sops
+  ];
+
+  sops = {
+    age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
+    defaultSopsFile = "${inputs.self.outPath}/secrets/secrets.yaml";
+    defaultSymlinkPath = "/run/user/${uid}/secrets";
+    defaultSecretsMountPoint = "/run/user/${uid}/secrets.d";
+  };
+
+  systemd.user.tmpfiles.rules = [
+    "d /run/user/${uid}/secrets 0700 ${config.home.username} - -"
+    "d /run/user/${uid}/secrets.d 0700 ${config.home.username} - -"
   ];
 
   home.sessionVariables = {
@@ -50,7 +65,9 @@ in {
     HYPRCURSOR_SIZE = "24";
     HYPRCURSOR_THEME = "Bibata-Modern-Black";
     XCOMPOSEFILE = "~/.XCompose";
+    SOPS_AGE_KEY_FILE = "${config.xdg.configHome}/sops/age/keys.txt";
   };
+
   home.packages = with pkgs; [
     (pass.withExtensions (exts: [exts.pass-otp]))
     mullvad-vpn
@@ -233,6 +250,7 @@ in {
       enable_transience
 
       set -gx UV_PYTHON $VIRTUAL_ENV/bin/python
+
     '';
     interactiveShellInit = ''
       alias cd="z"
@@ -946,12 +964,15 @@ in {
   #       {
   #         name = "deepseek-v3.2";
   #         type = "openai";
-  #         api_base = builtins.extraBuiltins.passKey "opencode" "base_url";
-  #         api_key = builtins.extraBuiltins.passKey "opencode" "api_key";
+  #         api_base = config.sops.secrets."opencode/base_url".path;
+  #         api_key = config.sops.secrets."opencode/api_key".path;
   #       }
   #     ];
   #   };
   # };
+  #
+  # sops.secrets."opencode/base_url" = {};
+  # sops.secrets."opencode/api_key" = {};
 
   xdg.desktopEntries.kew-player = {
     name = "Kew";

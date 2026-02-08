@@ -1,0 +1,8 @@
+keys:
+  - &key age1uzrrtl7taufk0kc7wlu6mqlzfp3g8g0zjye5p9gh6mc50q6g0afsh006sr
+
+creation_rules:
+  - path_regex: secrets\.(yaml|json)$  
+    key_groups:
+      - age:
+          - *key

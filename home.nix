@@ -29,16 +29,16 @@
     bright7 = "#c0caf5";
   };
 
-  uid = builtins.toString config.home.uid;
+  uid = "1000";
 in {
   imports = [
     nix4nvchad.homeManagerModule
-    inputs.sops-nix.homeManagerModules.sops
   ];
 
   sops = {
     age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
-    defaultSopsFile = "${inputs.self.outPath}/secrets/secrets.yaml";
+    # defaultSopsFile = "${inputs.self.outPath}/secrets/secrets.yaml";
+    defaultSopsFile = ./secrets/secrets.yaml;
     defaultSymlinkPath = "/run/user/${uid}/secrets";
     defaultSecretsMountPoint = "/run/user/${uid}/secrets.d";
   };
@@ -65,9 +65,7 @@ in {
     HYPRCURSOR_SIZE = "24";
     HYPRCURSOR_THEME = "Bibata-Modern-Black";
     XCOMPOSEFILE = "~/.XCompose";
-    SOPS_AGE_KEY_FILE = "${config.xdg.configHome}/sops/age/keys.txt";
   };
-
   home.packages = with pkgs; [
     (pass.withExtensions (exts: [exts.pass-otp]))
     mullvad-vpn
@@ -956,23 +954,23 @@ in {
     enableFishIntegration = true;
   };
 
-  # programs.opencode = {
-  #   enable = true;
-  #   settings = {
-  #     theme = "tokyonight";
-  #     providers = [
-  #       {
-  #         name = "deepseek-v3.2";
-  #         type = "openai";
-  #         api_base = config.sops.secrets."opencode/base_url".path;
-  #         api_key = config.sops.secrets."opencode/api_key".path;
-  #       }
-  #     ];
-  #   };
-  # };
-  #
-  # sops.secrets."opencode/base_url" = {};
-  # sops.secrets."opencode/api_key" = {};
+  sops.secrets."opencode/base_url" = {};
+  sops.secrets."opencode/api_key" = {};
+
+  programs.opencode = {
+    enable = true;
+    settings = {
+      theme = "tokyonight";
+      providers = [
+        {
+          name = "deepseek-v3.2";
+          type = "openai";
+          api_base = config.sops.secrets."opencode/base_url".path;
+          api_key = config.sops.secrets."opencode/api_key".path;
+        }
+      ];
+    };
+  };
 
   xdg.desktopEntries.kew-player = {
     name = "Kew";

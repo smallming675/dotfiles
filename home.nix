@@ -224,6 +224,7 @@ in {
     ];
     shellInit = ''
       set fish_greeting
+      set -gx PASSWORD_STORE_DIR "${passwordStoreDir}"
       eval "$(zoxide init fish)"
       function bind_bang
         switch (commandline -t)[-1]

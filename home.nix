@@ -28,8 +28,7 @@
     bright6 = "#a4daff";
     bright7 = "#c0caf5";
   };
-
-  uid = "1000";
+  # uid = "1000";
 in {
   imports = [
     nix4nvchad.homeManagerModule
@@ -39,14 +38,14 @@ in {
     age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
     # defaultSopsFile = "${inputs.self.outPath}/secrets/secrets.yaml";
     defaultSopsFile = ./secrets/secrets.yaml;
-    defaultSymlinkPath = "/run/user/${uid}/secrets";
-    defaultSecretsMountPoint = "/run/user/${uid}/secrets.d";
+    # defaultSymlinkPath = "/run/user/${uid}/secrets";
+    # defaultSecretsMountPoint = "/run/user/${uid}/secrets.d";
   };
 
-  systemd.user.tmpfiles.rules = [
-    "d /run/user/${uid}/secrets 0700 ${config.home.username} - -"
-    "d /run/user/${uid}/secrets.d 0700 ${config.home.username} - -"
-  ];
+  # systemd.user.tmpfiles.rules = [
+  #   "d /run/user/${uid}/secrets 0700 ${config.home.username} - -"
+  #   "d /run/user/${uid}/secrets.d 0700 ${config.home.username} - -"
+  # ];
 
   home.sessionVariables = {
     XDG_CURRENT_DESKTOP = "Hyprland";
@@ -969,6 +968,9 @@ in {
           api_key = config.sops.secrets."opencode/api_key".path;
         }
       ];
+
+      autoupdate = true;
+      model = "deepseek-v3.2";
     };
   };
 

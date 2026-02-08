@@ -1,12 +1,27 @@
-{inputs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     ../../modules/nixos/common.nix
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.microsoft-surface-common
   ];
 
-  networking.hostName = "laptop";
-  networking.networkmanager.wifi.backend = "iwd";
-  hardware.microsoft-surface.kernelVersion = "stable";
-  config.microsoft-surface.surface-control.enable = true;
+  config = {
+    networking.hostName = "laptop";
+    networking.networkmanager.wifi.backend = "iwd";
+
+    # Keep the patched linux-surface kernel.
+    hardware.microsoft-surface.kernelVersion = "longterm";
+
+    environment.systemPackages = with pkgs; [
+      surface-control
+    ];
+
+    users.users.user.extraGroups = ["surface-control"];
+
+    services.xserver.videoDrivers = ["modesetting"];
+  };
 }

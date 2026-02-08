@@ -35,11 +35,10 @@ in {
   ];
 
   sops = {
-    age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
-    # defaultSopsFile = "${inputs.self.outPath}/secrets/secrets.yaml";
+    age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
     defaultSopsFile = ./secrets/secrets.yaml;
-    # defaultSymlinkPath = "/run/user/${uid}/secrets";
-    # defaultSecretsMountPoint = "/run/user/${uid}/secrets.d";
+    defaultSymlinkPath = "${config.home.homeDirectory}/.local/share/sops-nix/secrets";
+    defaultSecretsMountPoint = "${config.home.homeDirectory}/.local/share/sops-nix/secrets.d";
   };
 
   # systemd.user.tmpfiles.rules = [
@@ -492,7 +491,7 @@ in {
       xwayland.force_zero_scaling = true;
       monitor = ", preferred, auto, 1";
       exec-once = [
-        "swaybg -c ${colors.bg}"
+        "swaybg -c ${lib.removePrefix "#" colors.bg}"
         "[workspace 1 silent] brave"
         "[workspace 2 silent] alacritty"
         "[workspace 3 silent] obsidian"

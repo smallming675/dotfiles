@@ -961,7 +961,7 @@ in {
     settings = {
       theme = "tokyonight";
       provider = {
-        custom = {
+        openai = {
           options = {
             baseURL = "{file:${config.sops.secrets."opencode/base_url".path}}";
             apiKey = "{file:${config.sops.secrets."opencode/api_key".path}}";

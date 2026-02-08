@@ -41,11 +41,6 @@ in {
     defaultSecretsMountPoint = "${config.home.homeDirectory}/.local/share/sops-nix/secrets.d";
   };
 
-  # systemd.user.tmpfiles.rules = [
-  #   "d /run/user/${uid}/secrets 0700 ${config.home.username} - -"
-  #   "d /run/user/${uid}/secrets.d 0700 ${config.home.username} - -"
-  # ];
-
   home.sessionVariables = {
     XDG_CURRENT_DESKTOP = "Hyprland";
     XDG_SESSION_DESKTOP = "Hyprland";
@@ -326,7 +321,7 @@ in {
     chadrcConfig = ''
       local M = {}
       M.base46 = {
-        theme = "chocolate",
+        theme = "tokyonight",
         transparency = false,
       }
       return M

@@ -7,4 +7,6 @@
 
   networking.hostName = "laptop";
   networking.networkmanager.wifi.backend = "iwd";
+  hardware.microsoft-surface.kernelVersion = "stable";
+  config.microsoft-surface.surface-control.enable = true;
 }

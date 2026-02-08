@@ -506,6 +506,11 @@ in {
         focus_on_activate = true;
         anr_missed_pings = 3;
       };
+      touchpad = {
+        natural_scroll = true;
+        tap_to_click = true;
+        tap_and_drag = true;
+      };
       cursor = {
         no_hardware_cursors = true;
         hide_on_key_press = true;

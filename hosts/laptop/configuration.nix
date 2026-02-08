@@ -12,13 +12,13 @@
   config = {
     networking.hostName = "laptop";
     networking.networkmanager.wifi.backend = "iwd";
-    hardware.microsoft-surface.kernelVersion = "stable";
-
-    environment.systemPackages = with pkgs; [
-      surface-control
-    ];
-
-    users.users.user.extraGroups = ["surface-control"];
-    services.xserver.videoDrivers = ["modesetting"];
+    # hardware.microsoft-surface.kernelVersion = "stable";
+    #
+    # environment.systemPackages = with pkgs; [
+    #   surface-control
+    # ];
+    #
+    # users.users.user.extraGroups = ["surface-control"];
+    # services.xserver.videoDrivers = ["modesetting"];
   };
 }

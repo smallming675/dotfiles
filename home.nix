@@ -59,6 +59,15 @@ in {
     HYPRCURSOR_THEME = "Bibata-Modern-Black";
     XCOMPOSEFILE = "~/.XCompose";
   };
+
+  home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Black";
+    size = 24;
+  };
+
   home.packages = with pkgs; [
     (pass.withExtensions (exts: [exts.pass-otp]))
     mullvad-vpn
@@ -492,7 +501,14 @@ in {
         "[workspace 3 silent] obsidian"
         "[workspace 4 silent] vesktop"
       ];
-      input.follow_mouse = 0;
+      input = {
+        follow_mouse = 0;
+        touchpad = {
+          natural_scroll = true;
+          tap_to_click = true;
+          tap_and_drag = true;
+        };
+      };
       misc = {
         disable_hyprland_logo = true;
         animate_manual_resizes = true;
@@ -500,11 +516,6 @@ in {
         disable_splash_rendering = true;
         focus_on_activate = true;
         anr_missed_pings = 3;
-      };
-      touchpad = {
-        natural_scroll = true;
-        tap_to_click = true;
-        tap_and_drag = true;
       };
       cursor = {
         no_hardware_cursors = true;

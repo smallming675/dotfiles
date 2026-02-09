@@ -25,7 +25,12 @@
     system = "x86_64-linux";
     lib = nixpkgs.lib;
     mkHost = {
-      hostName,
+      hostName ? null,
+      hostConfig ? (
+        if hostName == null
+        then null
+        else ./hosts/${hostName}/configuration.nix
+      ),
       extraModules ? [],
     }:
       lib.nixosSystem {
@@ -34,8 +39,8 @@
           inherit nix4nvchad inputs self;
         };
         modules =
-          [
-            ./hosts/${hostName}/configuration.nix
+          (lib.optionals (hostConfig != null) [hostConfig])
+          ++ [
             home-manager.nixosModules.home-manager
             sops-nix.nixosModules.sops
             ({config, ...}: {
@@ -55,13 +60,7 @@
       desktop = mkHost {hostName = "desktop";};
       laptop = mkHost {hostName = "laptop";};
       iso = mkHost {
-        hostName = "desktop";
-        extraModules = [
-          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-          {
-            isoImage.isoName = "nixos-config.iso";
-          }
-        ];
+        hostConfig = ./modules/nixos/iso.nix;
       };
     };
   };

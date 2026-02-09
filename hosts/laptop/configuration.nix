@@ -10,33 +10,8 @@
   ];
 
   config = {
+    my.userName = "user";
     networking.hostName = "laptop";
-
-    sops = {
-      defaultSopsFile = ../../secrets/secrets.yaml;
-      age.keyFile = "${config.users.users.user.home}/.config/sops/age/keys.txt";
-      age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
-      secrets = {
-        "ssh/id_ed25519" = {
-          path = "/home/user/.ssh/id_ed25519";
-          owner = "user";
-          group = "users";
-          mode = "0600";
-        };
-        "ssh/id_ed25519_pub" = {
-          path = "/home/user/.ssh/id_ed25519.pub";
-          owner = "user";
-          group = "users";
-          mode = "0644";
-        };
-        "age_keys" = {
-          path = "/home/user/.config/sops/age/keys.txt";
-          owner = "user";
-          group = "users";
-          mode = "0600";
-        };
-      };
-    };
 
     networking.wireless.enable = false;
     networking.networkmanager.wifi.backend = "iwd";

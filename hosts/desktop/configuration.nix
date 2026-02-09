@@ -4,6 +4,7 @@
     ./hardware-configuration.nix
   ];
 
+  my.userName = "user";
   networking.hostName = "desktop";
 
   hardware.nvidia = {

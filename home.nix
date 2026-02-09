@@ -54,6 +54,8 @@ in {
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
     OZONE_PLATFORM = "wayland";
     XCURSOR_SIZE = "24";
+    XCURSOR_THEME = "Bibata-Modern-Black";
+    HYPRCURSOR_THEME = "Bibata-Modern-Black";
     HYPRCURSOR_SIZE = "24";
     XCOMPOSEFILE = "~/.XCompose";
     PASSWORD_STORE_DIR = passwordStoreDir;
@@ -482,6 +484,12 @@ in {
     enable = true;
     package = pkgs.hyprland;
     settings = {
+      env = [
+        "XCURSOR_THEME,Bibata-Modern-Black"
+        "XCURSOR_SIZE,24"
+        "HYPRCURSOR_THEME,Bibata-Modern-Black"
+        "HYPRCURSOR_SIZE,24"
+      ];
       layerrule = [
         "no_anim on, match:namespace rofi"
       ];
@@ -510,6 +518,7 @@ in {
         anr_missed_pings = 3;
       };
       cursor = {
+        enable_hyprcursor = true;
         no_hardware_cursors = true;
         hide_on_key_press = true;
       };

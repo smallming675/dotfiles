@@ -47,7 +47,6 @@ in {
     XDG_SESSION_TYPE = "wayland";
     QT_QPA_PLATFORM = "wayland;xcb";
     QT_STYLE_OVERRIDE = "";
-    SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
     NVD_BACKEND = "direct";
     GDK_BACKEND = "wayland,x11,*";
     SDL_VIDEODRIVER = "wayland";
@@ -56,14 +55,9 @@ in {
     OZONE_PLATFORM = "wayland";
     XCURSOR_SIZE = "24";
     HYPRCURSOR_SIZE = "24";
-    HYPRCURSOR_THEME = "Bibata-Modern-Black";
     XCOMPOSEFILE = "~/.XCompose";
     PASSWORD_STORE_DIR = passwordStoreDir;
   };
-
-  home.file.".config/environment.d/10-password-store.conf".text = ''
-    PASSWORD_STORE_DIR=${passwordStoreDir}
-  '';
 
   home.pointerCursor = {
     gtk.enable = true;
@@ -504,6 +498,7 @@ in {
       xwayland.force_zero_scaling = true;
       monitor = ", preferred, auto, 1";
       exec-once = [
+        "hyprctl setcursor Bibata-Modern-Black 24"
         "swaybg -c ${lib.removePrefix "#" colors.bg}"
         "[workspace 1 silent] brave"
         "[workspace 2 silent] alacritty"

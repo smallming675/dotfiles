@@ -87,7 +87,7 @@ in {
     users.users.${cfg.userName} = {
       isNormalUser = true;
       description = cfg.userName;
-      extraGroups = ["networkmanager" "wheel"];
+      extraGroups = ["networkmanager" "wheel" "users"];
     };
 
     environment = {
@@ -164,6 +164,11 @@ in {
         generateKey = true;
       };
     };
+
+    systemd.tmpfiles.rules = [
+      "d /var/lib/sops-nix 0750 root users -"
+      "z /var/lib/sops-nix/key.txt 0640 root users -"
+    ];
 
     nix = {
       settings.experimental-features = ["nix-command" "flakes"];

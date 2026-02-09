@@ -35,7 +35,7 @@ in {
   ];
 
   sops = {
-    age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+    age.keyFile = "/var/lib/sops-nix/key.txt";
     defaultSopsFile = ./secrets/secrets.yaml;
     defaultSymlinkPath = "${config.home.homeDirectory}/.local/share/sops-nix/secrets";
     defaultSecretsMountPoint = "${config.home.homeDirectory}/.local/share/sops-nix/secrets.d";

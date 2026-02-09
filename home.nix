@@ -59,14 +59,6 @@ in {
     PASSWORD_STORE_DIR = passwordStoreDir;
   };
 
-  home.pointerCursor = {
-    gtk.enable = true;
-    x11.enable = true;
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Black";
-    size = 24;
-  };
-
   home.packages = with pkgs; [
     mullvad-vpn
 
@@ -130,7 +122,6 @@ in {
     swaybg
     hyprpaper
     pavucontrol
-    bibata-cursors
 
     # Media
     yt-dlp
@@ -148,8 +139,7 @@ in {
     obsidian
     docker
     nautilus
-    kitty
-    foot
+    bibata-cursors
   ];
 
   programs.starship = {

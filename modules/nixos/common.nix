@@ -12,9 +12,14 @@ in {
       type = lib.types.str;
       default = "user";
     };
+    flakeDir = lib.mkOption {
+      type = lib.types.str;
+      description = "Absolute path to the flake checkout.";
+    };
   };
 
   config = {
+    my.flakeDir = lib.mkDefault "${config.users.users.${cfg.userName}.home}/config";
     boot.loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;

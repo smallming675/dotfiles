@@ -3,10 +3,11 @@
   pkgs,
   config,
   nix4nvchad,
+  flakeDir,
   lib,
   ...
 }: let
-  passwordStoreDir = "${config.home.homeDirectory}/config/secrets/password-store";
+  passwordStoreDir = "${flakeDir}/secrets/password-store";
   colors = {
     fg = "#c0caf5";
     bg = "#1a1b26";
@@ -54,9 +55,7 @@ in {
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
     OZONE_PLATFORM = "wayland";
     XCURSOR_SIZE = "24";
-    XCURSOR_THEME = "Bibata-Modern-Black";
-    HYPRCURSOR_THEME = "Bibata-Modern-Black";
-    HYPRCURSOR_SIZE = "24";
+    XCURSOR_THEME = "Bibata-Modern-Dark";
     XCOMPOSEFILE = "~/.XCompose";
     PASSWORD_STORE_DIR = passwordStoreDir;
   };
@@ -485,10 +484,8 @@ in {
     package = pkgs.hyprland;
     settings = {
       env = [
-        "XCURSOR_THEME,Bibata-Modern-Black"
+        "XCURSOR_THEME,Bibata-Modern-Dark"
         "XCURSOR_SIZE,24"
-        "HYPRCURSOR_THEME,Bibata-Modern-Black"
-        "HYPRCURSOR_SIZE,24"
       ];
       layerrule = [
         "no_anim on, match:namespace rofi"
@@ -496,7 +493,7 @@ in {
       xwayland.force_zero_scaling = true;
       monitor = ", preferred, auto, 1";
       exec-once = [
-        "hyprctl setcursor Bibata-Modern-Black 24"
+        "hyprctl setcursor Bibata-Modern-Dark 24"
         "swaybg -c ${lib.removePrefix "#" colors.bg}"
         "[workspace 1 silent] brave"
         "[workspace 2 silent] alacritty"
@@ -518,7 +515,7 @@ in {
         anr_missed_pings = 3;
       };
       cursor = {
-        enable_hyprcursor = true;
+        enable_hyprcursor = false;
         no_hardware_cursors = true;
         hide_on_key_press = true;
       };

@@ -54,8 +54,8 @@ in {
     MOZ_ENABLE_WAYLAND = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
     OZONE_PLATFORM = "wayland";
+    XCURSOR_THEME = "Bibata-Modern-Classic";
     XCURSOR_SIZE = "24";
-    XCURSOR_THEME = "Bibata-Modern-Dark";
     XCOMPOSEFILE = "~/.XCompose";
     PASSWORD_STORE_DIR = passwordStoreDir;
   };
@@ -484,7 +484,7 @@ in {
     package = pkgs.hyprland;
     settings = {
       env = [
-        "XCURSOR_THEME,Bibata-Modern-Dark"
+        "XCURSOR_THEME,Bibata-Modern-Classic"
         "XCURSOR_SIZE,24"
       ];
       layerrule = [
@@ -493,7 +493,7 @@ in {
       xwayland.force_zero_scaling = true;
       monitor = ", preferred, auto, 1";
       exec-once = [
-        "hyprctl setcursor Bibata-Modern-Dark 24"
+        "hyprctl setcursor Bibata-Modern-Classic 24"
         "swaybg -c ${lib.removePrefix "#" colors.bg}"
         "[workspace 1 silent] brave"
         "[workspace 2 silent] alacritty"

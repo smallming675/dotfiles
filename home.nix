@@ -60,6 +60,16 @@ in {
     PASSWORD_STORE_DIR = passwordStoreDir;
   };
 
+  home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = false;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 24;
+  };
+
+  xdg.dataFile."icons/Bibata-Modern-Classic".source = "${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Classic";
+
   home.packages = with pkgs; [
     mullvad-vpn
 
@@ -493,7 +503,6 @@ in {
       xwayland.force_zero_scaling = true;
       monitor = ", preferred, auto, 1";
       exec-once = [
-        "hyprctl setcursor Bibata-Modern-Classic 24"
         "swaybg -c ${lib.removePrefix "#" colors.bg}"
         "[workspace 1 silent] brave"
         "[workspace 2 silent] alacritty"
@@ -515,7 +524,6 @@ in {
         anr_missed_pings = 3;
       };
       cursor = {
-        enable_hyprcursor = false;
         no_hardware_cursors = true;
         hide_on_key_press = true;
       };

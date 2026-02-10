@@ -109,6 +109,8 @@ in {
         gnumake
         pkg-config
         cmake
+        sops
+        age
         python3
         nodejs
         go

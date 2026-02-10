@@ -8,7 +8,7 @@
   networking.hostName = "desktop";
 
   fileSystems."/mnt/backup" = {
-    device = "/dev/disk/by-uuid/efd88dc0-0879-4879-b54b-ca563128123a";
+    device = "/dev/disk/by-uuid/b441d35a-141a-4ba7-8a83-eb6a13c8a729";
     fsType = "ext4";
     options = ["nofail" "x-systemd.automount" "x-systemd.idle-timeout=10min"];
   };

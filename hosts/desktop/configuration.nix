@@ -34,7 +34,7 @@
       passCommand = ''cat ${config.sops.secrets."borg/passphrase".path}'';
     };
 
-    environment.BORG_BASE_DIR = "/var/lib/borg";
+    environment.BORG_BASE_DIR = "/mnt/backup/.borg";
   };
 
   hardware.nvidia = {

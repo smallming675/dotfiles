@@ -376,7 +376,6 @@ in {
     escapeTime = 0;
 
     plugins = with pkgs; [
-      tmuxPlugins.tmux-fzf
     ];
 
     extraConfig = ''
@@ -394,6 +393,10 @@ in {
       set -g pane-active-border-style "fg=${colors.blue}"
       set -s extended-keys on
       set -as terminal-features 'xterm*:extkeys'
+
+      set -g mode-keys vi
+      bind -T copy-mode-vi v send-keys -X begin-selection
+      bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "wl-copy"
 
       bind -n C-h select-pane -L
       bind -n C-j select-pane -D

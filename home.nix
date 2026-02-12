@@ -380,7 +380,10 @@ in {
         plugin = tmuxPlugins.tmux-sessionx;
         extraConfig = ''
           set -g @sessionx-x-path '${flakeDir}'
-          set -g @sessionx-zoxide-mode 'on'
+          set -g @sessionx-zoxide-mode 'off'
+          set -g @sessionx-fzf-builtin-tmux 'on'
+          set -g @sessionx-custom-paths '${flakeDir}'
+          set -g @sessionx-custom-paths-subdirectories 'true'
         '';
       }
     ];

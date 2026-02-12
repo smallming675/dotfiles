@@ -376,6 +376,13 @@ in {
     escapeTime = 0;
 
     plugins = with pkgs; [
+      {
+        plugin = tmuxPlugins.tmux-sessionx;
+        extraConfig = ''
+          set -g @sessionx-x-path '${flakeDir}'
+          set -g @sessionx-zoxide-mode 'on'
+        '';
+      }
     ];
 
     extraConfig = ''
@@ -971,31 +978,6 @@ in {
 
   sops.secrets."opencode/base_url" = {};
   sops.secrets."opencode/api_key" = {};
-
-  sops.templates."llm-config".content = ''
-    {
-      "default_model": "gpt-5.2-codex",
-      "models": {
-        "gpt-5.2-codex": {
-          "provider": "openai",
-          "model": "gpt-5.2-codex",
-          "api_base": "${config.sops.placeholder."opencode/base_url"}"
-        }
-      }
-    }
-  '';
-  sops.templates."llm-config".path = "${config.home.homeDirectory}/.config/io.datasette.llm/config.json";
-
-  sops.templates."llm-keys".content = ''
-    {
-      "openai": "${config.sops.placeholder."opencode/api_key"}"
-    }
-  '';
-  sops.templates."llm-keys".path = "${config.home.homeDirectory}/.config/io.datasette.llm/keys.json";
-
-  home.activation.ensureLlmConfigDir = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    mkdir -p "${config.home.homeDirectory}/.config/io.datasette.llm"
-  '';
 
   programs.opencode = {
     enable = true;

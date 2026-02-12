@@ -160,10 +160,12 @@ in {
     services.greetd = {
       enable = true;
       settings.default_session = {
-        command = "start-hyprland";
+        command = "niri-session";
         user = cfg.userName;
       };
     };
+
+    programs.niri.enable = true;
 
     sops = {
       age = {

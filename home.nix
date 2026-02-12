@@ -403,7 +403,6 @@ in {
       bind -n C-+ resize-pane -U 5
       bind -n C-_ resize-pane -D 5
 
-
       bind -n C-t new-window -c "#{pane_current_path}"
       bind -n C-w kill-pane
 

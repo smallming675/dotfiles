@@ -366,6 +366,33 @@ in {
     package = pkgs.pass.withExtensions (exts: [exts.pass-otp]);
   };
 
+  home.file.".local/bin/tmux-sessionizer" = {
+    executable = true;
+    text = ''
+      #!/usr/bin/env bash
+      set -euo pipefail
+
+      root="${flakeDir}"
+
+      candidates="$(${pkgs.fd}/bin/fd --type d --hidden --follow --max-depth 4 . "$root" 2>/dev/null || true)"
+      selected="$({ printf '%s\n' "$root"; printf '%s\n' "$candidates"; } | ${pkgs.fzf}/bin/fzf --prompt='Session > ' --height=45% --reverse)"
+
+      [ -n "${selected:-}" ] || exit 0
+
+      session_name="$(basename "$selected" | tr '. ' '__')"
+
+      if ! ${pkgs.tmux}/bin/tmux has-session -t="$session_name" 2>/dev/null; then
+        ${pkgs.tmux}/bin/tmux new-session -ds "$session_name" -c "$selected"
+      fi
+
+      if [ -n "${TMUX:-}" ]; then
+        ${pkgs.tmux}/bin/tmux switch-client -t "$session_name"
+      else
+        ${pkgs.tmux}/bin/tmux attach-session -t "$session_name"
+      fi
+    '';
+  };
+
   programs.tmux = {
     enable = true;
     shell = "${pkgs.fish}/bin/fish";
@@ -375,18 +402,7 @@ in {
     prefix = "C-b";
     escapeTime = 0;
 
-    plugins = with pkgs; [
-      {
-        plugin = tmuxPlugins.tmux-sessionx;
-        extraConfig = ''
-          set -g @sessionx-x-path '${flakeDir}'
-          set -g @sessionx-zoxide-mode 'off'
-          set -g @sessionx-fzf-builtin-tmux 'on'
-          set -g @sessionx-custom-paths '${flakeDir}'
-          set -g @sessionx-custom-paths-subdirectories 'true'
-        '';
-      }
-    ];
+    plugins = with pkgs; [];
 
     extraConfig = ''
       set-option -g status-position top
@@ -425,6 +441,8 @@ in {
       bind -n C-s select-window -t 2
       bind -n C-d select-window -t 3
       bind -n C-f select-window -t 4
+
+      bind o run-shell "${config.home.homeDirectory}/.local/bin/tmux-sessionizer"
 
       bind -n M-a select-window -t 5
       bind -n M-s select-window -t 6

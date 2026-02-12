@@ -43,8 +43,8 @@ in {
   };
 
   home.sessionVariables = {
-    XDG_CURRENT_DESKTOP = "niri";
-    XDG_SESSION_DESKTOP = "niri";
+    XDG_CURRENT_DESKTOP = "Hyprland";
+    XDG_SESSION_DESKTOP = "Hyprland";
     XDG_SESSION_TYPE = "wayland";
     QT_QPA_PLATFORM = "wayland;xcb";
     QT_STYLE_OVERRIDE = "";
@@ -130,10 +130,9 @@ in {
     playerctl
 
     # Wayland
-    niri
     swaybg
+    hyprpaper
     pavucontrol
-    xwayland-satellite
 
     # Media
     yt-dlp
@@ -396,7 +395,6 @@ in {
       set -as terminal-features 'xterm*:extkeys'
 
       set -g mode-keys vi
-      bind -n C-n copy-mode
       bind -T copy-mode-vi v send-keys -X begin-selection
       bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "wl-copy"
 
@@ -494,94 +492,135 @@ in {
     };
   };
 
-  xdg.configFile."niri/config.kdl".text = ''
-    input {
-      touchpad {
-        natural-scroll
-      }
-    }
-
-    layout {
-      gaps 0
-      focus-ring {
-        off
-      }
-      border {
-        off
-      }
-    }
-
-    cursor {
-      xcursor-theme "Bibata-Modern-Classic"
-      xcursor-size 24
-      hide-when-typing
-    }
-
-    hotkey-overlay {
-      skip-at-startup
-    }
-
-    spawn-at-startup "swaybg" "-c" "${colors.bg}"
-    spawn-at-startup "brave"
-    spawn-at-startup "alacritty"
-    spawn-at-startup "obsidian"
-    spawn-at-startup "vesktop"
-
-    binds {
-      Super+T repeat=false { spawn "alacritty"; }
-      Super+N repeat=false { spawn "brave"; }
-      Super+M repeat=false { fullscreen-window; }
-      Super+P repeat=false { toggle-window-floating; }
-      Super+Q repeat=false { close-window; }
-      Super+S repeat=false { spawn-sh "slurp | grim -g - - | wl-copy"; }
-      Super+Space repeat=false { spawn-sh "rofi -show drun || pkill rofi"; }
-      Super+Shift+S repeat=false { spawn "hyprpicker" "-a"; }
-      Super+O repeat=false { spawn "obsidian"; }
-      Super+Tab repeat=false { focus-workspace-previous; }
-
-      Super+6 { focus-workspace 1; }
-      Super+7 { focus-workspace 2; }
-      Super+8 { focus-workspace 3; }
-      Super+9 { focus-workspace 4; }
-      Super+1 { focus-workspace 5; }
-      Super+2 { focus-workspace 6; }
-      Super+3 { focus-workspace 7; }
-      Super+4 { focus-workspace 8; }
-
-      Super+Ctrl+H { move-window-to-workspace 1; }
-      Super+Ctrl+J { move-window-to-workspace 2; }
-      Super+Ctrl+K { move-window-to-workspace 3; }
-      Super+Ctrl+L { move-window-to-workspace 4; }
-      Super+Ctrl+A { move-window-to-workspace 5; }
-      Super+Ctrl+S { move-window-to-workspace 6; }
-      Super+Ctrl+D { move-window-to-workspace 7; }
-      Super+Ctrl+F { move-window-to-workspace 8; }
-
-      Super+Alt+H { move-column-left; }
-      Super+Alt+J { move-window-down; }
-      Super+Alt+K { move-window-up; }
-      Super+Alt+L { move-column-right; }
-
-      Super+Shift+L { set-column-width "+10%"; }
-      Super+Shift+H { set-column-width "-10%"; }
-      Super+Shift+K { set-window-height "-10%"; }
-      Super+Shift+J { set-window-height "+10%"; }
-
-      Super+H { focus-column-left; }
-      Super+J { focus-window-down; }
-      Super+K { focus-window-up; }
-      Super+L { focus-column-right; }
-
-      XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "pamixer -ui 5"; }
-      XF86AudioLowerVolume allow-when-locked=true { spawn-sh "pamixer -ud 5"; }
-      XF86AudioMute allow-when-locked=true { spawn-sh "pamixer --toggle-mute"; }
-      XF86MonBrightnessUp allow-when-locked=true { spawn-sh "brightnessctl set 10%+"; }
-      XF86MonBrightnessDown allow-when-locked=true { spawn-sh "brightnessctl set 10%-"; }
-      XF86AudioPlay allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-      XF86AudioNext allow-when-locked=true { spawn-sh "playerctl next"; }
-      XF86AudioPrev allow-when-locked=true { spawn-sh "playerctl previous"; }
-    }
-  '';
+  wayland.windowManager.hyprland = {
+    enable = true;
+    package = pkgs.hyprland;
+    settings = {
+      env = [
+        "XCURSOR_THEME,Bibata-Modern-Classic"
+        "XCURSOR_SIZE,24"
+      ];
+      layerrule = [
+        "no_anim on, match:namespace rofi"
+      ];
+      xwayland.force_zero_scaling = true;
+      monitor = ", preferred, auto, 1";
+      exec-once = [
+        "swaybg -c ${lib.removePrefix "#" colors.bg}"
+        "[workspace 1 silent] brave"
+        "[workspace 2 silent] alacritty"
+        "[workspace 3 silent] obsidian"
+        "[workspace 4 silent] vesktop"
+      ];
+      input = {
+        follow_mouse = 0;
+        touchpad = {
+          natural_scroll = true;
+        };
+      };
+      misc = {
+        disable_hyprland_logo = true;
+        animate_manual_resizes = true;
+        vfr = true;
+        disable_splash_rendering = true;
+        focus_on_activate = true;
+        anr_missed_pings = 3;
+      };
+      cursor = {
+        no_hardware_cursors = true;
+        hide_on_key_press = true;
+      };
+      general = {
+        border_size = 0;
+        resize_on_border = false;
+        allow_tearing = false;
+        gaps_in = 0;
+        gaps_out = 0;
+      };
+      animations = {
+        enabled = true;
+        bezier = [
+          "easeOutQuint,0.23,1,0.32,1"
+          "easeInOutCubic,0.65,0.05,0.36,1"
+          "linear,0,0,1,1"
+          "almostLinear,0.5,0.5,0.75,1.0"
+          "quick,0.15,0,0.1,1"
+        ];
+        animation = [
+          "global, 1, 10, default"
+          "border, 1, 5.39, easeOutQuint"
+          "windows, 1, 4.79, easeOutQuint"
+          "windowsIn, 1, 4.1, easeOutQuint, popin 87%"
+          "windowsOut, 1, 1.49, linear, popin 87%"
+          "fadeIn, 1, 1.73, almostLinear"
+          "fadeOut, 1, 1.46, almostLinear"
+          "fade, 1, 3.03, quick"
+          "layers, 1, 3.81, easeOutQuint"
+          "layersIn, 1, 4, easeOutQuint, fade"
+          "layersOut, 1, 1.5, linear, fade"
+          "fadeLayersIn, 1, 1.79, almostLinear"
+          "fadeLayersOut, 1, 1.39, almostLinear"
+          "workspaces, 1, 2, easeOutQuint"
+        ];
+      };
+      master.new_status = "master";
+      ecosystem.no_update_news = true;
+      debug.disable_logs = false;
+      bind = [
+        "SUPER,T,exec,alacritty"
+        "SUPER,N,exec,brave"
+        "SUPER,M,fullscreen"
+        "SUPER,P,togglefloating"
+        "SUPER,Q,killactive"
+        "SUPER,S,exec, slurp | grim -g - - | wl-copy"
+        "SUPER,SUPER_L,exec,rofi -show drun || pkill rofi"
+        "SUPER SHIFT,S,exec,hyprpicker -a"
+        "SUPER,O,exec,obsidian"
+        "SUPER,Tab,cyclenext"
+        "SUPER,6,workspace,1"
+        "SUPER,7,workspace,2"
+        "SUPER,8,workspace,3"
+        "SUPER,9,workspace,4"
+        "SUPER,1,workspace,5"
+        "SUPER,2,workspace,6"
+        "SUPER,3,workspace,7"
+        "SUPER,4,workspace,8"
+        "SUPER CTRL,h,movetoworkspace,1"
+        "SUPER CTRL,j,movetoworkspace,2"
+        "SUPER CTRL,k,movetoworkspace,3"
+        "SUPER CTRL,l,movetoworkspace,4"
+        "SUPER CTRL,a,movetoworkspace,5"
+        "SUPER CTRL,s,movetoworkspace,6"
+        "SUPER CTRL,d,movetoworkspace,7"
+        "SUPER CTRL,f,movetoworkspace,8"
+        "SUPER ALT,h,movewindow,l"
+        "SUPER ALT,j,movewindow,d"
+        "SUPER ALT,k,movewindow,u"
+        "SUPER ALT,l,movewindow,r"
+        "SUPER SHIFT,l,resizeactive,100 0"
+        "SUPER SHIFT,h,resizeactive,-100 0"
+        "SUPER SHIFT,k,resizeactive,0 -100"
+        "SUPER SHIFT,j,resizeactive,0 100"
+        ",XF86AudioRaiseVolume,exec,pamixer -ui 5"
+        ",XF86AudioLowerVolume,exec,pamixer -ud 5"
+        ",XF86AudioMute,exec,pamixer --toggle-mute"
+        ",XF86MonBrightnessUp,exec,brightnessctl set 10%+"
+        ",XF86MonBrightnessDown,exec,brightnessctl set 10%-"
+        ",XF86AudioPlay,exec,playerctl play-pause"
+        ",XF86AudioNext,exec,playerctl next"
+        ",XF86AudioPrev,exec,playerctl previous"
+        "SUPER,mouse:272,movewindow"
+        "SUPER,grave,togglespecialworkspace"
+        "SUPER ALT,grave,movetoworkspace,special"
+      ];
+      bindr = [
+        "SUPER,h,movefocus,l"
+        "SUPER,l,movefocus,r"
+        "SUPER,k,movefocus,u"
+        "SUPER,j,movefocus,d"
+      ];
+    };
+  };
 
   programs.chromium = {
     enable = true;

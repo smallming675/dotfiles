@@ -112,6 +112,12 @@ in {
     ctags
     bear
     uv
+    (pkgs.writeShellScriptBin "pix2tex" ''
+      exec ${pkgs.uv}/bin/uvx --from pix2tex latexocr "$@"
+    '')
+    (pkgs.writeShellScriptBin "latexocr" ''
+      exec ${pkgs.uv}/bin/uvx --from pix2tex latexocr "$@"
+    '')
     jdk
     ghostscript
     imagemagick

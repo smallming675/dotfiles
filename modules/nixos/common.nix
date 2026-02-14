@@ -194,7 +194,7 @@ in {
 
     system.autoUpgrade = {
       enable = true;
-      flake = inputs.self.outPath;
+      flake = config.my.flakeDir;
       dates = "02:00";
       randomizedDelaySec = "45min";
     };
@@ -203,10 +203,9 @@ in {
       enable = true;
       drivers = with pkgs; [gutenprint gutenprintBin];
       listenAddresses = ["localhost:631"];
-      allowFrom = ["all"];
       browsing = true;
       defaultShared = true;
-      openFirewall = true;
+      openFirewall = false;
       browsed.enable = true;
     };
 

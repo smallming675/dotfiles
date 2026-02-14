@@ -20,6 +20,8 @@
         [connection]
         id=home
         type=wifi
+        autoconnect=true
+        autoconnect-priority=100
 
         [wifi]
         mode=infrastructure
@@ -29,6 +31,13 @@
         [wifi-security]
         key-mgmt=wpa-psk
         psk=${config.sops.placeholder."wifi/home_psk"}
+
+        [ipv4]
+        method=auto
+
+        [ipv6]
+        addr-gen-mode=stable-privacy
+        method=auto
       '';
     };
 

@@ -10,7 +10,7 @@
   fileSystems."/mnt/backup" = {
     device = "/dev/disk/by-uuid/b441d35a-141a-4ba7-8a83-eb6a13c8a729";
     fsType = "ext4";
-    options = ["nofail" "x-systemd.automount" "x-systemd.idle-timeout=10min"];
+    options = ["nofail" "noauto"];
   };
 
   sops = {
@@ -35,6 +35,14 @@
     };
 
     environment.BORG_BASE_DIR = "/mnt/backup/.borg";
+
+    preHook = ''
+      mountpoint -q /mnt/backup || mount /mnt/backup
+    '';
+    postHook = ''
+      sync
+      umount /mnt/backup || umount -l /mnt/backup || true
+    '';
   };
 
   hardware.nvidia = {

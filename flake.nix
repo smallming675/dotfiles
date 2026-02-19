@@ -60,9 +60,6 @@
     nixosConfigurations = {
       desktop = mkHost {hostName = "desktop";};
       laptop = mkHost {hostName = "laptop";};
-      iso = mkHost {
-        hostConfig = ./modules/nixos/iso.nix;
-      };
     };
   };
 }

@@ -222,5 +222,13 @@ in {
 
     services.usbmuxd.enable = true;
     system.stateVersion = "25.11";
+    services.flatpak.enable = true;
+    xdg.portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+        xdg-desktop-portal-hyprland
+      ];
+    };
   };
 }

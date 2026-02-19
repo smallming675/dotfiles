@@ -3,11 +3,9 @@
   pkgs,
   config,
   nix4nvchad,
-  flakeDir,
   lib,
   ...
 }: let
-  passwordStoreDir = "${flakeDir}/secrets/password-store";
   colors = {
     fg = "#c0caf5";
     bg = "#1a1b26";
@@ -57,7 +55,6 @@ in {
     XCURSOR_THEME = "Bibata-Modern-Classic";
     XCURSOR_SIZE = "24";
     XCOMPOSEFILE = "~/.XCompose";
-    PASSWORD_STORE_DIR = passwordStoreDir;
   };
 
   home.pointerCursor = {
@@ -97,11 +94,12 @@ in {
     git
     github-cli
     neovim
-    (python3.withPackages (ps: []))
+    python3
     cargo
     rustc
     rust-analyzer
     alejandra
+    nil
     nodejs
     gcc
     gnumake
@@ -133,6 +131,7 @@ in {
     swaybg
     hyprpaper
     pavucontrol
+    prismlauncher
 
     # Media
     yt-dlp
@@ -965,6 +964,11 @@ in {
     config = {
       theme = "Catppuccin Mocha";
     };
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
   };
 
   programs.yazi = {

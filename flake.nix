@@ -44,10 +44,7 @@
             ({config, ...}: {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {
-                inherit nix4nvchad inputs self;
-                flakeDir = config.my.flakeDir;
-              };
+              home-manager.extraSpecialArgs = {inherit nix4nvchad inputs self;};
               home-manager.sharedModules = [
                 sops-nix.homeManagerModules.sops
               ];

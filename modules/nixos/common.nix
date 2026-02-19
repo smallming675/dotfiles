@@ -12,17 +12,13 @@ in {
       type = lib.types.str;
       default = "user";
     };
-    flakeDir = lib.mkOption {
-      type = lib.types.str;
-      description = "Absolute path to the flake checkout.";
-    };
   };
 
   config = {
-    my.flakeDir = lib.mkDefault "${config.users.users.${cfg.userName}.home}/config";
     boot.loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
+      timeout = 2;
     };
 
     hardware = {
@@ -105,16 +101,8 @@ in {
         zip
         unzip
         openssh
-        gcc
-        gnumake
-        pkg-config
-        cmake
         sops
         age
-        python3
-        nodejs
-        go
-        clang-tools
       ];
 
       pathsToLink = ["/share/applications" "/share/xdg-desktop-portal"];
@@ -153,9 +141,20 @@ in {
 
     services.openssh.enable = true;
 
+    services.openssh.settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+    };
+
     services.udev.extraRules = ''
       KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{serial}=="*vial:f64c2b3c*", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
     '';
+
+    security.sudo = {
+      execWheelOnly = true;
+      wheelNeedsPassword = true;
+    };
 
     services.greetd = {
       enable = true;
@@ -178,7 +177,10 @@ in {
     ];
 
     nix = {
-      settings.experimental-features = ["nix-command" "flakes"];
+      settings = {
+        experimental-features = ["nix-command" "flakes"];
+        auto-optimise-store = true;
+      };
 
       gc = {
         automatic = true;
@@ -194,7 +196,7 @@ in {
 
     system.autoUpgrade = {
       enable = true;
-      flake = config.my.flakeDir;
+      flake = inputs.self.outPath;
       dates = "02:00";
       randomizedDelaySec = "45min";
     };
@@ -210,6 +212,8 @@ in {
     };
 
     services.ipp-usb.enable = true;
+    services.fstrim.enable = true;
+    zramSwap.enable = true;
 
     programs.appimage = {
       enable = true;

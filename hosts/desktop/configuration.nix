@@ -1,4 +1,4 @@
-{config, ...}: {
+{...}: {
   imports = [
     ../../modules/nixos/common.nix
     ./hardware-configuration.nix
@@ -6,44 +6,6 @@
 
   my.userName = "user";
   networking.hostName = "desktop";
-
-  fileSystems."/mnt/backup" = {
-    device = "/dev/disk/by-uuid/b441d35a-141a-4ba7-8a83-eb6a13c8a729";
-    fsType = "ext4";
-    options = ["nofail" "noauto"];
-  };
-
-  sops = {
-    defaultSopsFile = ../../secrets/secrets.yaml;
-    secrets."borg/passphrase" = {
-      owner = "root";
-      mode = "0400";
-    };
-  };
-
-  services.borgbackup.jobs.home = {
-    paths = ["/home/${config.my.userName}"];
-    repo = "/mnt/backup";
-    doInit = true;
-    compression = "zstd,6";
-    startAt = "daily";
-    persistentTimer = true;
-
-    encryption = {
-      mode = "keyfile-blake2";
-      passCommand = ''cat ${config.sops.secrets."borg/passphrase".path}'';
-    };
-
-    environment.BORG_BASE_DIR = "/mnt/backup/.borg";
-
-    preHook = ''
-      mountpoint -q /mnt/backup || mount /mnt/backup
-    '';
-    postHook = ''
-      sync
-      umount /mnt/backup || umount -l /mnt/backup || true
-    '';
-  };
 
   hardware.nvidia = {
     modesetting.enable = true;

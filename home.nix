@@ -131,7 +131,6 @@ in {
     swaybg
     hyprpaper
     pavucontrol
-    prismlauncher-unwrapped
 
     # Media
     yt-dlp

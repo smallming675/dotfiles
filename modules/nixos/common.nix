@@ -82,10 +82,6 @@ in {
       mullvad-vpn.enable = true;
     };
 
-    time.timeZone = "Asia/Hong_Kong";
-    i18n.defaultLocale = "en_HK.UTF-8";
-    services.xserver.xkb.layout = "us";
-
     users.users.${cfg.userName} = {
       isNormalUser = true;
       description = cfg.userName;
@@ -165,23 +161,24 @@ in {
       };
     };
 
-    sops = {
-      age = {
-        keyFile = "/var/lib/sops-nix/key.txt";
-        generateKey = true;
-      };
-    };
-
-    systemd.tmpfiles.rules = [
-      "d /var/lib/sops-nix 0750 root users -"
-      "z /var/lib/sops-nix/key.txt 0640 root users -"
-    ];
-
     nix = {
       settings = {
         experimental-features = ["nix-command" "flakes"];
         auto-optimise-store = true;
+        flake-registry = "";
       };
+
+      registry = {
+        nixpkgs.flake = inputs.nixpkgs;
+        home-manager.flake = inputs.home-manager;
+        nix4nvchad.flake = inputs.nix4nvchad;
+        sops-nix.flake = inputs.sops-nix;
+        nix-flatpak.flake = inputs.nix-flatpak;
+      };
+
+      nixPath = [
+        "nixpkgs=${inputs.nixpkgs.outPath}"
+      ];
 
       gc = {
         automatic = true;
@@ -202,17 +199,8 @@ in {
       randomizedDelaySec = "45min";
     };
 
-    services.printing = {
-      enable = true;
-      drivers = with pkgs; [gutenprint gutenprintBin];
-      listenAddresses = ["localhost:631"];
-      browsing = true;
-      defaultShared = true;
-      openFirewall = false;
-      browsed.enable = true;
-    };
+    system.configurationRevision = inputs.self.rev or "dirty";
 
-    services.ipp-usb.enable = true;
     services.fstrim.enable = true;
     zramSwap.enable = true;
 
@@ -225,6 +213,7 @@ in {
     system.stateVersion = "25.11";
     xdg.portal = {
       enable = true;
+      config.common.default = "*";
       extraPortals = with pkgs; [
         xdg-desktop-portal-gtk
         xdg-desktop-portal-hyprland

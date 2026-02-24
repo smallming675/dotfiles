@@ -65,8 +65,7 @@ in {
     size = 24;
   };
 
-  xdg.dataFile."icons/Bibata-Modern-Classic".source = "${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Classic";
-
+  # xdg.dataFile."icons/Bibata-Modern-Classic".source = "${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Classic";
   home.packages = with pkgs; [
     mullvad-vpn
 
@@ -149,6 +148,7 @@ in {
     docker
     nautilus
     bibata-cursors
+    libqalculate
   ];
 
   programs.starship = {
@@ -963,6 +963,15 @@ in {
     config = {
       theme = "Catppuccin Mocha";
     };
+  };
+
+  xdg.desktopEntries.prismlauncher = {
+    name = "Prism Launcher";
+    genericName = "Minecraft Launcher";
+    exec = "flatpak run org.prismlauncher.PrismLauncher";
+    icon = "org.prismlauncher.PrismLauncher";
+    terminal = false;
+    categories = ["Game"];
   };
 
   programs.direnv = {

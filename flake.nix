@@ -10,6 +10,7 @@
     nix4nvchad.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.7.0";
   };
 
   outputs = {
@@ -18,6 +19,7 @@
     home-manager,
     nix4nvchad,
     sops-nix,
+    nix-flatpak,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -39,6 +41,7 @@
         modules =
           (lib.optionals (hostConfig != null) [hostConfig])
           ++ [
+            nix-flatpak.nixosModules.nix-flatpak
             home-manager.nixosModules.home-manager
             sops-nix.nixosModules.sops
             ({config, ...}: {

@@ -10,7 +10,8 @@ in {
   options.my = {
     userName = lib.mkOption {
       type = lib.types.str;
-      default = "user";
+      example = "alice";
+      description = "Primary login username for this host.";
     };
   };
 
@@ -222,22 +223,6 @@ in {
 
     services.usbmuxd.enable = true;
     system.stateVersion = "25.11";
-    services.flatpak = {
-      enable = true;
-    };
-
-    systemd.services.flatpak-prismlauncher = {
-      description = "Ensure Prism Launcher Flatpak is installed";
-      wants = ["network-online.target"];
-      after = ["network-online.target"];
-      wantedBy = ["multi-user.target"];
-      serviceConfig.Type = "oneshot";
-      path = [pkgs.flatpak];
-      script = ''
-        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-        flatpak install -y --noninteractive flathub org.prismlauncher.PrismLauncher
-      '';
-    };
     xdg.portal = {
       enable = true;
       extraPortals = with pkgs; [

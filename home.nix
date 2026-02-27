@@ -112,7 +112,7 @@ in {
     ghostscript
     imagemagick
     graphviz
-    gemini-cli-bin
+    bun
     lazygit
 
     # GUI

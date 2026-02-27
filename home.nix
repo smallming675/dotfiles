@@ -246,6 +246,7 @@ in {
       enable_transience
 
       set -gx UV_PYTHON $VIRTUAL_ENV/bin/python
+      fish_add_path "$HOME/.bun/bin"
 
     '';
     interactiveShellInit = ''

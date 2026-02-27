@@ -148,7 +148,6 @@ in {
     nautilus
     bibata-cursors
     libqalculate
-    claude-code-bin
   ];
 
   programs.starship = {
@@ -984,25 +983,25 @@ in {
     enableFishIntegration = true;
   };
 
-  # sops.secrets."opencode/base_url" = {};
-  # sops.secrets."opencode/api_key" = {};
-  #
-  # programs.opencode = {
-  #   enable = true;
-  #   settings = {
-  #     theme = "tokyonight";
-  #     provider = {
-  #       openai = {
-  #         options = {
-  #           baseURL = "{file:${config.sops.secrets."opencode/base_url".path}}";
-  #           apiKey = "{file:${config.sops.secrets."opencode/api_key".path}}";
-  #         };
-  #       };
-  #     };
-  #     autoupdate = true;
-  #     model = "gpt-5.2-codex";
-  #   };
-  # };
+  sops.secrets."opencode/base_url" = {};
+  sops.secrets."opencode/api_key" = {};
+
+  programs.opencode = {
+    enable = true;
+    settings = {
+      theme = "tokyonight";
+      provider = {
+        openai = {
+          options = {
+            baseURL = "{file:${config.sops.secrets."opencode/base_url".path}}";
+            apiKey = "{file:${config.sops.secrets."opencode/api_key".path}}";
+          };
+        };
+      };
+      autoupdate = true;
+      model = "claude-sonnet-4-6";
+    };
+  };
 
   xdg.desktopEntries.kew-player = {
     name = "Kew";

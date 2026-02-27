@@ -990,6 +990,7 @@ in {
     enable = true;
     settings = {
       theme = "tokyonight";
+      plugin = ["opencode-plugin-openspec" "@bastiangx/opencode-unmoji" "micode" "@tarquinen/opencode-dcp@latest" "cc-safety-net" "opencode-agent-memory"];
       provider = {
         openai = {
           options = {

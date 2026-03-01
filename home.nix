@@ -993,7 +993,7 @@ in {
       theme = "tokyonight";
       plugin = ["opencode-plugin-openspec" "@bastiangx/opencode-unmoji" "micode" "@tarquinen/opencode-dcp@latest" "cc-safety-net" "opencode-agent-memory"];
       provider = {
-        custom = {
+        anthropic = {
           options = {
             baseURL = "{file:${config.sops.secrets."opencode/base_url".path}}";
             apiKey = "{file:${config.sops.secrets."opencode/api_key".path}}";
@@ -1001,7 +1001,7 @@ in {
         };
       };
       autoupdate = true;
-      # model = "claude-sonnet-4-6";
+      model = "claude-sonnet-4-6";
     };
   };
 

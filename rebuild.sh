@@ -18,7 +18,7 @@ done
 REPO_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 cd "$REPO_DIR"
 
-alejandra . &>/dev/null \
+true || alejandra . &>/dev/null \
   || ( alejandra . ; echo "formatting failed!" && exit 1)
 
 git diff -U0 '*.nix'

@@ -16,6 +16,8 @@ in {
   };
 
   config = {
+    boot.kernelModules = ["tcp_bbr"];
+    boot.kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
     boot.loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
@@ -62,8 +64,10 @@ in {
             dnssec = "true";
             domains = ["~."];
             fallbackDns = [
-              "1.1.1.1#one.one.one.one"
-              "1.0.0.1#one.one.one.one"
+              "1.1.1.1"
+              "1.0.0.1"
+              "8.8.8.8"
+              "8.8.4.4"
             ];
           };
         };

@@ -60,11 +60,13 @@
     checks.${system} = {
       nixos-desktop = self.nixosConfigurations.desktop.config.system.build.toplevel;
       nixos-laptop = self.nixosConfigurations.laptop.config.system.build.toplevel;
+      nixos-server = self.nixosConfigurations.server.config.system.build.toplevel;
     };
 
     nixosConfigurations = {
       desktop = mkHost {hostName = "desktop";};
       laptop = mkHost {hostName = "laptop";};
+      server = mkHost {hostName = "server";};
     };
   };
 }

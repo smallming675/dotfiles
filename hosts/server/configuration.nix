@@ -13,9 +13,9 @@
   boot.supportedFilesystems = ["zfs"];
 
   networking.hostName = "server";
-  my.userName = "user";
   networking.hostId = "8425e349";
   networking.networkmanager.enable = true;
+  nixpkgs.config.allowUnfree = true;
 
   users.users.user = {
     isNormalUser = true;
@@ -30,9 +30,13 @@
     git
   ];
 
+  environment.pathsToLink = [
+    "/share/applications"
+    "/share/xdg-desktop-portal"
+  ];
+
   services.openssh.enable = true;
 
-  system.copySystemConfiguration = true;
   system.stateVersion = "25.11";
 
   networking.firewall.allowedTCPPorts = [80 443 8096 22];

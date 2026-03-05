@@ -9,3 +9,4 @@ creation_rules:
           - *desktop
           - *laptop
           - *server
+

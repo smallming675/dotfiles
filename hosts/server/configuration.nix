@@ -130,16 +130,6 @@
     extraAppsEnable = true;
   };
 
-  systemd.services.nextcloud-setup = {
-    requires = [ "sops-nix.service" ];
-    after = [ "sops-nix.service" ];
-  };
-  
-  systemd.services.phpfpm-nextcloud = {
-    requires = [ "sops-nix.service" ];
-    after = [ "sops-nix.service" ];
-  };
-  
   systemd.tmpfiles.rules = [
     "d /data/apps/jellyfin 0755 jellyfin jellyfin -"
     "d /data/media/videos 0755 root media -"
@@ -151,6 +141,16 @@
     "/share/xdg-desktop-portal"
   ];
 
+  systemd.services.nextcloud-setup = {
+    requires = [ "sops-install-secrets.service" ];
+    after = [ "sops-install-secrets.service" ];
+  };
+  
+  systemd.services.phpfpm-nextcloud = {
+    requires = [ "sops-install-secrets.service" ];
+    after = [ "sops-install-secrets.service" ];
+  };
+  
   services.openssh.enable = true;
 
   system.stateVersion = "25.11";

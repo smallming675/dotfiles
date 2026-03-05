@@ -10,7 +10,7 @@
 
   config = {
     my.userName = "user";
-    networking.hostName = "desktop";
+    networking.hostName = "laptop";
 
     time.timeZone = "Asia/Hong_Kong";
     i18n.defaultLocale = "en_HK.UTF-8";

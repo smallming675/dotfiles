@@ -69,6 +69,8 @@
   };
   
   systemd.tmpfiles.rules = [
+    "f /etc/nextcloud-db-pass 0600 nextcloud nextcloud - password"
+    "f /etc/nextcloud-admin-pass 0600 nextcloud nextcloud - password"
     "d /data/apps/jellyfin 0755 jellyfin jellyfin -"
     "d /data/media/videos 0755 root media -"
     "d /data/media/music 0755 root media -"
@@ -114,11 +116,6 @@
     extraAppsEnable = true;
   };
   
-  systemd.tmpfiles.rules = [
-    "f /etc/nextcloud-db-pass 0600 nextcloud nextcloud - password"
-    "f /etc/nextcloud-admin-pass 0600 nextcloud nextcloud - password"
-  ];
-
   environment.pathsToLink = [
     "/share/applications"
     "/share/xdg-desktop-portal"

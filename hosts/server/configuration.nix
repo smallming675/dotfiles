@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    inputs.sops-nix.nixosModules.sops
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -63,24 +64,36 @@
     enable = true;
     openFirewall = true;
   };
-  
-  systemd.services.jellyfin.serviceConfig = {
-    SupplementaryGroups = [ "media" ];
+
+  sops = {
+    defaultSopsFile = ./secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
+    
+    age = {
+      sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+      generateKey = true;
+    };
+    
+    secrets = {
+      "nextcloud_admin_password" = {
+        owner = "nextcloud";
+        group = "nextcloud";
+        mode = "0400";
+      };
+      
+      "nextcloud_db_password" = {
+        owner = "nextcloud";
+        group = "nextcloud";
+        mode = "0400";
+      };
+    };
   };
-  
-  systemd.tmpfiles.rules = [
-    "f /etc/nextcloud-db-pass 0600 nextcloud nextcloud - password"
-    "f /etc/nextcloud-admin-pass 0600 nextcloud nextcloud - password"
-    "d /data/apps/jellyfin 0755 jellyfin jellyfin -"
-    "d /data/media/videos 0755 root media -"
-    "d /data/media/music 0755 root media -"
-  ];
 
   services.mysql = {
     enable = true;
     package = pkgs.mariadb;
     dataDir = "/data/apps/mysql";
-    ensureDatabases = ["nextcloud"];
+    ensureDatabases = [ "nextcloud" ];
     ensureUsers = [
       {
         name = "nextcloud";
@@ -90,22 +103,21 @@
       }
     ];
   };
-  
+
   services.nextcloud = {
     enable = true;
-    hostName = "localhost";  
-    
-    datadir = "/data/apps/nextcloud/data";
+    hostName = "localhost";
     database.createLocally = false;
+    datadir = "/data/apps/nextcloud/data";
     
     config = {
       dbtype = "mysql";
       dbname = "nextcloud";
       dbuser = "nextcloud";
-      dbpassFile = "/etc/nextcloud-db-pass";
-      dbhost = "/run/mysqld/mysqld.sock";  
+      dbpassFile = config.sops.secrets."nextcloud_db_password".path;
+      dbhost = "/run/mysqld/mysqld.sock";
       adminuser = "admin";
-      adminpassFile = "/etc/nextcloud-admin-pass";
+      adminpassFile = config.sops.secrets."nextcloud_admin_password".path;
     };
     
     configureRedis = true;
@@ -115,6 +127,22 @@
     };
     extraAppsEnable = true;
   };
+
+  systemd.services.nextcloud-setup = {
+    requires = [ "sops-nix.service" ];
+    after = [ "sops-nix.service" ];
+  };
+  
+  systemd.services.phpfpm-nextcloud = {
+    requires = [ "sops-nix.service" ];
+    after = [ "sops-nix.service" ];
+  };
+  
+  systemd.tmpfiles.rules = [
+    "d /data/apps/jellyfin 0755 jellyfin jellyfin -"
+    "d /data/media/videos 0755 root media -"
+    "d /data/media/music 0755 root media -"
+  ];
   
   environment.pathsToLink = [
     "/share/applications"

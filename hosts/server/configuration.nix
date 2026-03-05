@@ -134,6 +134,7 @@
     "d /data/apps/jellyfin 0755 jellyfin jellyfin -"
     "d /data/media/videos 0755 root media -"
     "d /data/media/music 0755 root media -"
+    "d /data/media/torrents 0755 transmission transmission -"
   ];
   
   environment.pathsToLink = [
@@ -151,6 +152,22 @@
     after = [ "sops-install-secrets.service" ];
   };
   
+  users.users.transmission.extraGroups = [ "media" ];
+
+  services.transmission = {
+    enable = true;
+    openFirewall = true;  
+    settings = {
+      download-dir = "/data/media/videos";
+      watch-dir = "/data/media/torrents";
+      umask = 2;                     
+      rpc-bind-address = "0.0.0.0";
+      rpc-authentication-required = false;  
+      rpc-whitelist = "127.0.0.1,::1,192.168.*.*";   
+      rpc-whitelist-enabled = true;
+    };
+  };
+
   services.openssh.enable = true;
 
   system.stateVersion = "25.11";

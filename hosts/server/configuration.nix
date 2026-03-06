@@ -100,6 +100,7 @@ in {
     settings = {
       download-dir = "/data/media/videos";
       watch-dir = "/data/media/torrents";
+      incomplete-dir-enabled = false; 
       umask = 2;                     
       rpc-bind-address = "0.0.0.0";
       rpc-authentication-required = false;  

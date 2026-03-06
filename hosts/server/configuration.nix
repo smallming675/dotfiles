@@ -127,7 +127,7 @@ in {
       adminpassFile = config.sops.secrets.nextcloud_admin_password.path;
     };
     extraApps = with config.services.nextcloud.package.packages.apps; {
-      inherit calendar contacts tasks onlyoffice;
+      inherit calendar contacts tasks onlyoffice notes;
     };
     extraAppsEnable = true;
     settings = {

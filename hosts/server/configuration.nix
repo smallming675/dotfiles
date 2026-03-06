@@ -144,6 +144,11 @@ in {
 
   system.stateVersion = "25.11";
 
+  services.nextcloud.settings.trusted_domains = [
+    "oceu.tech"
+    "192.168.1.150"
+  ];
+
   networking.firewall.allowedTCPPorts = [
     80    # HTTP (Nextcloud)
     443   # HTTPS

@@ -75,59 +75,6 @@
       sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
       generateKey = true;
     };
-    
-    secrets = {
-      "nextcloud_admin_password" = {
-        owner = "nextcloud";
-        group = "nextcloud";
-        mode = "0400";
-      };
-      
-      "nextcloud_db_password" = {
-        owner = "nextcloud";
-        group = "nextcloud";
-        mode = "0400";
-      };
-    };
-  };
-
-  services.mysql = {
-    enable = true;
-    package = pkgs.mariadb;
-    dataDir = "/data/apps/mysql";
-    ensureDatabases = [ "nextcloud" ];
-    ensureUsers = [
-      {
-        name = "nextcloud";
-        ensurePermissions = {
-          "nextcloud.*" = "ALL PRIVILEGES";
-        };
-      }
-    ];
-  };
-
-  services.nextcloud = {
-    enable = true;
-    hostName = "localhost";
-    database.createLocally = false;
-    datadir = "/data/apps/nextcloud/data";
-    
-    config = {
-      dbtype = "mysql";
-      dbname = "nextcloud";
-      dbuser = "nextcloud";
-      dbpassFile = config.sops.secrets."nextcloud_db_password".path;
-      dbhost = "/run/mysqld/mysqld.sock";
-      adminuser = "admin";
-      adminpassFile = config.sops.secrets."nextcloud_admin_password".path;
-    };
-    
-    configureRedis = true;
-    
-    extraApps = with config.services.nextcloud.package.packages.apps; {
-      inherit calendar contacts mail notes tasks;
-    };
-    extraAppsEnable = true;
   };
 
   systemd.tmpfiles.rules = [
@@ -142,16 +89,6 @@
     "/share/xdg-desktop-portal"
   ];
 
-  systemd.services.nextcloud-setup = {
-    requires = [ "sops-install-secrets.service" ];
-    after = [ "sops-install-secrets.service" ];
-  };
-  
-  systemd.services.phpfpm-nextcloud = {
-    requires = [ "sops-install-secrets.service" ];
-    after = [ "sops-install-secrets.service" ];
-  };
-  
   users.users.transmission.extraGroups = [ "media" ];
 
   services.transmission = {

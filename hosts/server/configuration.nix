@@ -81,6 +81,7 @@ in {
 
   systemd.tmpfiles.rules = [
     "d /data/apps/jellyfin 0755 jellyfin jellyfin -"
+    "d /data/apps/nextcloud 0750 nextcloud nextcloud -"
     "d /data/media/videos 0755 root media -"
     "d /data/media/music 0755 root media -"
     "d /data/media/torrents 0755 transmission transmission -"
@@ -119,14 +120,28 @@ in {
     enable = true;
     hostName = nextcloudDomain;
     https = true;
+    datadir = "/data/apps/nextcloud";
     database.createLocally = true;
     config = {
       dbtype = "pgsql";
       adminpassFile = config.sops.secrets.nextcloud_admin_password.path;
     };
+    extraApps = with config.services.nextcloud.package.packages.apps; {
+      inherit calendar contacts tasks onlyoffice;
+    };
+    extraAppsEnable = true;
     settings = {
       overwriteprotocol = "https";
+      maintenance_window_start = 2;
     };
+  };
+
+  services.postgresqlBackup = {
+    enable = true;
+    databases = [ "nextcloud" ];
+    location = "/data/backups/postgresql";
+    startAt = "*-*-* 01:15:00";
+    compression = "zstd";
   };
 
   services.nginx = {

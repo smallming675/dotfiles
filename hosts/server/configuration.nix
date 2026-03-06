@@ -4,7 +4,9 @@
   pkgs,
   inputs,
   ...
-}: {
+}: let
+  nextcloudDomain = "oceu.tech";
+in {
   imports = [
     ./hardware-configuration.nix
     inputs.sops-nix.nixosModules.sops
@@ -106,6 +108,39 @@
   };
 
   services.openssh.enable = true;
+
+  sops.secrets.nextcloud_admin_password = {
+    owner = "nextcloud";
+    group = "nextcloud";
+    mode = "0400";
+  };
+
+  services.nextcloud = {
+    enable = true;
+    hostName = nextcloudDomain;
+    https = true;
+    database.createLocally = true;
+    config = {
+      dbtype = "pgsql";
+      adminpassFile = config.sops.secrets.nextcloud_admin_password.path;
+    };
+    settings = {
+      overwriteprotocol = "https";
+    };
+  };
+
+  services.nginx = {
+    enable = true;
+    virtualHosts.${nextcloudDomain} = {
+      enableACME = true;
+      forceSSL = true;
+    };
+  };
+
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "admin@${nextcloudDomain}";
+  };
 
   system.stateVersion = "25.11";
 

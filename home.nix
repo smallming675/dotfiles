@@ -1012,5 +1012,6 @@ in {
     categories = ["Audio" "AudioVideo" "Player"];
   };
 
+
   home.stateVersion = "25.11";
 }

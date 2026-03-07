@@ -89,7 +89,7 @@ in {
     users.users.${cfg.userName} = {
       isNormalUser = true;
       description = cfg.userName;
-      extraGroups = ["networkmanager" "wheel" "users"];
+      extraGroups = ["networkmanager" "wheel" "users" "docker"];
     };
 
     environment = {

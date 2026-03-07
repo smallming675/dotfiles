@@ -137,8 +137,7 @@ in {
     kew
     gimp
     zathura
-    onlyoffice-desktopeditors
-
+    libreoffice
     # Others
     usbmuxd
     localsend

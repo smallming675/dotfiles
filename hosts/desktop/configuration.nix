@@ -42,6 +42,7 @@
     open = false;
     nvidiaSettings = true;
   };
+  virtualisation.docker.enable = true;
 
   services.xserver.videoDrivers = ["nvidia"];
 }

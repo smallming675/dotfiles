@@ -138,7 +138,6 @@ in {
     gimp
     zathura
     libreoffice
-
     # Others
     usbmuxd
     localsend
@@ -148,6 +147,7 @@ in {
     nautilus
     bibata-cursors
     libqalculate
+    nextcloud-client
   ];
 
   programs.starship = {
@@ -1012,6 +1012,7 @@ in {
     terminal = false;
     categories = ["Audio" "AudioVideo" "Player"];
   };
+
 
   home.stateVersion = "25.11";
 }

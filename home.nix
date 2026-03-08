@@ -147,6 +147,7 @@ in {
     nautilus
     bibata-cursors
     libqalculate
+    nextcloud-client
   ];
 
   programs.starship = {

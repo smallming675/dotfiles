@@ -94,6 +94,7 @@ in {
 
     environment = {
       systemPackages = with pkgs; [
+        davfs2 
         vial
         vim
         wget

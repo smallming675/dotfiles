@@ -21,6 +21,7 @@
   systemd.tmpfiles.rules = [
     "d /var/lib/sops-nix 0750 root users -"
     "z /var/lib/sops-nix/key.txt 0640 root users -"
+    "d /home/user/sync 0755 user users -"
   ];
 
   services.printing = {
@@ -43,6 +44,20 @@
     nvidiaSettings = true;
   };
   virtualisation.docker.enable = true;
+  environment.systemPackages = with pkgs; [ davfs2 ];
+
+  fileSystems."/home/user/sync" = {
+    device = "https://oceu.tech/remote.php/dav/files/youruser/";
+    fsType = "davfs";
+    options = [
+      "noauto"
+      "user"
+      "uid=youruser"
+      "gid=users"
+      "file_mode=0644"
+      "dir_mode=0755"
+    ];
+  };
 
   services.xserver.videoDrivers = ["nvidia"];
 }

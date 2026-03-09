@@ -130,7 +130,8 @@ in {
     extraApps = with config.services.nextcloud.package.packages.apps; {
       inherit calendar contacts tasks onlyoffice notes;
     };
-    extraAppsEnable = true;
+    autoUpdateApps.enable = false;  
+    extraAppsEnable = false;
     settings = {
       overwriteprotocol = "https";
       maintenance_window_start = 2;

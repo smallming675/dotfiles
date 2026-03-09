@@ -1,11 +1,17 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}:
+let
+  syncDir = "/home/user/sync";
+  userName = "user";
+  nextcloudDomain = "oceu.tech";
+in
+{
   imports = [
     ../../modules/nixos/common.nix
     ../../modules/nixos/desktop/flatpak.nix
     ./hardware-configuration.nix
   ];
-
   my.userName = "user";
+  my.nextcloudDomain = "oceu.tech";
   networking.hostName = "desktop";
 
   time.timeZone = "Asia/Hong_Kong";
@@ -21,7 +27,7 @@
   systemd.tmpfiles.rules = [
     "d /var/lib/sops-nix 0750 root users -"
     "z /var/lib/sops-nix/key.txt 0640 root users -"
-    "d /home/user/sync 0755 user users -"
+    "d ${syncDir} 0755 user users -"
   ];
 
   services.printing = {
@@ -44,20 +50,29 @@
     nvidiaSettings = true;
   };
   virtualisation.docker.enable = true;
-  environment.systemPackages = with pkgs; [ davfs2 ];
+  environment.systemPackages = with pkgs; [ rsync openssh ];
 
-  fileSystems."/home/user/sync" = {
-    device = "https://oceu.tech/remote.php/dav/files/youruser/";
-    fsType = "davfs";
-    options = [
-      "noauto"
-      "user"
-      "uid=youruser"
-      "gid=users"
-      "file_mode=0644"
-      "dir_mode=0755"
-    ];
+  systemd.user.services.nextcloud-rsync = {
+    description = "Sync to nextcloud";
+    after = [ "network.target" ];
+    wantedBy = [ "timers.target" ];
+    
+    serviceConfig = {
+      Type = "oneshot";
+      User = userName;
+      Group = "users";
+      ExecStart = "${pkgs.rsync}/bin/rsync -avz -e ssh ${syncDir}/ ${userName}@${nextcloudDomain}:/home/${userName}/sync/";
+    };
   };
 
+  systemd.user.timers.nextcloud-rsync = {
+    description = "Hourly rsync to Nextcloud timer";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "hourly";
+      Persistent = true;
+      Unit = "nextcloud-rsync.service";
+    };
+  };
   services.xserver.videoDrivers = ["nvidia"];
 }

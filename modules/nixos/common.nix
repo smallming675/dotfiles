@@ -13,6 +13,11 @@ in {
       example = "alice";
       description = "Primary login username for this host.";
     };
+    nextcloudDomain = lib.mkOption {
+      type = lib.types.str;
+      example = "cloud.example.com";
+      description = "Domain for Nextcloud server.";
+    };
   };
 
   config = {

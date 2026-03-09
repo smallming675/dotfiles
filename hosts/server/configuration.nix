@@ -4,13 +4,13 @@
   pkgs,
   inputs,
   ...
-}: let
-  nextcloudDomain = "oceu.tech";
-in {
+}: {
   imports = [
     ./hardware-configuration.nix
     inputs.sops-nix.nixosModules.sops
   ];
+
+  my.config.my.nextcloudDomain = "oceu.tech";
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -31,7 +31,7 @@ in {
   users.users.user = {
     isNormalUser = true;
     extraGroups = ["wheel" "networkmanager"];
-    initialPassword = "changeme";
+    # TODO: set password with `passwd user` after first boot
     packages = with pkgs; [];
   };
 
@@ -119,7 +119,7 @@ in {
 
   services.nextcloud = {
     enable = true;
-    hostName = nextcloudDomain;
+    hostName = config.my.nextcloudDomain;
     https = true;
     datadir = "/data/apps/nextcloud";
     database.createLocally = true;
@@ -131,12 +131,15 @@ in {
       inherit calendar contacts tasks onlyoffice notes;
     };
     autoUpdateApps.enable = false;  
-    extraAppsEnable = false;
+    extraAppsEnable = true;
     settings = {
       overwriteprotocol = "https";
       maintenance_window_start = 2;
     };
   };
+
+  # Disable nextcloud-setup after initial install to prevent rebuild failures
+  systemd.services.nextcloud-setup.enable = false;
 
   services.postgresqlBackup = {
     enable = true;
@@ -148,7 +151,7 @@ in {
 
   services.nginx = {
     enable = true;
-    virtualHosts.${nextcloudDomain} = {
+    virtualHosts.${config.my.nextcloudDomain} = {
       enableACME = true;
       forceSSL = true;
     };
@@ -156,14 +159,13 @@ in {
 
   security.acme = {
     acceptTerms = true;
-    defaults.email = "admin@${nextcloudDomain}";
+    defaults.email = "admin@${config.my.nextcloudDomain}";
   };
 
   system.stateVersion = "25.11";
 
   services.nextcloud.settings.trusted_domains = [
-    "oceu.tech"
-    "192.168.1.150"
+    config.my.nextcloudDomain
   ];
 
   networking.firewall.allowedTCPPorts = [

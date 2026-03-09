@@ -1013,5 +1013,16 @@ in {
     categories = ["Audio" "AudioVideo" "Player"];
   };
 
+  home.file = {
+    "sync/obsidian" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/obsidian";
+      force = false;  
+    };
+    "sync/past-papers" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/past-papers";
+      force = false;
+    };
+  };
+
   home.stateVersion = "25.11";
 }

@@ -51,7 +51,7 @@
               home-manager.sharedModules = [
                 sops-nix.homeManagerModules.sops
               ];
-              home-manager.users.user = import ./home.nix;
+              home-manager.users.${config.my.userName or "user"} = import ./home.nix;
             })
           ]
           ++ extraModules;

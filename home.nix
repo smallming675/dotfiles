@@ -1032,7 +1032,7 @@ in {
     };
     Service = {
       Type = "oneshot";
-      ExecStart = "${pkgs.nextcloud-client}/bin/nextcloudcmd --trust --path / ${config.home.homeDirectory}/sync https://user:NTYJ8-E895T-iDjcZ-ggenj-Px9T2@${nextCloudDomain}/remote.php/dav/files/user/";
+      ExecStart = "${pkgs.nextcloud-client}/bin/nextcloudcmd --trust --path / ${config.home.homeDirectory}/sync https://user:NTYJ8-E895T-iDjcZ-ggenj-Px9T2@${nextCloudDomain}/";
     };
   };
   

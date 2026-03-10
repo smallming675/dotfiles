@@ -6,6 +6,7 @@
   lib,
   ...
 }: let
+  nextCloudDomain = "oceu.tech";
   colors = {
     fg = "#c0caf5";
     bg = "#1a1b26";
@@ -1022,6 +1023,27 @@ in {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/past-papers";
       force = false;
     };
+  };
+
+  systemd.user.services.nextcloud-sync = {
+    Unit = {
+      Description = "Nextcloud sync for sync directory";
+      After = "network-online.target";
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.nextcloud-client}/bin/nextcloudcmd -n --path / ${config.home.homeDirectory}/sync ${nextCloudDomain}";
+    };
+  };
+  
+  systemd.user.timers.nextcloud-sync = {
+    Unit.Description = "Timer for Nextcloud sync";
+    Timer = {
+      OnBootSec = "5min";
+      OnUnitActiveSec = "1h"; 
+      Persistent = true;    
+    };
+    Install.WantedBy = [ "timers.target" ];
   };
 
   home.stateVersion = "25.11";

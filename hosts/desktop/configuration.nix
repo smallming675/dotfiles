@@ -1,8 +1,6 @@
 {pkgs, lib, ...}:
 let
   syncDir = "/home/user/sync";
-  userName = "user";
-  nextcloudDomain = "oceu.tech";
 in
 {
   imports = [
@@ -11,7 +9,6 @@ in
     ./hardware-configuration.nix
   ];
   my.userName = "user";
-  my.nextcloudDomain = "oceu.tech";
   networking.hostName = "desktop";
 
   time.timeZone = "Asia/Hong_Kong";
@@ -52,27 +49,5 @@ in
   virtualisation.docker.enable = true;
   environment.systemPackages = with pkgs; [ rsync openssh ];
 
-  systemd.user.services.nextcloud-rsync = {
-    description = "Sync to nextcloud";
-    after = [ "network.target" ];
-    wantedBy = [ "timers.target" ];
-    
-    serviceConfig = {
-      Type = "oneshot";
-      User = userName;
-      Group = "users";
-      ExecStart = "${pkgs.rsync}/bin/rsync -avz -e ssh ${syncDir}/ ${userName}@${nextcloudDomain}:/home/${userName}/sync/";
-    };
-  };
-
-  systemd.user.timers.nextcloud-rsync = {
-    description = "Hourly rsync to Nextcloud timer";
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      OnCalendar = "hourly";
-      Persistent = true;
-      Unit = "nextcloud-rsync.service";
-    };
-  };
   services.xserver.videoDrivers = ["nvidia"];
 }

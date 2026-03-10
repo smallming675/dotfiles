@@ -5,15 +5,14 @@
   inputs,
   ...
 }: let
-  nextcloudDomain = "nextcloud.oceu.tech";
-  jellyfinDomain = "jellyfin.oceu.tech";
+  mainDomain = "oceu.tech";
+  nextcloudDomain = "nextcloud.${mainDomain}";
+  jellyfinDomain = "jellyfin.${mainDomain}";
 in {
   imports = [
     ./hardware-configuration.nix
     inputs.sops-nix.nixosModules.sops
   ];
-
-  my.config.my.nextcloudDomain = "oceu.tech";
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -121,7 +120,7 @@ in {
 
   services.nextcloud = {
     enable = true;
-    hostName = config.my.nextcloudDomain;
+    hostName = nextcloudDomain;
     https = true;
     datadir = "/data/apps/nextcloud";
     database.createLocally = true;
@@ -137,11 +136,11 @@ in {
     settings = {
       overwriteprotocol = "https";
       maintenance_window_start = 2;
+      trusted_domains = [ nextcloudDomain ];  
     };
   };
 
   systemd.services.nextcloud-setup.enable = false;
-
   services.postgresqlBackup = {
     enable = true;
     databases = [ "nextcloud" ];
@@ -152,10 +151,6 @@ in {
 
   services.nginx = {
     enable = true;
-    virtualHosts.${config.my.nextcloudDomain} = {
-      enableACME = true;
-      forceSSL = true;
-    };
     virtualHosts.${jellyfinDomain} = {
       forceSSL = true;
       enableACME = true;
@@ -180,7 +175,7 @@ in {
 
   security.acme = {
     acceptTerms = true;
-    defaults.email = "admin@${config.my.nextcloudDomain}";
+    defaults.email = "admin@${mainDomain}";
   };
 
   system.stateVersion = "25.11";
@@ -192,7 +187,6 @@ in {
   networking.firewall.allowedTCPPorts = [
     80    # HTTP (Nextcloud)
     443   # HTTPS
-    8096  # Jellyfin
     22    # SSH
     8384  # Syncthing
     22000 # Syncthing

@@ -4,7 +4,10 @@
   pkgs,
   inputs,
   ...
-}: {
+}: let
+  nextcloudDomain = "nextcloud.oceu.tech";
+  jellyfinDomain = "jellyfin.oceu.tech";
+in {
   imports = [
     ./hardware-configuration.nix
     inputs.sops-nix.nixosModules.sops
@@ -31,7 +34,6 @@
   users.users.user = {
     isNormalUser = true;
     extraGroups = ["wheel" "networkmanager"];
-    # TODO: set password with `passwd user` after first boot
     packages = with pkgs; [];
   };
 
@@ -138,7 +140,6 @@
     };
   };
 
-  # Disable nextcloud-setup after initial install to prevent rebuild failures
   systemd.services.nextcloud-setup.enable = false;
 
   services.postgresqlBackup = {
@@ -155,6 +156,26 @@
       enableACME = true;
       forceSSL = true;
     };
+    virtualHosts.${jellyfinDomain} = {
+      forceSSL = true;
+      enableACME = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:8096";
+        proxyWebsockets = true;
+        extraConfig = ''
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+          proxy_buffering off;
+        '';
+      };
+    };
+
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
   };
 
   security.acme = {

@@ -179,13 +179,15 @@ in {
     defaults.email = "admin@${mainDomain}";
   };
 
-  security.acme.certs."jellyfin.oceu.tech" = {
+  security.acme.certs."${jellyfinDomain}" = {
     webroot = "/var/lib/acme/acme-challenge";
+    postRun = "systemctl reload nginx";
     group = "nginx";
   };
 
-  security.acme.certs."nextcloud.oceu.tech" = {
+  security.acme.certs."${nextcloudDomain}" = {
     webroot = "/var/lib/acme/acme-challenge";
+    postRun = "systemctl reload nginx";
     group = "nginx";
   };
 

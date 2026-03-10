@@ -180,10 +180,6 @@ in {
 
   system.stateVersion = "25.11";
 
-  services.nextcloud.settings.trusted_domains = [
-    config.my.nextcloudDomain
-  ];
-
   networking.firewall.allowedTCPPorts = [
     80    # HTTP (Nextcloud)
     443   # HTTPS

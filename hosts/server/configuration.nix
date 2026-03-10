@@ -154,7 +154,7 @@ in {
     virtualHosts.${jellyfinDomain} = {
       default = false;
       forceSSL = true;
-      useACMEHost = "jellyfin.oceu.tech";
+      enableACME = true;
       locations."/" = {
         proxyPass = "http://127.0.0.1:8096";
         proxyWebsockets = true;

@@ -86,6 +86,7 @@ in {
     "d /data/media/videos 0755 root media -"
     "d /data/media/music 0755 root media -"
     "d /data/media/torrents 0755 transmission transmission -"
+    "d /var/lib/acme/acme-challenge 0750 nginx nginx -"
   ];
   
   environment.pathsToLink = [
@@ -153,7 +154,7 @@ in {
     enable = true;
     virtualHosts.${jellyfinDomain} = {
       forceSSL = true;
-      enableACME = true;
+      useACMEHost = "jellyfin.oceu.tech";
       locations."/" = {
         proxyPass = "http://127.0.0.1:8096";
         proxyWebsockets = true;
@@ -176,6 +177,16 @@ in {
   security.acme = {
     acceptTerms = true;
     defaults.email = "admin@${mainDomain}";
+  };
+
+  security.acme.certs."jellyfin.oceu.tech" = {
+    webroot = "/var/lib/acme/acme-challenge";
+    group = "nginx";
+  };
+
+  security.acme.certs."nextcloud.oceu.tech" = {
+    webroot = "/var/lib/acme/acme-challenge";
+    group = "nginx";
   };
 
   system.stateVersion = "25.11";

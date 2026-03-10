@@ -123,7 +123,6 @@ in {
     enable = true;
     hostName = nextcloudDomain;
     https = true;
-    datadir = "/data/apps/nextcloud";
     database.createLocally = true;
     config = {
       dbtype = "pgsql";
@@ -153,6 +152,7 @@ in {
   services.nginx = {
     enable = true;
     virtualHosts.${jellyfinDomain} = {
+      default = false;
       forceSSL = true;
       useACMEHost = "jellyfin.oceu.tech";
       locations."/" = {
@@ -209,3 +209,4 @@ in {
     21027 # Syncthing discovery
   ];
 }
+

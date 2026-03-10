@@ -5,7 +5,8 @@
   inputs,
   ...
 }: let
-  nextcloudDomain = "oceu.tech";
+  nextcloudDomain = "nextcloud.oceu.tech";
+  jellyfinDomain = "jellyfin.oceu.tech";
 in {
   imports = [
     ./hardware-configuration.nix
@@ -152,6 +153,27 @@ in {
       enableACME = true;
       forceSSL = true;
     };
+    virtualHosts.${jellyfinDomain} = {
+      forceSSL = true;
+      enableACME = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:8096";
+        proxyWebsockets = true;
+        extraConfig = ''
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+          # Disable buffering for better streaming performance
+          proxy_buffering off;
+        '';
+      };
+    };
+
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
   };
 
   security.acme = {

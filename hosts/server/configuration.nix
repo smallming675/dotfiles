@@ -152,7 +152,6 @@ in {
   services.nginx = {
     enable = true;
     virtualHosts.${jellyfinDomain} = {
-      default = false;
       forceSSL = true;
       enableACME = true;
       locations."/" = {

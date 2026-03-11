@@ -207,5 +207,6 @@ in {
     22000 # Syncthing
     21027 # Syncthing discovery
   ];
+  programs.nix-ld.enable = true;
 }
 

@@ -123,6 +123,8 @@ in {
     enable = true;
     hostName = nextcloudDomain;
     https = true;
+    package = pkgs.nextcloud32;
+    datadir = "/data/apps/nextcloud";
     database.createLocally = true;
     config = {
       dbtype = "pgsql";
@@ -136,11 +138,12 @@ in {
     settings = {
       overwriteprotocol = "https";
       maintenance_window_start = 2;
-      trusted_domains = [ nextcloudDomain ];  
+      trusted_domains = [ nextcloudDomain ];
     };
   };
 
   systemd.services.nextcloud-setup.enable = false;
+
   services.postgresqlBackup = {
     enable = true;
     databases = [ "nextcloud" ];
@@ -154,17 +157,15 @@ in {
     virtualHosts.${jellyfinDomain} = {
       forceSSL = true;
       enableACME = true;
+      http2 = false;
       locations."/" = {
         proxyPass = "http://127.0.0.1:8096";
         proxyWebsockets = true;
-        extraConfig = ''
-          proxy_set_header Host $host;
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_set_header X-Forwarded-Proto $scheme;
-          proxy_buffering off;
-        '';
       };
+    };
+    virtualHosts.${nextcloudDomain} = {
+      forceSSL = true;
+      enableACME = true;
     };
 
     recommendedProxySettings = true;
@@ -207,5 +208,6 @@ in {
     22000 # Syncthing
     21027 # Syncthing discovery
   ];
+  programs.nix-ld.enable = true;
 }
 

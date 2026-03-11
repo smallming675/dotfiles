@@ -6,7 +6,7 @@
   lib,
   ...
 }: let
-  nextCloudDomain = "oceu.tech";
+  nextcloudDomain = "nextcloud.oceu.tech";
   colors = {
     fg = "#c0caf5";
     bg = "#1a1b26";
@@ -1021,7 +1021,7 @@ in {
     };
     Service = {
       Type = "oneshot";
-      ExecStart = "${pkgs.nextcloud-client}/bin/nextcloudcmd --trust --path / ${config.home.homeDirectory}/sync https://root:ZA2bP-gYPsy-Azaj8-yZy9H-PM6Bg@${nextCloudDomain}/";
+      ExecStart = "${pkgs.nextcloud-client}/bin/nextcloudcmd --trust --path / ${config.home.homeDirectory}/sync https://root:ZA2bP-gYPsy-Azaj8-yZy9H-PM6Bg@${nextcloudDomain}/";
     };
   };
   

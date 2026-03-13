@@ -993,12 +993,13 @@ in {
      enable = true;
      settings = {
        theme = "tokyonight";
-       autoupdate = true;
-       model = "claude-sonnet-4-6";
+       model = "anthropic/claude-sonnet-4-6";
        provider = {
          anthropic = {
-           base_url = "{file:${config.sops.secrets."opencode/base_url".path}}";
-           api_key = "{file:${config.sops.secrets."opencode/api_key".path}}";
+           options = {
+             baseURL = "{file:${config.sops.secrets."opencode/base_url".path}}";
+             apiKey = "{file:${config.sops.secrets."opencode/api_key".path}}";
+           };
          };
        };
      };

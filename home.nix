@@ -89,32 +89,33 @@ in {
     rip2
     watchexec
 
-    # Dev tools
-    git
-    github-cli
-    neovim
-    python3
-    cargo
-    rustc
-    rust-analyzer
-    alejandra
-    nil
-    nodejs
-    gcc
-    gnumake
-    cmake
-    gdb
-    valgrind
-    cppcheck
-    ctags
-    bear
-    uv
-    jdk
-    ghostscript
-    imagemagick
-    graphviz
-    bun
-    lazygit
+     # Dev tools
+     git
+     github-cli
+     neovim
+     python3
+     cargo
+     rustc
+     rust-analyzer
+     alejandra
+     nil
+     nodejs
+     gcc
+     gnumake
+     cmake
+     gdb
+     valgrind
+     cppcheck
+     ctags
+     bear
+     uv
+     jdk
+     ghostscript
+     imagemagick
+     graphviz
+     bun
+     lazygit
+     claude-code
 
     # GUI
     grim
@@ -980,39 +981,61 @@ in {
     nix-direnv.enable = true;
   };
 
-  programs.yazi = {
-    enable = true;
-    enableFishIntegration = true;
+   programs.yazi = {
+     enable = true;
+     enableFishIntegration = true;
+   };
+
+   sops.secrets."claude-code/api_key" = {};
+   sops.secrets."claude-code/base_url" = {};
+
+   programs.claude-code = {
+     enable = true;
+     settings = {
+       theme = "tokyonight";
+       autoupdate = true;
+       model = "[REDACTED]";
+       provider = {
+         anthropic = {
+           baseURL = "{file:${config.sops.secrets."claude-code/base_url".path}}";
+           apiKey = "{file:${config.sops.secrets."claude-code/api_key".path}}";
+         };
+       };
+     };
+   };
+
+   home.activation.installClaudeCodeSkills = lib.hm.dag.entryAfter ["writeBoundary"] ''
+     if command -v claude &> /dev/null; then
+       $DRY_RUN_CMD claude plugin marketplace add trailofbits/skills || true
+       $DRY_RUN_CMD claude plugin marketplace add trailofbits/skills-curated || true
+       $DRY_RUN_CMD claude plugin marketplace add obra/superpowers || true
+       $DRY_RUN_CMD claude plugin marketplace add anthropics/knowledge-work-plugins || true
+
+       # Install skills
+       $DRY_RUN_CMD claude plugin install modern-python@trailofbits/skills || true
+       $DRY_RUN_CMD claude plugin install git-cleanup@trailofbits/skills || true
+       $DRY_RUN_CMD claude plugin install differential-review@trailofbits/skills || true
+       $DRY_RUN_CMD claude plugin install static-analysis@trailofbits/skills || true
+       $DRY_RUN_CMD claude plugin install skill-improver@trailofbits/skills || true
+       $DRY_RUN_CMD claude plugin install property-based-testing@trailofbits/skills || true
+       $DRY_RUN_CMD claude plugin install supply-chain-risk-auditor@trailofbits/skills || true
+       $DRY_RUN_CMD claude plugin install ask-questions-if-underspecified@trailofbits/skills || true
+       $DRY_RUN_CMD claude plugin install insecure-defaults@trailofbits/skills || true
+       $DRY_RUN_CMD claude plugin install sharp-edges@trailofbits/skills || true
+       $DRY_RUN_CMD claude plugin install test-driven-development@obra/superpowers || true
+       $DRY_RUN_CMD claude plugin install systematic-debugging@obra/superpowers || true
+       $DRY_RUN_CMD claude plugin install brainstorming@obra/superpowers || true
+       $DRY_RUN_CMD claude plugin install writing-plans@obra/superpowers || true
+     fi
+   '';
+
+  xdg.desktopEntries.kew-player = {
+    name = "Kew";
+    genericName = "Music Player";
+    exec = "alacritty --class kew-music -e kew all";
+    terminal = false;
+    categories = ["Audio" "AudioVideo" "Player"];
   };
-
-  sops.secrets."opencode/base_url" = {};
-  sops.secrets."opencode/api_key" = {};
-
-  programs.opencode = {
-    enable = true;
-    settings = {
-      theme = "tokyonight";
-      plugin = ["opencode-plugin-openspec" "@bastiangx/opencode-unmoji" "micode" "@tarquinen/opencode-dcp@latest" "cc-safety-net" "opencode-agent-memory"];
-      provider = {
-        anthropic = {
-          options = {
-            baseURL = "{file:${config.sops.secrets."opencode/base_url".path}}";
-            apiKey = "{file:${config.sops.secrets."opencode/api_key".path}}";
-          };
-        };
-      };
-      autoupdate = true;
-      model = "claude-sonnet-4-6";
-    };
-  };
-
-  # xdg.desktopEntries.kew-player = {
-  #   name = "Kew";
-  #   genericName = "Music Player";
-  #   exec = "alacritty --class kew-music -e kew all";
-  #   terminal = false;
-  #   categories = ["Audio" "AudioVideo" "Player"];
-  # };
 
   systemd.user.services.nextcloud-sync = {
     Unit = {

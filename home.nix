@@ -1006,13 +1006,13 @@ in {
     };
   };
 
-  xdg.desktopEntries.kew-player = {
-    name = "Kew";
-    genericName = "Music Player";
-    exec = "alacritty --class kew-music -e kew all";
-    terminal = false;
-    categories = ["Audio" "AudioVideo" "Player"];
-  };
+  # xdg.desktopEntries.kew-player = {
+  #   name = "Kew";
+  #   genericName = "Music Player";
+  #   exec = "alacritty --class kew-music -e kew all";
+  #   terminal = false;
+  #   categories = ["Audio" "AudioVideo" "Player"];
+  # };
 
   systemd.user.services.nextcloud-sync = {
     Unit = {

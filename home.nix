@@ -1014,26 +1014,26 @@ in {
     categories = ["Audio" "AudioVideo" "Player"];
   };
 
-  # systemd.user.services.nextcloud-sync = {
-  #   Unit = {
-  #     Description = "Nextcloud sync for sync directory";
-  #     After = "network-online.target";
-  #   };
-  #   Service = {
-  #     Type = "oneshot";
-  #     ExecStart = "${pkgs.nextcloud-client}/bin/nextcloudcmd --trust --path / ${config.home.homeDirectory}/sync https://root:ZA2bP-gYPsy-Azaj8-yZy9H-PM6Bg@${nextcloudDomain}/";
-  #   };
-  # };
-  #
-  # systemd.user.timers.nextcloud-sync = {
-  #   Unit.Description = "Timer for Nextcloud sync";
-  #   Timer = {
-  #     OnBootSec = "5min";
-  #     OnUnitActiveSec = "1h"; 
-  #     Persistent = true;    
-  #   };
-  #   Install.WantedBy = [ "timers.target" ];
-  # };
+  systemd.user.services.nextcloud-sync = {
+    Unit = {
+      Description = "Nextcloud sync for sync directory";
+      After = "network-online.target";
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.nextcloud-client}/bin/nextcloudcmd --trust --path / ${config.home.homeDirectory}/sync https://root:ZA2bP-gYPsy-Azaj8-yZy9H-PM6Bg@${nextcloudDomain}/";
+    };
+  };
+
+  systemd.user.timers.nextcloud-sync = {
+    Unit.Description = "Timer for Nextcloud sync";
+    Timer = {
+      OnBootSec = "5min";
+      OnUnitActiveSec = "1h"; 
+      Persistent = true;    
+    };
+    Install.WantedBy = [ "timers.target" ];
+  };
 
   home.stateVersion = "25.11";
 }

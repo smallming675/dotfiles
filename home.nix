@@ -997,8 +997,8 @@ in {
        model = "claude-sonnet-4-6";
        provider = {
          anthropic = {
-           baseURL = "{file:${config.sops.secrets."opencode/base_url".path}}";
-           apiKey = "{file:${config.sops.secrets."opencode/api_key".path}}";
+           base_url = "{file:${config.sops.secrets."opencode/base_url".path}}";
+           api_key = "{file:${config.sops.secrets."opencode/api_key".path}}";
          };
        };
      };

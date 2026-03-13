@@ -992,10 +992,14 @@ in {
    programs.claude-code = {
      enable = true;
      settings = {
-       model = "claude-sonnet-4-6";
-       env = {
-         ANTHROPIC_API_KEY = "{file:${config.sops.secrets."claude-code/api_key".path}}";
-         ANTHROPIC_BASE_URL = "{file:${config.sops.secrets."claude-code/base_url".path}}";
+       theme = "tokyonight";
+       autoupdate = true;
+       model = "[REDACTED]";
+       provider = {
+         anthropic = {
+           baseURL = "{file:${config.sops.secrets."claude-code/base_url".path}}";
+           apiKey = "{file:${config.sops.secrets."claude-code/api_key".path}}";
+         };
        };
      };
    };

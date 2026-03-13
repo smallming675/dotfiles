@@ -115,7 +115,7 @@ in {
      graphviz
      bun
      lazygit
-     claude-code
+     opencode
 
     # GUI
     grim
@@ -986,48 +986,23 @@ in {
      enableFishIntegration = true;
    };
 
-   sops.secrets."claude-code/api_key" = {};
-   sops.secrets."claude-code/base_url" = {};
+   sops.secrets."opencode/api_key" = {};
+   sops.secrets."opencode/base_url" = {};
 
-   programs.claude-code = {
+   programs.opencode = {
      enable = true;
      settings = {
        theme = "tokyonight";
        autoupdate = true;
-       model = "[REDACTED]";
+       model = "claude-sonnet-4-6";
        provider = {
          anthropic = {
-           baseURL = "{file:${config.sops.secrets."claude-code/base_url".path}}";
-           apiKey = "{file:${config.sops.secrets."claude-code/api_key".path}}";
+           baseURL = "{file:${config.sops.secrets."opencode/base_url".path}}";
+           apiKey = "{file:${config.sops.secrets."opencode/api_key".path}}";
          };
        };
      };
    };
-
-   home.activation.installClaudeCodeSkills = lib.hm.dag.entryAfter ["writeBoundary"] ''
-     if command -v claude &> /dev/null; then
-       $DRY_RUN_CMD claude plugin marketplace add trailofbits/skills || true
-       $DRY_RUN_CMD claude plugin marketplace add trailofbits/skills-curated || true
-       $DRY_RUN_CMD claude plugin marketplace add obra/superpowers || true
-       $DRY_RUN_CMD claude plugin marketplace add anthropics/knowledge-work-plugins || true
-
-       # Install skills
-       $DRY_RUN_CMD claude plugin install modern-python@trailofbits/skills || true
-       $DRY_RUN_CMD claude plugin install git-cleanup@trailofbits/skills || true
-       $DRY_RUN_CMD claude plugin install differential-review@trailofbits/skills || true
-       $DRY_RUN_CMD claude plugin install static-analysis@trailofbits/skills || true
-       $DRY_RUN_CMD claude plugin install skill-improver@trailofbits/skills || true
-       $DRY_RUN_CMD claude plugin install property-based-testing@trailofbits/skills || true
-       $DRY_RUN_CMD claude plugin install supply-chain-risk-auditor@trailofbits/skills || true
-       $DRY_RUN_CMD claude plugin install ask-questions-if-underspecified@trailofbits/skills || true
-       $DRY_RUN_CMD claude plugin install insecure-defaults@trailofbits/skills || true
-       $DRY_RUN_CMD claude plugin install sharp-edges@trailofbits/skills || true
-       $DRY_RUN_CMD claude plugin install test-driven-development@obra/superpowers || true
-       $DRY_RUN_CMD claude plugin install systematic-debugging@obra/superpowers || true
-       $DRY_RUN_CMD claude plugin install brainstorming@obra/superpowers || true
-       $DRY_RUN_CMD claude plugin install writing-plans@obra/superpowers || true
-     fi
-   '';
 
   xdg.desktopEntries.kew-player = {
     name = "Kew";

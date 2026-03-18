@@ -993,10 +993,10 @@ in {
      enable = true;
      settings = {
        theme = "tokyonight";
-       model = "anthropic/claude-sonnet-4-6";
+       model = "openai/gpt-5.4";
        plugin = [ "cc-safety-net" "@tarquinen/opencode-dcp@latest" "micode" "@bastiangx/opencode-unmoji" "superpowers@git+https://github.com/obra/superpowers.git" ];
        provider = {
-         anthropic = {
+         openai = {
            options = {
              baseURL = "{file:${config.sops.secrets."opencode/base_url".path}}";
              apiKey = "{file:${config.sops.secrets."opencode/api_key".path}}";

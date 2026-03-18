@@ -994,7 +994,7 @@ in {
      settings = {
        theme = "tokyonight";
        model = "anthropic/claude-sonnet-4-6";
-       plugin = [ "cc-safety-net" "@tarquinen/opencode-dcp@latest" "micode" "opencode-snip@latest" "@bastiangx/opencode-unmoji" "superpowers@git+https://github.com/obra/superpowers.git" ];
+       plugin = [ "cc-safety-net" "@tarquinen/opencode-dcp@latest" "micode" "@bastiangx/opencode-unmoji" "superpowers@git+https://github.com/obra/superpowers.git" ];
        provider = {
          anthropic = {
            options = {

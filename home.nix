@@ -68,7 +68,7 @@ in {
 
   home.packages = with pkgs; [
     mullvad-vpn
-
+    keepassxc
     # CLI
     ripgrep
     fd

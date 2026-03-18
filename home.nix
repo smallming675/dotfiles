@@ -89,33 +89,34 @@ in {
     rip2
     watchexec
 
-     # Dev tools
-     git
-     github-cli
-     neovim
-     python3
-     cargo
-     rustc
-     rust-analyzer
-     alejandra
-     nil
-     nodejs
-     gcc
-     gnumake
-     cmake
-     gdb
-     valgrind
-     cppcheck
-     ctags
-     bear
-     uv
-     jdk
-     ghostscript
-     imagemagick
-     graphviz
-     bun
-     lazygit
-     opencode
+    # Dev tools
+    go
+    git
+    github-cli
+    neovim
+    python3
+    cargo
+    rustc
+    rust-analyzer
+    alejandra
+    nil
+    nodejs
+    gcc
+    gnumake
+    cmake
+    gdb
+    valgrind
+    cppcheck
+    ctags
+    bear
+    uv
+    jdk
+    ghostscript
+    imagemagick
+    graphviz
+    bun
+    lazygit
+    opencode
 
     # GUI
     grim

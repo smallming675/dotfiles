@@ -151,6 +151,7 @@ in {
     bibata-cursors
     libqalculate
     nextcloud-client
+    anki-bin
   ];
 
   programs.starship = {

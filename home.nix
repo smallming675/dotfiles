@@ -996,7 +996,7 @@ in {
      settings = {
        theme = "tokyonight";
        model = "anthropic/claude-sonnet-4-6";
-       plugin = [ "cc-safety-net" "@bastiangx/opencode-unmoji"];
+       plugin = [ "cc-safety-net" "@bastiangx/opencode-unmoji" "micode" "opencode-plugin-openspec"];
        provider = {
          anthropic = {
            options = {

@@ -508,7 +508,7 @@ in {
       xwayland.force_zero_scaling = true;
       monitor = ", preferred, auto, 1";
       exec-once = [
-        "swaybg -c ${lib.removePrefix "#" colors.bg}"
+        "swaybg -i ${config.home.homeDirectory}/config/bin/catalina_wallpaper.jpg"
         "[workspace 1 silent] brave"
         "[workspace 2 silent] alacritty"
         "[workspace 3 silent] obsidian"

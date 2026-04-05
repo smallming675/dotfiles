@@ -53,9 +53,6 @@ in {
     MOZ_ENABLE_WAYLAND = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
     OZONE_PLATFORM = "wayland";
-    XCURSOR_THEME = "Bibata-Modern-Classic";
-    XCURSOR_SIZE = "24";
-    XCOMPOSEFILE = "~/.XCompose";
   };
 
   home.pointerCursor = {
@@ -81,7 +78,6 @@ in {
     delta
     zoxide
     atuin
-    hyfetch
     zip
     unzip
     unrar

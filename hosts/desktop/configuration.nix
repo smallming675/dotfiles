@@ -5,9 +5,16 @@ in
 {
   imports = [
     ../../modules/nixos/common.nix
-    ../../modules/nixos/desktop/flatpak.nix
     ./hardware-configuration.nix
   ];
+
+  services.flatpak = {
+    enable = true;
+    packages = [
+      "org.prismlauncher.PrismLauncher"
+    ];
+  };
+
   my.userName = "user";
   networking.hostName = "desktop";
 

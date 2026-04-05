@@ -36,7 +36,22 @@ in {
     packages = with pkgs; [];
   };
 
+
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-color-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    dina-font
+    proggyfonts
+  ];
+
   environment.systemPackages = with pkgs; [
+    unzip
+    zip
+    uv
     vim
     wget
     git

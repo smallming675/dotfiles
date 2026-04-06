@@ -49,6 +49,7 @@ in {
   ];
 
   environment.systemPackages = with pkgs; [
+    7z
     unzip
     zip
     uv
@@ -224,5 +225,6 @@ in {
     21027 # Syncthing discovery
   ];
   programs.nix-ld.enable = true;
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 }
 

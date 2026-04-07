@@ -57,4 +57,35 @@ in
   environment.systemPackages = with pkgs; [ rsync openssh ];
 
   services.xserver.videoDrivers = ["nvidia"];
+  sops.secrets."borg/passphrase" = {
+    owner = "root";
+  };
+
+  services.borgbackup.jobs = {
+    "backup" = {
+      paths = [ "/home" ];
+      exclude = [
+        "'*/.cache'"
+        "'*/.local/share/Trash'"
+      ];
+      repo = "ssh://borg@oceu.tech:22/./borg/backups/borg";
+      encryption = {
+        mode = "repokey-blake2";
+        passCommand = "${pkgs.coreutils}/bin/cat ${config.sops.secrets."borg/passphrase".path}";
+      };
+
+      compression = "auto,lzma";
+      startAt = "daily";
+      environment = {
+        BORG_RSH = "ssh -i /home/user/.ssh/id_ed25519_backup -o StrictHostKeyChecking=yes";
+      };
+      
+      prune.keep = {
+        daily = 7;
+        weekly = 4;
+        monthly = 6;
+      };
+    };
+  };
+}
 }

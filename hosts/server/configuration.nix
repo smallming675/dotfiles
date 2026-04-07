@@ -226,5 +226,13 @@ in {
   ];
   programs.nix-ld.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
+  services.borgbackup.repos = {
+    backup = {
+      path = "/data/backups/borg";
+      authorizedKeys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOF9ooms2wgPLU5DQtrg0HtRRoJi5nqms7IDYStgrrDA user@desktop"
+      ];
+    };
+  };
 }
 

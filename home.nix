@@ -4,6 +4,7 @@
   config,
   nix4nvchad,
   lib,
+  llm-agents,
   ...
 }: let
   nextcloudDomain = "nextcloud.oceu.tech";
@@ -53,6 +54,30 @@ in {
     MOZ_ENABLE_WAYLAND = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
     OZONE_PLATFORM = "wayland";
+  };
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Materia-dark";
+      package = pkgs.materia-theme;
+    };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+    font = {
+      name = "Sans";
+      size = 10;
+    };
+    
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+    
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
   };
 
   home.pointerCursor = {
@@ -112,7 +137,6 @@ in {
     graphviz
     bun
     lazygit
-    opencode
 
     # GUI
     grim
@@ -144,10 +168,15 @@ in {
     obsidian
     docker
     nautilus
+    nautilus-python
+    adwaita-icon-theme
+    gnome-themes-extra
+    materia-theme  
     bibata-cursors
     libqalculate
     nextcloud-client
     anki-bin
+    llm-agents.packages.${pkgs.system}.code
   ];
 
   programs.starship = {
@@ -984,24 +1013,24 @@ in {
      enableFishIntegration = true;
    };
 
-   sops.secrets."opencode/api_key" = {};
-   sops.secrets."opencode/base_url" = {};
-
-   programs.opencode = {
-     enable = true;
-     settings = {
-       theme = "tokyonight";
-       plugin = [ "cc-safety-net" "@bastiangx/opencode-unmoji" "micode" "opencode-plugin-openspec" "superpowers@git+https://github.com/obra/superpowers.git"];
-       provider = {
-         anthropic = {
-           options = {
-             baseURL = "{file:${config.sops.secrets."opencode/base_url".path}}";
-             apiKey = "{file:${config.sops.secrets."opencode/api_key".path}}";
-           };
-         };
-       };
-     };
-   };
+   # sops.secrets."opencode/api_key" = {};
+   # sops.secrets."opencode/base_url" = {};
+   #
+   # programs.opencode = {
+   #   enable = true;
+   #   settings = {
+   #     theme = "tokyonight";
+   #     plugin = [ "cc-safety-net" "@bastiangx/opencode-unmoji" "micode" "opencode-plugin-openspec" "superpowers@git+https://github.com/obra/superpowers.git"];
+   #     provider = {
+   #       anthropic = {
+   #         options = {
+   #           baseURL = "{file:${config.sops.secrets."opencode/base_url".path}}";
+   #           apiKey = "{file:${config.sops.secrets."opencode/api_key".path}}";
+   #         };
+   #       };
+   #     };
+   #   };
+   # };
 
   xdg.desktopEntries.kew-player = {
     name = "Kew";
@@ -1032,5 +1061,6 @@ in {
     Install.WantedBy = [ "timers.target" ];
   };
 
+  dconf.enable = false;
   home.stateVersion = "25.11";
 }

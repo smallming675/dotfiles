@@ -1,11 +1,12 @@
-{pkgs, lib, ...}:
+{ config, pkgs, lib, inputs, ... }:
 let
-  syncDir = "/home/user/sync";
-in
-{
+  userName = "user";
+  syncDir = "/home/${userName}/sync";
+in {
   imports = [
     ../../modules/nixos/common.nix
     ./hardware-configuration.nix
+    inputs.sops-nix.nixosModules.sops  
   ];
 
   services.flatpak = {
@@ -22,10 +23,16 @@ in
   i18n.defaultLocale = "en_HK.UTF-8";
   services.xserver.xkb.layout = "us";
 
-  sops.age = {
-    keyFile = "/var/lib/sops-nix/key.txt";
-    generateKey = true;
-    sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+  sops = {
+    age = {
+      keyFile = "/var/lib/sops-nix/key.txt";
+      generateKey = true;
+      sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+    };
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    secrets."borg/passphrase" = {
+      owner = "root";
+    };
   };
 
   systemd.tmpfiles.rules = [
@@ -57,9 +64,6 @@ in
   environment.systemPackages = with pkgs; [ rsync openssh ];
 
   services.xserver.videoDrivers = ["nvidia"];
-  sops.secrets."borg/passphrase" = {
-    owner = "root";
-  };
 
   services.borgbackup.jobs = {
     "backup" = {
@@ -87,5 +91,7 @@ in
       };
     };
   };
+  services.gnome.gnome-keyring.enable = true;
+  services.gvfs.enable = true;  
 }
-}
+

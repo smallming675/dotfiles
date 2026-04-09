@@ -54,6 +54,8 @@ in {
     MOZ_ENABLE_WAYLAND = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
     OZONE_PLATFORM = "wayland";
+    OPENAI_API_KEY = "{file:${config.sops.secrets."opencode/api_key".path}}";
+    OPENAI_BASE_URL = "{file:${config.sops.secrets."opencode/base_url".path}}";
   };
 
   gtk = {
@@ -1013,24 +1015,8 @@ in {
      enableFishIntegration = true;
    };
 
-   # sops.secrets."opencode/api_key" = {};
-   # sops.secrets."opencode/base_url" = {};
-   #
-   # programs.opencode = {
-   #   enable = true;
-   #   settings = {
-   #     theme = "tokyonight";
-   #     plugin = [ "cc-safety-net" "@bastiangx/opencode-unmoji" "micode" "opencode-plugin-openspec" "superpowers@git+https://github.com/obra/superpowers.git"];
-   #     provider = {
-   #       anthropic = {
-   #         options = {
-   #           baseURL = "{file:${config.sops.secrets."opencode/base_url".path}}";
-   #           apiKey = "{file:${config.sops.secrets."opencode/api_key".path}}";
-   #         };
-   #       };
-   #     };
-   #   };
-   # };
+   sops.secrets."opencode/api_key" = {};
+   sops.secrets."opencode/base_url" = {};
 
   xdg.desktopEntries.kew-player = {
     name = "Kew";

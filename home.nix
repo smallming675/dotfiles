@@ -343,7 +343,11 @@ in {
                 require("nvim-surround").setup({
                 })
             end
-        }
+        },
+        {
+          "google/vim-google-apps-script",
+          ft = "javascript",
+        },
       };
     '';
     extraConfig = ''

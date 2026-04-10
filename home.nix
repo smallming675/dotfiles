@@ -179,6 +179,7 @@ in {
     nextcloud-client
     anki-bin
     llm-agents.packages.${pkgs.system}.code
+    google-clasp
   ];
 
   programs.starship = {
